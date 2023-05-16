@@ -8,17 +8,10 @@
 #include <iostream>
 using namespace std;
 
-int result_disp ()
-{
-  // declaring variables:
-  int a, b;
-  decltype(a) result;  // the same as: int a,b;
+// Note all the sub routine should be above the MAIN program
 
-  // process:
-  a = 5;
-  b = 2;
-  a = a + 1;
-  result = a - b;
+int result_disp (int result)
+{
 
   // print out the result:
     cout << "result = ";
@@ -29,14 +22,34 @@ int result_disp ()
   return 0;
 }
 
+int result_disp1 ()
+{
+  // declaring variables:
+  int a, b;
+  decltype(a) result;  // the same as: int a,b;
+
+  // process:
+  a = 5;
+  b = 2;
+  a = a + 1;
+  result = a - b;
+  
+    result_disp (result);
+
+  // terminate the program:
+  return 0;
+}
+
 // MAIN program for using subroutine
+// Explore on how to take file as input and print the items
 
 int main(int argc, const char * argv[]) {
     // insert code here...
+    int result;
     std::cout << "Nice...!!!!\n";
-    result_disp();
+    result_disp1();
+    std::cout << "Enter a number...!!!\n";
+    std::cin >> result;
+    result_disp(result);
     return 0;
 }
-
-
-// Next task to create a program which takes argument and runs interatively

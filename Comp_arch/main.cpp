@@ -6,21 +6,12 @@
 //
 
 #include <iostream>
+// Adding multiple files here
+#include "result_display2.hpp"
+
 using namespace std;
 
 // Note all the sub routine should be above the MAIN program
-
-int result_disp (int result)
-{
-
-  // print out the result:
-    cout << "result = ";
-    cout << result;
-    cout << "\n";
-
-  // terminate the program:
-  return 0;
-}
 
 int result_disp1 ()
 {
@@ -41,7 +32,7 @@ int result_disp1 ()
 }
 
 // MAIN program for using subroutine
-// Explore on how to take file as input and print the items
+// Explore on how to take file as input and
 
 int main(int argc, const char * argv[]) {
     // insert code here...

@@ -12,7 +12,7 @@ int result_disp ()
 {
   // declaring variables:
   int a, b;
-  int result;
+  decltype(a) result;  // the same as: int a,b;
 
   // process:
   a = 5;

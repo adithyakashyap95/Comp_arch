@@ -31,7 +31,7 @@ int result_disp1 ()
   return 0;
 }
 
-// MAIN program for using subroutine
+// MAIN program for using subroutine should be at last
 // Explore on how to take file as input and
 
 int main(int argc, const char * argv[]) {

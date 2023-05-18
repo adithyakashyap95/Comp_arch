@@ -46,16 +46,22 @@ int main(int argc, const char * argv[]) {
     result_disp(result);
     string mystring;
     
-    ifstream myfile("d");
-    std::cout << "file open ??\n";
-// FIXME: Below line something is wrong
-    std::cout << myfile.is_open();
+    // Create and open a text file
+    ofstream MyFile("filename.txt");
+    // Write to the file
+    MyFile << "Files can be tricky, but it is fun enough!";
+
+    // Close the file
+    MyFile.close();
+    
+    ifstream myfile("test.txt");
     
     if ( myfile.is_open() ) {
         while ( getline (myfile,mystring) ) {
             std::cout << mystring;
+            std::cout << "\n";
         }
-        
+        // FIXME :: Its only saving last name/line
         std::cout << "Printing the file\n";
         std::cout << mystring;
         

@@ -6,6 +6,8 @@
 //
 
 #include <iostream>
+#include <fstream>
+#include <string>
 // Adding multiple files here
 #include "result_display2.hpp"
 
@@ -42,5 +44,25 @@ int main(int argc, const char * argv[]) {
     std::cout << "Enter a number...!!!\n";
     std::cin >> result;
     result_disp(result);
+    string mystring;
+    
+    ifstream myfile("d");
+    std::cout << "file open ??\n";
+// FIXME: Below line something is wrong
+    std::cout << myfile.is_open();
+    
+    if ( myfile.is_open() ) {
+        while ( getline (myfile,mystring) ) {
+            std::cout << mystring;
+        }
+        
+        std::cout << "Printing the file\n";
+        std::cout << mystring;
+        
+    }
+    else {
+        std::cout << "File not found...!!\n";
+    }
+
     return 0;
 }

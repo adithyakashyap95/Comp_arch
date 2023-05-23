@@ -44,7 +44,7 @@ int main(int argc, const char * argv[]) {
     std::cout << "Enter a number...!!!\n";
     std::cin >> result;
     result_disp(result);
-    string mystring;
+    string mystring,files;
     
     // Create and open a text file
     ofstream MyFile("filename.txt");
@@ -64,7 +64,6 @@ int main(int argc, const char * argv[]) {
         // FIXME :: Its only saving last name/line
         std::cout << "Printing the file\n";
         std::cout << mystring;
-        
     }
     else {
         std::cout << "File not found...!!\n";

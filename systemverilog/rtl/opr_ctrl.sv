@@ -3,7 +3,7 @@ module opr_ctrl (
 	input  logic 	clk,
 	input  logic 	rstb,
 	input  logic 	valid,
-	output logic 	opr_finished,
+	input  logic 	opr_finished,
 
 // Generated Pulses
 
@@ -24,7 +24,7 @@ begin
 	begin
 		cntr_opr <= 0;
 	end
-	else if(cntr_opr==1023)
+	else if(opr_finished)
 	begin
 		cntr_opr <= 0;
 	end	
@@ -37,8 +37,6 @@ begin
 		cntr_opr <= cntr_opr;
 	end
 end
-
-assign opr_finished = (cntr_opr==1023)? 1 : 0;
 
 always_comb
 begin

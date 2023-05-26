@@ -14,6 +14,21 @@ typedef struct packed {
 	logic [(D_SIZE-1):0] mem;
 } mem_t;
 
+typedef struct packed {
+	logic [5:0] opcode;
+	logic [4:0] rs;
+	logic [4:0] rt;
+	logic [4:0] rd;
+	logic [10:0] unused;
+} r_type;
+
+typedef struct packed {
+	logic [5:0] opcode;
+	logic [4:0] rs;
+	logic [4:0] rt;
+	logic [15:0] imm;
+} i_type;
+
 //typedef enum logic [(INST_BIT-1):0] {  
 //	S0 = 2'b00,
 //	S1 = 2'b01,

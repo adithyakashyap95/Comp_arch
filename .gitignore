@@ -3,3 +3,11 @@ systemverilog/work/work/
 */*/*swp
 */*swp
 *swp
+*/*/*/*swo
+*/*/*swo
+*/*swo
+*swo
+*/*/*/*.nfs*
+*/*/*.nfs*
+*/*.nfs*
+*.nfs*

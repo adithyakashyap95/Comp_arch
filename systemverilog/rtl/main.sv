@@ -20,9 +20,11 @@ module main (
 // Input to ID state and Output from ID state
 logic w_f_wb;                         // Write from WB stage 
 logic [31:0] inst;                    // from Inst Fetch stage
+logic [31:0] pc_in_f_if_2_id;         // from Inst Fetch stage
 logic [(ADDR_LINE-1):0] addr_in_f_wb; // From WB stage
 logic [(D_SIZE-1):0] write_data_f_wb; // From WB stage
 
+logic [31:0] pc_in_f_id_2_ex;         // from Inst decode stage
 logic [5:0]  opcode_2_ex;
 logic [31:0] rs_reg_value_2_ex;
 logic [31:0] rt_reg_value_2_ex;
@@ -56,9 +58,11 @@ id i_decode(
 	.clk               (clk               ), 
 	.reset             (reset             ), 
 	.w_f_wb            (w_f_wb            ),
+	.pc_in_f_if        (pc_in_f_if_2_id   ),
 	.inst              (inst              ),
 	.addr_in_f_wb      (addr_in_f_wb      ), 
 	.write_data_f_wb   (write_data_f_wb   ),
+	.pc_in_2_ex        (pc_in_f_id_2_ex   ),
 	.opcode_2_ex       (opcode_2_ex       ),
 	.rs_reg_value_2_ex (rs_reg_value_2_ex ),
 	.rt_reg_value_2_ex (rt_reg_value_2_ex ),

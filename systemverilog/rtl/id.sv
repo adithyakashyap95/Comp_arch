@@ -8,10 +8,12 @@ module id (
 	input  logic 	clk,
 	input  logic 	reset,
 	input  logic    w_f_wb,                      // Write from WB stage 
+	input  logic [31:0] pc_in_f_if,                  // PC Value In from IF
 	input  logic [31:0] inst,                    // from Inst Fetch stage
 	input  logic [(ADDR_LINE-1):0] addr_in_f_wb, // From WB stage
 	input  logic [(D_SIZE-1):0] write_data_f_wb, // From WB stage
 
+	output logic [31:0] pc_out_2_ex,
 	output logic [5:0]  opcode_2_ex,
 	output logic [31:0] rs_reg_value_2_ex,
 	output logic [31:0] rt_reg_value_2_ex,
@@ -197,6 +199,7 @@ begin
         	rt_reg_value_2_ex <= '0; 
         	rd_reg_value_2_ex <= '0; 
         	i_data_2_ex       <= '0; 
+		pc_out_2_ex       <= '0;
 	end
 	else
 	begin
@@ -205,6 +208,7 @@ begin
         	rt_reg_value_2_ex <= rt_reg_value; 
         	rd_reg_value_2_ex <= rd_reg_value; 
         	i_data_2_ex       <= i_data; 
+		pc_out_2_ex       <= pc_in_f_if;
 	end
 end
 

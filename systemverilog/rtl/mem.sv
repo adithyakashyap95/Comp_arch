@@ -5,7 +5,6 @@
 module mem (
 	input  logic clk, 
 	input  logic reset,
-        input  logic update,
 	input  logic rw,                           // read = 0 and write = 1 
 	input  logic [(ADDR_LINE-1):0] addr_in, 
 	input  logic [(D_SIZE-1):0] write_data, 
@@ -19,10 +18,8 @@ module mem (
   begin
 	if(reset==0)
 		memory <= '0;
-	else if(update)
-		memory <= mem_local;
 	else
-		memory <= memory;
+		memory <= mem_local;
   end
 
   always_comb

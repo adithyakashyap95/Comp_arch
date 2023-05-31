@@ -7,7 +7,6 @@
 module id (
 	input  logic 	clk,
 	input  logic 	reset,
-	input  logic 	valid,
 	input  logic    w_f_wb,                      // Write from WB stage 
 	input  logic [31:0] inst,                    // from Inst Fetch stage
 	input  logic [(ADDR_LINE-1):0] addr_in_f_wb, // From WB stage

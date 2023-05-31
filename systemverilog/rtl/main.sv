@@ -45,6 +45,10 @@ logic [(ADDR_LINE-1):0] addr_in_f_ex;
 logic [(D_SIZE-1):0] write_data_f_ex;
 logic [(D_SIZE-1):0] read_data_f_ex; 
 
+// WB stage
+logic [31:0] alu_out_f_mem_2_wb;
+logic [31:0] reg_in_f_wb_2_id;  
+
 // Operation control
 // opr_ctrl i_opr (
 // 	.clk		(clk		),
@@ -105,10 +109,18 @@ mem i_memory
 	.rw		(rw_f_ex	), 
 	.addr_in	(addr_in_f_ex	), 
 	.write_data	(write_data_f_ex), 
-	.read_data	(read_data_f_ex	)
+	.read_data	(read_data_f_ex	),
+	.alu_out_f_mem_2_wb (alu_out_f_mem_2_wb),
+	.alu_add_f_mem_2_wb (alu_add_f_mem_2_wb)
 );
 
 // Writeback
+wb i_writeback (
+	.memToReg   	(                  ), // When Will it WB and what 
+	.alu_out    	(alu_out_f_mem_2_wb), 
+	.memory_out 	(read_data_f_ex    ), 
+	.register_in	(reg_in_f_wb_2_id  )
+);
 
 
 endmodule

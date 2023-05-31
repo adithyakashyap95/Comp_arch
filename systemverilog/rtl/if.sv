@@ -2,7 +2,7 @@
 
 `include "../rtl/struct.sv"
 
-module if (
+module inst_f (
 	input  logic clk,
 	input  logic rst,
 	input  logic hazard,

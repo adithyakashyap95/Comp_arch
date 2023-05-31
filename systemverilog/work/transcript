@@ -13,7 +13,7 @@
 # //  18 U.S.C. Section 1905.
 # //
 # vsim -debugDB tb -do "add wave sim:/tb/* ; run -all" 
-# Start time: 14:22:14 on May 31,2023
+# Start time: 15:35:02 on May 31,2023
 # ** Warning: (vsim-4308) Enabling visibility using +acc is recommended with debug flow.
 # ** Note: (vsim-3812) Design is being optimized...
 # ** Note: (vsim-8611) Generating debug db.
@@ -23,5 +23,5 @@
 #             work
 # Optimization failed
 # Error loading design
-# End time: 14:22:15 on May 31,2023, Elapsed time: 0:00:01
+# End time: 15:35:02 on May 31,2023, Elapsed time: 0:00:00
 # Errors: 1, Warnings: 2

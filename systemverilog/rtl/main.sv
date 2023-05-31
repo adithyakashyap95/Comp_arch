@@ -17,6 +17,12 @@ module main (
 //logic opr_4_to_m;	
 //logic opr_5_to_w;
 
+// IF stage
+logic hazard;
+logic [31:0] add_f_ex_2_id;
+logic [31:0] pc_f_ex_2_id;
+logic [31:0] pc4_f_if_2_id;
+
 // Input to ID state and Output from ID state
 logic w_f_wb;                         // Write from WB stage 
 logic [31:0] inst;                    // from Inst Fetch stage
@@ -25,6 +31,7 @@ logic [(ADDR_LINE-1):0] addr_in_f_wb; // From WB stage
 logic [(D_SIZE-1):0] write_data_f_wb; // From WB stage
 
 logic [31:0] pc_in_f_id_2_ex;         // from Inst decode stage
+logic [31:0] pc4_in_f_id_2_ex;         // from Inst decode stage
 logic [5:0]  opcode_2_ex;
 logic [31:0] rs_reg_value_2_ex;
 logic [31:0] rt_reg_value_2_ex;
@@ -52,6 +59,18 @@ logic [(D_SIZE-1):0] read_data_f_ex;
 // );
 
 // Fetch
+inst_f i_inst_fetch (
+	.clk         	 (clk         	), 
+	.rst         	 (reset        	),
+	.hazard      	 (hazard      	),   // Not connected
+	.pc_out1     	 (pc_f_ex_2_id  ),
+	.address     	 (address       ),   // Not required FIXME
+	.instruction 	 (instruction   ),
+	.ex_add      	 (add_f_ex_2_id ),
+	.pc_out      	 (pc_in_f_if_2_id), 
+	.pc4         	 (pc4_f_if_2_id)
+);
+
 
 // Decode
 id i_decode(
@@ -62,6 +81,8 @@ id i_decode(
 	.inst              (inst              ),
 	.addr_in_f_wb      (addr_in_f_wb      ), 
 	.write_data_f_wb   (write_data_f_wb   ),
+	.pc4_in_f_if	   (pc4_f_if_2_id     ),
+	.pc4_out_2_ex      (pc4_in_f_id_2_ex  ),
 	.pc_in_2_ex        (pc_in_f_id_2_ex   ),
 	.opcode_2_ex       (opcode_2_ex       ),
 	.rs_reg_value_2_ex (rs_reg_value_2_ex ),
@@ -72,6 +93,7 @@ id i_decode(
 
 
 // Execute E
+	// GIVE PC4 to EX stage 
 
 
 // Memory

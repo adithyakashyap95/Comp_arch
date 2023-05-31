@@ -13,10 +13,11 @@ module id (
 	input  logic [(ADDR_LINE-1):0] addr_in_f_wb, // From WB stage
 	input  logic [(D_SIZE-1):0] write_data_f_wb, // From WB stage
 
-	output logic [31:0] rs_reg_value,
-	output logic [31:0] rt_reg_value,
-	output logic [31:0] rd_reg_value,
-	output logic [31:0] i_data
+	output logic [5:0]  opcode_2_ex,
+	output logic [31:0] rs_reg_value_2_ex,
+	output logic [31:0] rt_reg_value_2_ex,
+	output logic [31:0] rd_reg_value_2_ex,
+	output logic [31:0] i_data_2_ex
 ); 
 
 mem_t [31:0] registers; // Defininig the set of registers used as variables, temporary ...
@@ -28,6 +29,10 @@ logic [4:0]  r_rd;
 logic [4:0]  i_rs;
 logic [4:0]  i_rt;
 logic [15:0] i_imm;
+logic [31:0] rs_reg_value;
+logic [31:0] rt_reg_value;
+logic [31:0] rd_reg_value;
+logic [31:0] i_data;
 
 assign opcode = inst[31:26];
 
@@ -180,6 +185,28 @@ begin
 	registers_nxt    = registers;
 	registers_nxt[0] = 32'b0; // always Constant zero
 	registers_nxt[addr_in_f_wb] = (w_f_wb == 1'b1) ? write_data_f_wb : registers_nxt[addr_in_f_wb]; 
+end
+
+// pipeline
+
+always_ff@(posedge clk or negedge reset)
+begin
+	if(reset)
+	begin
+        	opcode_2_ex       <= '0; 
+        	rs_reg_value_2_ex <= '0; 
+        	rt_reg_value_2_ex <= '0; 
+        	rd_reg_value_2_ex <= '0; 
+        	i_data_2_ex       <= '0; 
+	end
+	else
+	begin
+        	opcode_2_ex       <= opcode; 
+        	rs_reg_value_2_ex <= rs_reg_value; 
+        	rt_reg_value_2_ex <= rt_reg_value; 
+        	rd_reg_value_2_ex <= rd_reg_value; 
+        	i_data_2_ex       <= i_data; 
+	end
 end
 
 endmodule

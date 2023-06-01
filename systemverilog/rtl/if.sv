@@ -71,6 +71,7 @@ begin
 	else begin
 		inst_mem <= inst_mem;
 		pc4 <= pc_out;
+	     end
 end	
 
   

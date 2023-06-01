@@ -60,5 +60,18 @@ begin
 	if(rst) 
 		$readmemb("instruction.txt",inst_mem);  //reading the list of instructions from the instruction.txt file
 end
+
+always_ff @(pos_edge clk)
+begin 
+	if(rst) begin 
+		inst_mem <= 1'b0;
+		pc4 <= 1'b0;
+		end
+
+	else begin
+		inst_mem <= inst_mem;
+		pc4 <= pc_out;
+end	
+
   
 endmodule

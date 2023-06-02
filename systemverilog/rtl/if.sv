@@ -12,11 +12,12 @@ module inst_f (
 	
 	output logic [31:0] instruction,
 	output logic [31:0] pc_out,
-	output logic [31:0] pc4
+	output logic [31:0] pc4_dc
 );
 
 logic opcode;
 logic [31:0] pc_in;
+logic [31:0] pc4;
 logic [31:0] inst_mem [1023:0];
 assign instruction = inst_mem [address[31:2]];
 
@@ -61,16 +62,16 @@ begin
 		$readmemb("instruction.txt",inst_mem);  //reading the list of instructions from the instruction.txt file
 end
 
-always_ff @(pos_edge clk)
+always_ff @(posedge clk)
 begin 
 	if(rst) begin 
-		inst_mem <= 1'b0;
-		pc4 <= 1'b0;
+		inst_mem <= '0;
+		pc4_dc <= '0;
 		end
 
 	else begin
 		inst_mem <= inst_mem;
-		pc4 <= pc_out;
+		pc4_dc <= pc4;
 	     end
 end	
 

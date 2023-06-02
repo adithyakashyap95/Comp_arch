@@ -12,5 +12,5 @@
 /pkgs/mentor/questa/10.6b/questasim/bin/vlog ../rtl/mem.sv
 /pkgs/mentor/questa/10.6b/questasim/bin/vlog ../rtl/wb.sv
 /pkgs/mentor/questa/10.6b/questasim/bin/vlog ../rtl/opr_ctrl.sv
-/pkgs/mentor/questa/10.6b/questasim/bin/vsim -debugDB tb -do  "add wave sim:/tb/* ; run -all"
+/pkgs/mentor/questa/10.6b/questasim/bin/vsim -debugDB main -do  "add wave sim:/main/* ; run -all"
 

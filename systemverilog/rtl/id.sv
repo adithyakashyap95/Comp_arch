@@ -10,7 +10,7 @@ module id (
 	input  logic    w_f_wb,                      // Write from WB stage 
 	input  logic [31:0] pc_in_f_if,              // PC Value In from IF
 	input  logic [31:0] inst,                    // from Inst Fetch stage
-	input  logic [(ADDR_LINE-1):0] addr_in_f_wb, // From WB stage
+	input  logic [(ADDR_LINE_REG-1):0] addr_in_f_wb, // From WB stage
 	input  logic [(D_SIZE-1):0] write_data_f_wb, // From WB stage
 	input  logic [31:0] pc4_in_f_if,             // PC Value In from IF
 
@@ -72,7 +72,7 @@ begin
 			i_data       = '0;
 			branch       = 0;
 			mem_read     = 0;
-			mem_to_reg   = 0; 	
+			mem_to_reg   = 1; 	
 			mem_write    = 0; 	
 		end
 		6'b000001:begin			// addi
@@ -82,7 +82,7 @@ begin
 			i_data 	     = i_imm;
 			branch       = 0;
 			mem_read     = 0;
-			mem_to_reg   = 0; 	
+			mem_to_reg   = 1; 	
 			mem_write    = 0; 	
 		end
 		6'b000010:begin 		// sub
@@ -92,7 +92,7 @@ begin
 			i_data 	     = '0;
 			branch       = 0;
 			mem_read     = 0;
-			mem_to_reg   = 0; 	
+			mem_to_reg   = 1; 	
 			mem_write    = 0; 	
 		end
 		6'b000011:begin			// subi
@@ -102,7 +102,7 @@ begin
 			i_data 	     = i_imm;
 			branch       = 0;
 			mem_read     = 0;
-			mem_to_reg   = 0; 	
+			mem_to_reg   = 1; 	
 			mem_write    = 0; 	
 		end	
 		6'b000100:begin			// mul
@@ -112,7 +112,7 @@ begin
 			i_data 	     = '0;
 			branch       = 0;
 			mem_read     = 0;
-			mem_to_reg   = 0; 	
+			mem_to_reg   = 1; 	
 			mem_write    = 0; 	
 		end
 		6'b000101:begin			// muli
@@ -122,7 +122,7 @@ begin
 			i_data 	     = i_imm;
 			branch       = 0;
 			mem_read     = 0;
-			mem_to_reg   = 0; 	
+			mem_to_reg   = 1; 	
 			mem_write    = 0; 	
 		end
 		6'b000110:begin			// OR
@@ -132,7 +132,7 @@ begin
 			i_data 	     = '0;
 			branch       = 0;
 			mem_read     = 0;
-			mem_to_reg   = 0; 	
+			mem_to_reg   = 1; 	
 			mem_write    = 0; 	
 		end
 		6'b000111:begin			// ORI
@@ -142,7 +142,7 @@ begin
 			i_data 	     = i_imm;
 			branch       = 0;
 			mem_read     = 0;
-			mem_to_reg   = 0; 	
+			mem_to_reg   = 1; 	
 			mem_write    = 0; 	
 		end
 		6'b001000:begin			// AND
@@ -152,7 +152,7 @@ begin
 			i_data 	     = '0;
 			branch       = 0;
 			mem_read     = 0;
-			mem_to_reg   = 0; 	
+			mem_to_reg   = 1; 	
 			mem_write    = 0; 	
 		end
 		6'b001001:begin			// ANDI
@@ -162,7 +162,7 @@ begin
 			i_data 	     = i_imm;
 			branch       = 0;
 			mem_read     = 0;
-			mem_to_reg   = 0; 	
+			mem_to_reg   = 1; 	
 			mem_write    = 0; 	
 		end
 		6'b001010:begin			// XOR
@@ -172,7 +172,7 @@ begin
 			i_data 	     = '0;
 			branch       = 0;
 			mem_read     = 0;
-			mem_to_reg   = 0; 	
+			mem_to_reg   = 1; 	
 			mem_write    = 0; 	
 		end
 		6'b001011:begin			// XORI
@@ -182,7 +182,7 @@ begin
 			i_data 	     = i_imm;
 			branch       = 0;
 			mem_read     = 0;
-			mem_to_reg   = 0; 	
+			mem_to_reg   = 1; 	
 			mem_write    = 0; 	
 		end
 		6'b001100:begin			// LDW

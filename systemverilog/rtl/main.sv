@@ -9,14 +9,6 @@ module main (
 	input  logic 	opr_finished
 ); 
 
-// Do I need this ?
-// Logic for opr_control Module to all pipeline module
-//logic opr_1_to_f;	
-//logic opr_2_to_d;	
-//logic opr_3_to_ex;	
-//logic opr_4_to_m;	
-//logic opr_5_to_w;
-
 // IF stage
 logic hazard;
 logic [31:0] add_f_ex_2_id;
@@ -24,11 +16,8 @@ logic [31:0] pc_f_ex_2_id;
 logic [31:0] pc4_f_if_2_id;
 
 // Input to ID state and Output from ID state
-logic w_f_wb;                         // Write from WB stage 
 logic [31:0] inst;                    // from Inst Fetch stage
 logic [31:0] pc_in_f_if_2_id;         // from Inst Fetch stage
-logic [(ADDR_LINE-1):0] addr_in_f_wb; // From WB stage
-logic [(D_SIZE-1):0] write_data_f_wb; // From WB stage
 
 logic [31:0] pc_in_f_id_2_ex;         // from Inst decode stage
 logic [31:0] pc4_in_f_id_2_ex;         // from Inst decode stage
@@ -38,33 +27,20 @@ logic [31:0] rt_reg_value_2_ex;
 logic [31:0] rd_reg_value_2_ex;
 logic [31:0] i_data_2_ex;
 
-// Data from EX stage to Mem Stage if needed
-logic rw_f_ex;                     
-logic [(ADDR_LINE-1):0] addr_in_f_ex;
-logic [(D_SIZE-1):0] write_data_f_ex;
-logic [(D_SIZE-1):0] read_data_f_ex; 
-
 logic branch_2_ex;
 logic mem_read_2_ex;
 logic mem_to_reg_2_ex;	
 logic mem_write_2_ex;
 
-// WB stage
-logic [31:0] alu_out_f_mem_2_wb;
-logic [31:0] reg_in_f_wb_2_id;  
+// Data from EX stage to Mem Stage if needed
 
-// Operation control
-// opr_ctrl i_opr (
-// 	.clk		(clk		),
-// 	.rstb		(reset		),
-// 	.valid		(valid		),
-// 	.opr_finished	(opr_finished	),
-// 	.opr_1		(opr_1_to_f	),
-// 	.opr_2		(opr_2_to_d	),
-// 	.opr_3		(opr_3_to_ex	),
-// 	.opr_4		(opr_4_to_m	),
-// 	.opr_5		(opr_5_to_w	)
-// );
+// WB stage
+logic                       mem_to_reg_f_mem;
+logic [(D_SIZE-1):0]        alu_out_f_mem_2_wb;
+logic [(ADDR_LINE_REG-1):0] alu_add_f_mem_2_wb; 
+logic                       mem_to_reg_f_wb_to_id;
+logic [(D_SIZE-1):0]        reg_data_f_wb_id;
+logic [(ADDR_LINE_REG-1):0] reg_addr_f_wb_id;
 
 // Fetch
 inst_f i_inst_fetch (
@@ -83,11 +59,11 @@ inst_f i_inst_fetch (
 id i_decode(
 	.clk               (clk               ), 
 	.reset             (reset             ), 
-	.w_f_wb            (w_f_wb            ),
+	.w_f_wb            (mem_to_reg_f_wb_to_id),
 	.pc_in_f_if        (pc_in_f_if_2_id   ),
 	.inst              (inst              ),
-	.addr_in_f_wb      (addr_in_f_wb      ), 
-	.write_data_f_wb   (write_data_f_wb   ),
+	.addr_in_f_wb      (reg_addr_f_wb_id  ), 
+	.write_data_f_wb   (reg_data_f_wb_id  ),
 	.pc4_in_f_if	   (pc4_f_if_2_id     ),
 	.pc4_out_2_ex      (pc4_in_f_id_2_ex  ),
 	.pc_in_2_ex        (pc_in_f_id_2_ex   ),
@@ -108,25 +84,28 @@ id i_decode(
 
 // Memory
 
-mem i_memory
-(
-	.clk		(clk		), 
-	.reset		(reset		),
-	.rw		(rw_f_ex	), 
-	.addr_in	(addr_in_f_ex	), 
-	.write_data	(write_data_f_ex), 
-	.read_data	(read_data_f_ex	),
-	.alu_out_f_mem_2_wb (alu_out_f_mem_2_wb),
-	.alu_add_f_mem_2_wb (alu_add_f_mem_2_wb)
+mem i_memory (
+	.clk                	(clk                	),
+	.reset              	(reset              	),
+	.mem_write          	(mem_write          	),
+	.mem_read           	(mem_read           	),
+	.mem_to_reg         	(mem_to_reg         	), 
+	.addr_in            	(addr_in            	),  
+	.addr_reg_in        	(addr_reg_in        	),
+	.write_data         	(write_data         	),
+	.mem_to_reg_2_wb    	(mem_to_reg_f_mem    	), 
+	.alu_out_f_mem_2_wb 	(alu_out_f_mem_2_wb 	),
+	.alu_add_f_mem_2_wb 	(alu_add_f_mem_2_wb 	)
 );
 
 // Writeback
 wb i_writeback (
-	.memToReg   	(                  ), // When Will it WB and what 
-	.alu_out    	(alu_out_f_mem_2_wb), 
-	.memory_out 	(read_data_f_ex    ), 
-	.register_in	(reg_in_f_wb_2_id  )
+	.mem_to_reg_f_mem	(mem_to_reg_f_mem	), 
+	.alu_out_f_mem_2_wb  	(alu_out_f_mem_2_wb  	), 
+	.alu_add_f_mem_2_wb 	(alu_add_f_mem_2_wb 	), 
+	.mem_to_reg_f_wb_to_id	(mem_to_reg_f_wb_to_id	), 
+	.reg_data_f_wb_id	(reg_data_f_wb_id	), 
+	.reg_addr_f_wb_id 	(reg_addr_f_wb_id 	)
 );
-
 
 endmodule

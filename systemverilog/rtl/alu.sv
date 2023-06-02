@@ -32,8 +32,8 @@ assign IMM = (~imm + 1);
       6'b000001: rd <= rs + IMM;  // Add Immediate
       6'b000010: subtraction(rs, opr1, rd); // Subtract
       6'b000011: subtraction(rs, IMM, rd);  // Subtract Immedia
-      6'b000100: rd <= opr1 * opr2; // Multiply
-      6'b000101: rd <= opr1 * IMM;  // Multiply Immediate
+      6'b000100: multiplication(rs,rt,rd); //rd <= opr1 * opr2; // Multiply
+      6'b000101: multiplication(rs,imm,rd); //rd <= opr1 * IMM;  // Multiply Immediate
       6'b000110: rd <= rs | rt;     // Bitwise OR
       6'b000111: rd <= rs | imm;    // Bitwise OR Immediate
       6'b001000: rd <= rs & rt;     // Bitwise AND
@@ -115,8 +115,18 @@ else
 
 endtask
 
+task multiplication(
+input logic [31:0] A, B,
+output logic [31:0] M
+);
+logic [31:0] tmp1, tmp2;
 
+assign tmp1= A[31]? (~A+1) : A;
+assign tmp2= B[31]? (~B+1) : B;
 
+M=tmp1 * tmp2;
+
+endtask
 
 
 

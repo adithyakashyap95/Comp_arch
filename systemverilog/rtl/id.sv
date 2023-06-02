@@ -19,7 +19,7 @@ module id (
 	output logic [5:0]  opcode_2_ex,
 	output logic [31:0] rs_reg_value_2_ex,
 	output logic [31:0] rt_reg_value_2_ex,
-	output logic [5:0]  rd_add_value_2_ex,
+	output logic [4:0]  rd_add_value_2_ex,
 	output logic [31:0] i_data_2_ex,
 
  	output logic branch_2_ex,
@@ -33,13 +33,13 @@ mem_t [31:0] registers_nxt;
 logic [5:0]  opcode;
 logic [31:0] r_rs;
 logic [31:0] r_rt;
-logic [5:0] r_rd;
+logic [4:0] r_rd;
 logic [31:0] i_rs;
 logic [31:0] i_rt;
 logic [15:0] i_imm;
 logic [31:0] rs_reg_value;
 logic [31:0] rt_reg_value;
-logic [5:0]  rd_add_value;
+logic [4:0]  rd_add_value;
 logic [31:0] i_data;
 logic branch;
 logic mem_read;

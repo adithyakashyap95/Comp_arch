@@ -17,8 +17,8 @@ module inst_f (
 
 logic opcode;
 logic [31:0] pc_in;
-logic [31:0] inst_mem [1023:0];
-assign instruction = inst_mem [address[31:2]];
+inst_t [1023:0] inst_mem;
+assign instruction = inst_mem[address[31:2]];
 
 always_ff @(posedge clk) //porgram counter
 begin
@@ -64,13 +64,13 @@ end
 always_ff @(posedge clk)
 begin 
 	if(rst) begin 
-		inst_mem <= 1'b0;
-		pc4 <= 1'b0;
+		inst_mem <= '0;
+		//pc4 <= '0;
 		end
 
 	else begin
 		inst_mem <= inst_mem;
-		pc4 <= pc_out;
+		//pc4 <= pc_out;
 	     end
 end	
 

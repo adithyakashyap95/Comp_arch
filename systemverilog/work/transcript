@@ -12,16 +12,14 @@
 # //  is prohibited from disclosure under the Trade Secrets Act,
 # //  18 U.S.C. Section 1905.
 # //
-# vsim -debugDB tb -do "add wave sim:/tb/* ; run -all" 
-# Start time: 16:24:50 on May 31,2023
+# vsim -debugDB main -do "add wave sim:/main/* ; run -all" 
+# Start time: 18:26:08 on Jun 01,2023
 # ** Warning: (vsim-4308) Enabling visibility using +acc is recommended with debug flow.
 # ** Note: (vsim-3812) Design is being optimized...
 # ** Note: (vsim-8611) Generating debug db.
 # ** Warning: (vopt-4308) Enabling visibility using +acc is recommended with debug flow.
-# ** Error: (vopt-13130) Failed to find design unit tb.
-#         Searched libraries:
-#             work
+# ** Error: ../rtl/main.sv(124): Module 'wb' is not defined.
 # Optimization failed
 # Error loading design
-# End time: 16:24:50 on May 31,2023, Elapsed time: 0:00:00
+# End time: 18:26:09 on Jun 01,2023, Elapsed time: 0:00:01
 # Errors: 1, Warnings: 2

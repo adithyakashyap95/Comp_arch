@@ -8,8 +8,12 @@ module alu(
   input logic [31:0] rs,
   input logic [31:0] rt,
   input logic [31:0] imm,
+  input logic [31:0] pc_out_2_ex,
+  input logic [31:0] i_data_2_ex,
+
   output logic [31:0] rd,
   output logic [31:0] A,
+  output logic [31:0] pc_out_2_ex_out,
   input logic clk
 );
   
@@ -24,7 +28,7 @@ assign IMM = (~imm + 1);
   always_ff @(posedge clk) begin
         
     case (op)
-      6'b000000: rd <= rs + rt; // Add
+      6'b000000: addition(rs,rt,rd);  //rd <= rs + rt; // Add
       6'b000001: rd <= rs + IMM;  // Add Immediate
       6'b000010: subtraction(rs, opr1, rd); // Subtract
       6'b000011: subtraction(rs, IMM, rd);  // Subtract Immedia
@@ -36,8 +40,13 @@ assign IMM = (~imm + 1);
       6'b001001: rd <= rs & imm;    // Bitwise AND Immediate
       6'b001010: rd <= rs ^ rt;     // Bitwise XOR
       6'b001011: rd <= rs ^ imm;    // Bitwise XOR Immediate
-      6'b001100: A <= rs + imm;     // Load Word
-      6'b001101: A <= rs + imm;     // Store Word
+      6'b001100: addition(rs,imm,A);  //A <= rs + imm;     // Load Word
+      6'b001101: addition(rs,imm,A); //A <= rs + imm;     // Store Word
+      6'b001110: if(rs==0) pc_out_2_ex_out=pc_out_2_ex+i_data_2_ex;
+		 else pc_out_2_ex_out=pc_out_2_ex; //BZ Rs x 
+      6'b001111: if(rs==rt) pc_out_2_ex_out=pc_out_2_ex+i_data_2_ex;
+		 else pc_out_2_ex_out=pc_out_2_ex;  //BEQ Rs Rt x
+      6'b010000: pc_out_2_ex_out<=rs; // JR Rs (Load the PC [program counter] with the cont regi Rs.Jump to the new PC).	
       default: begin
         rd <= 32'b0; // Default output
         A <= 32'b0;  // Default output
@@ -57,6 +66,54 @@ else
 	S= (~tmp[31:0]+1);
 endtask
 
+
+task addition(
+input logic [31:0]A, B,
+output logic [31:0] S);
+
+logic [32:0] tmp, tmp1,tmp2;
+logic [31:0] a, b; 
+ 
+assign a = (~A+1);    //2's compliment of A
+assign b = (~B+1);    //2's compliment of B
+
+if(A[31]==0 && B[31]==0)
+	S = A+B;
+else if(A[31]==0 && B[31]==1) 
+				begin
+					if(A>b)  begin  //Addition of the positive number with a negative number when the positive number has a greater magnitude.
+							tmp = A+b;
+							S = tmp[31:0];
+						end
+					else if(A<b)  //Adding of the positive value with a negative value when the negative number has a higher magnitude
+						begin
+							tmp = A+b;
+							tmp1 =(~tmp+1);
+							S = tmp1[31:0];
+						end
+				end
+else if(A[31]==1 && B[31]==1)   // Addition when both are negative
+	begin
+		tmp=a+b;
+		tmp1= tmp[31:0]+tmp[32];
+		tmp2 = (~tmp1+1);
+		S = tmp2[31:0];
+	end
+else
+	begin
+					if(a<B)  begin  //Addition of the positive number with a negative number when the positive number has a greater magnitude.
+							tmp = a+B;
+							S = tmp[31:0];
+						end
+					else if(a>B)  //Adding of the positive value with a negative value when the negative number has a higher magnitude
+						begin
+							tmp = a+B;
+							tmp1 =(~tmp+1);
+							S = tmp1[31:0];
+						end
+	end
+
+endtask
 
 
 

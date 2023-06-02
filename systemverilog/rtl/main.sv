@@ -38,12 +38,16 @@ logic [31:0] rt_reg_value_2_ex;
 logic [31:0] rd_reg_value_2_ex;
 logic [31:0] i_data_2_ex;
 
-
 // Data from EX stage to Mem Stage if needed
 logic rw_f_ex;                     
 logic [(ADDR_LINE-1):0] addr_in_f_ex;
 logic [(D_SIZE-1):0] write_data_f_ex;
 logic [(D_SIZE-1):0] read_data_f_ex; 
+
+logic branch_2_ex;
+logic mem_read_2_ex;
+logic mem_to_reg_2_ex;	
+logic mem_write_2_ex;
 
 // WB stage
 logic [31:0] alu_out_f_mem_2_wb;
@@ -75,7 +79,6 @@ inst_f i_inst_fetch (
 	.pc4         	 (pc4_f_if_2_id)
 );
 
-
 // Decode
 id i_decode(
 	.clk               (clk               ), 
@@ -92,9 +95,12 @@ id i_decode(
 	.rs_reg_value_2_ex (rs_reg_value_2_ex ),
 	.rt_reg_value_2_ex (rt_reg_value_2_ex ),
 	.rd_reg_value_2_ex (rd_reg_value_2_ex ),
-	.i_data_2_ex       (i_data_2_ex       )
+	.i_data_2_ex       (i_data_2_ex       ),
+	.branch_2_ex	   (branch_2_ex	      ), 
+	.mem_read_2_ex	   (mem_read_2_ex     ), 
+	.mem_to_reg_2_ex   (mem_to_reg_2_ex   ), 
+	.mem_write_2_ex	   (mem_write_2_ex    ) 
 ); 
-
 
 // Execute E
 	// GIVE PC4 to EX stage 

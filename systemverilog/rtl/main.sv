@@ -12,14 +12,12 @@ module main (
 // IF stage
 logic hazard;
 logic [31:0] add_f_ex_2_id;
-logic [31:0] pc_f_ex_2_id;
 logic [31:0] pc4_f_if_2_id;
+logic [31:0] pc4_out_2_if;
 
 // Input to ID state and Output from ID state
 logic [31:0] inst;                    // from Inst Fetch stage
-logic [31:0] pc_in_f_if_2_id;         // from Inst Fetch stage
 
-logic [31:0] pc_in_f_id_2_ex;         // from Inst decode stage
 logic [31:0] pc4_in_f_id_2_ex;         // from Inst decode stage
 logic [5:0]  opcode_2_ex;
 logic [31:0] rs_reg_value_2_ex;
@@ -33,6 +31,9 @@ logic mem_to_reg_2_ex;
 logic mem_write_2_ex;
 
 // Data from EX stage to Mem Stage if needed
+logic [(ADDR_LINE_MEM-1):0] addr_in_f_ex;
+logic [(ADDR_LINE_REG-1):0] addr_reg_in_f_ex;
+logic [(D_SIZE-1):0] write_data_f_ex;
 
 // WB stage
 logic                       mem_to_reg_f_mem;
@@ -47,11 +48,9 @@ inst_f i_inst_fetch (
 	.clk         	 (clk         	), 
 	.rst         	 (reset        	),
 	.hazard      	 (hazard      	),   // Not connected
-	.pc_out1     	 (pc_f_ex_2_id  ),
-	.instruction 	 (instruction   ),
-	.ex_add      	 (add_f_ex_2_id ),
-	.pc_out      	 (pc_in_f_if_2_id) 
-	//.pc4         	 (pc4_f_if_2_id)
+	.instruction 	 (inst          ),
+	.ex_add      	 (pc4_out_2_if  ),
+	.pc_out      	 (pc4_f_if_2_id ) 
 );
 
 // Decode
@@ -60,13 +59,11 @@ id i_decode(
 	.clk               (clk               ), 
 	.reset             (reset             ), 
 	.w_f_wb            (mem_to_reg_f_wb_to_id),
-	.pc_in_f_if        (pc_in_f_if_2_id   ),
 	.inst              (inst              ),
 	.addr_in_f_wb      (reg_addr_f_wb_id  ), 
 	.write_data_f_wb   (reg_data_f_wb_id  ),
 	.pc4_in_f_if	   (pc4_f_if_2_id     ),
 
-	.pc_out_2_ex       (pc_in_f_id_2_ex   ),
 	.pc4_out_2_ex      (pc4_in_f_id_2_ex  ),
 	.opcode_2_ex       (opcode_2_ex       ),
 	.rs_reg_value_2_ex (rs_reg_value_2_ex ),
@@ -80,8 +77,23 @@ id i_decode(
 ); 
 
 // Execute E
-	// GIVE PC4 to EX stage 
 
+alu i_ex(
+	.clk                (clk             ),  
+	.reset              (reset           ),  
+	.op                 (opcode_2_ex     ),    
+	.rs                 (rs_reg_value_2_ex),   
+	.rt                 (rt_reg_value_2_ex),    
+	.imm                (i_data_2_ex     ),    
+	.pc4_out_2_ex       (pc4_in_f_id_2_ex),  
+	.i_data_2_ex        (i_data_2_ex     ), 
+	.rd                 (write_data_f_ex ),   
+	.A                  (addr_in_f_ex    ),   
+	.pc4_out_2_ex_out   (pc4_out_2_if    )
+);
+
+// FIXME :  EX stage should foreward the destination register as well
+// FIXME :  EX stage should foreward the ctrl registers mem_write, mem_red and mem_to_reg after pipelining 
 
 // Memory
 
@@ -91,9 +103,9 @@ mem i_memory (
 	.mem_write          	(mem_write          	),
 	.mem_read           	(mem_read           	),
 	.mem_to_reg         	(mem_to_reg         	), 
-	.addr_in            	(addr_in            	),  
-	.addr_reg_in        	(addr_reg_in        	),
-	.write_data         	(write_data         	),
+	.addr_in            	(addr_in_f_ex         	),  
+	.addr_reg_in        	(addr_reg_in_f_ex      	),
+	.write_data         	(write_data_f_ex       	),
 	.mem_to_reg_2_wb    	(mem_to_reg_f_mem    	), 
 	.alu_out_f_mem_2_wb 	(alu_out_f_mem_2_wb 	),
 	.alu_add_f_mem_2_wb 	(alu_add_f_mem_2_wb 	)

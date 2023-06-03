@@ -19,9 +19,9 @@ logic [31:0] inst_mem [0:1023];
 logic [31:0] inst_mem1 [0:1023];
 assign instruction = inst_mem[pc_out[31:2]];
 
-always_ff @(posedge clk) //porgram counter
+always_ff @(posedge clk or negedge rst) //porgram counter
 begin
-	if(rst)
+	if(rst==0)
     	begin
 		pc_out <= 0;	
     	end
@@ -39,7 +39,7 @@ end
 
 always_comb   // Add program counter
 begin
-	if(rst) 
+	if(rst==0) 
 		pc4 = 0;
 	else 
 		pc4 = pc_out + 4;
@@ -53,7 +53,7 @@ begin
 		6'b010001 : opcode = 1'b1;
 		default   : opcode = 1'b0; 
 	endcase 
-	pc_in = opcode ? pc4 : ex_add;
+	pc_in = (opcode==0) ? pc4 : ex_add;
 end
 
 string memory_image;
@@ -64,9 +64,9 @@ begin
 	$readmemh("memory_image.txt",inst_mem1);  //reading the list of instructions from the instruction.txt file
 end
 
-always_ff @(posedge clk)
+always_ff @(posedge clk or negedge rst)
 begin 
-	if(rst) begin 
+	if(rst==0) begin 
 		inst_mem <= inst_mem1;
 		end
 	else begin

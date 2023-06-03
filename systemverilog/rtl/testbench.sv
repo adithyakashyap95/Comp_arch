@@ -7,8 +7,12 @@ logic clk;
 logic rst;
 
 //.........instantiation .......
-i_main main (.clk(clk), .rst(rst));
-
+main i_main (
+	.clk		(clk	), 
+	.reset		(rst	),
+	.valid 		(1'b0	),
+	.opr_finished 	(1'b0	)
+);
 
 //..........clock generation .............
 always #5 clk = ~clk;
@@ -18,13 +22,18 @@ always #5 clk = ~clk;
 initial begin 
 
 clk = 0;
-rst = 1;
+rst = 0;
 
 
-#10 rst = 0;
+#10 rst = 1;
+
+
+#300 $finish;
 
 //...........Test cases..........
 
+end
 
+endmodule
 
 

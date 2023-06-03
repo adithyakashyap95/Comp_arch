@@ -12,12 +12,32 @@
 # //  is prohibited from disclosure under the Trade Secrets Act,
 # //  18 U.S.C. Section 1905.
 # //
-# vsim work.main -voptargs="+acc" "+MEM_IMAGE=memory_image.txt" -do "add wave sim:/main/* ; run -all" 
-# Start time: 23:41:41 on Jun 02,2023
+# vsim work.testbench -voptargs="+acc" "+MEM_IMAGE=memory_image.txt" -do "add wave sim:/testbench/i_main/i_decode/* ; run -all" 
+# Start time: 00:43:08 on Jun 03,2023
 # ** Note: (vsim-3812) Design is being optimized...
-# ** Error: ../rtl/main.sv(46): (vopt-2135) Too many port connections. Expected 6, found 7.
-# ** Error: ../rtl/main.sv(46): (vopt-2912) Port 'pc_out1' not found in module 'inst_f' (4th connection).
-# Optimization failed
-# Error loading design
-# End time: 23:41:41 on Jun 02,2023, Elapsed time: 0:00:00
-# Errors: 2, Warnings: 0
+# Loading sv_std.std
+# Loading work.testbench_sv_unit(fast)
+# Loading work.testbench(fast)
+# Loading work.main_sv_unit(fast)
+# Loading work.main(fast)
+# Loading work.if_sv_unit(fast)
+# Loading work.inst_f(fast)
+# Loading work.id_sv_unit(fast)
+# Loading work.id(fast)
+# Loading work.alu(fast)
+# Loading work.mem_sv_unit(fast)
+# Loading work.mem(fast)
+# Loading work.wb_sv_unit(fast)
+# Loading work.wb(fast)
+# ** Warning: (vsim-PLI-3691) ../rtl/if.sv(63): Expected a system task, not a system function '$value$plusargs'.
+#    Time: 0 ns  Iteration: 0  Instance: /testbench/i_main/i_inst_fetch File: ../rtl/if.sv
+# ** Warning: (vsim-PLI-3691) ../rtl/mem.sv(28): Expected a system task, not a system function '$value$plusargs'.
+#    Time: 0 ns  Iteration: 0  Instance: /testbench/i_main/i_memory File: ../rtl/mem.sv
+# add wave sim:/testbench/i_main/i_decode/* 
+#  run -all
+# ** Note: $finish    : ../rtl/testbench.sv(31)
+#    Time: 310 ns  Iteration: 0  Instance: /testbench
+# 1
+# Break in Module testbench at ../rtl/testbench.sv line 31
+# End time: 00:43:57 on Jun 03,2023, Elapsed time: 0:00:49
+# Errors: 0, Warnings: 2

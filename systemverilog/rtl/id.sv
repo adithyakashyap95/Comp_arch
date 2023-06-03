@@ -8,13 +8,11 @@ module id (
 	input  logic 	clk,
 	input  logic 	reset,
 	input  logic    w_f_wb,                      // Write from WB stage 
-	input  logic [31:0] pc_in_f_if,              // PC Value In from IF
 	input  logic [31:0] inst,                    // from Inst Fetch stage
 	input  logic [(ADDR_LINE_REG-1):0] addr_in_f_wb, // From WB stage
 	input  logic [(D_SIZE-1):0] write_data_f_wb, // From WB stage
 	input  logic [31:0] pc4_in_f_if,             // PC Value In from IF
 
-	output logic [31:0] pc_out_2_ex,
 	output logic [31:0] pc4_out_2_ex,
 	output logic [5:0]  opcode_2_ex,
 	output logic [31:0] rs_reg_value_2_ex,
@@ -262,7 +260,7 @@ end
 
 always_ff@(posedge clk or negedge reset)
 begin
-	if(reset)
+	if(reset==0)
 		registers <= '0;
 	else
 		registers <= registers_nxt;
@@ -279,14 +277,13 @@ end
 
 always_ff@(posedge clk or negedge reset)
 begin
-	if(reset)
+	if(reset==0)
 	begin
         	opcode_2_ex       <= '0; 
         	rs_reg_value_2_ex <= '0; 
         	rt_reg_value_2_ex <= '0; 
         	rd_add_value_2_ex <= '0; 
         	i_data_2_ex       <= '0; 
-		pc_out_2_ex       <= '0;
 		pc4_out_2_ex	  <= '0;
 		branch_2_ex  	  <= '0;
 		mem_read_2_ex 	  <= '0;
@@ -300,7 +297,6 @@ begin
         	rt_reg_value_2_ex <= rt_reg_value; 
         	rd_add_value_2_ex <= rd_add_value; 
         	i_data_2_ex       <= i_data; 
-		pc_out_2_ex       <= pc_in_f_if;
 		pc4_out_2_ex	  <= pc4_in_f_if;
 		branch_2_ex  	  <= branch;
 		mem_read_2_ex 	  <= mem_read;

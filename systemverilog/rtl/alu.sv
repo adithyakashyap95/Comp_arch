@@ -4,6 +4,8 @@
 //Output : Destination register --> rd -->5bit [4:0]
 
 module alu(
+  input logic clk,
+  input logic reset,
   input logic [5:0] op,
   input logic [31:0] rs,
   input logic [31:0] rt,
@@ -13,8 +15,7 @@ module alu(
 
   output logic [31:0] rd,
   output logic [31:0] A,
-  output logic [31:0] pc4_out_2_ex_out,
-  input logic clk
+  output logic [31:0] pc4_out_2_ex_out
 );
   
   logic [31:0] opr1, opr2;

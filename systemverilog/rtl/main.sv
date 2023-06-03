@@ -24,7 +24,7 @@ logic [31:0] pc4_in_f_id_2_ex;         // from Inst decode stage
 logic [5:0]  opcode_2_ex;
 logic [31:0] rs_reg_value_2_ex;
 logic [31:0] rt_reg_value_2_ex;
-logic [31:0] rd_reg_value_2_ex;
+logic [4:0]  rd_add_value_2_ex;
 logic [31:0] i_data_2_ex;
 
 logic branch_2_ex;
@@ -51,11 +51,12 @@ inst_f i_inst_fetch (
 	.address     	 (address       ),   // Not required FIXME
 	.instruction 	 (instruction   ),
 	.ex_add      	 (add_f_ex_2_id ),
-	.pc_out      	 (pc_in_f_if_2_id), 
-	.pc4         	 (pc4_f_if_2_id)
+	.pc_out      	 (pc_in_f_if_2_id) 
+	//.pc4         	 (pc4_f_if_2_id)
 );
 
 // Decode
+
 id i_decode(
 	.clk               (clk               ), 
 	.reset             (reset             ), 
@@ -65,12 +66,13 @@ id i_decode(
 	.addr_in_f_wb      (reg_addr_f_wb_id  ), 
 	.write_data_f_wb   (reg_data_f_wb_id  ),
 	.pc4_in_f_if	   (pc4_f_if_2_id     ),
+
+	.pc_out_2_ex       (pc_in_f_id_2_ex  ),
 	.pc4_out_2_ex      (pc4_in_f_id_2_ex  ),
-	.pc_in_2_ex        (pc_in_f_id_2_ex   ),
 	.opcode_2_ex       (opcode_2_ex       ),
 	.rs_reg_value_2_ex (rs_reg_value_2_ex ),
 	.rt_reg_value_2_ex (rt_reg_value_2_ex ),
-	.rd_reg_value_2_ex (rd_reg_value_2_ex ),
+	.rd_add_value_2_ex (rd_add_value_2_ex ),
 	.i_data_2_ex       (i_data_2_ex       ),
 	.branch_2_ex	   (branch_2_ex	      ), 
 	.mem_read_2_ex	   (mem_read_2_ex     ), 

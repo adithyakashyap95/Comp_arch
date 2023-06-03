@@ -270,8 +270,8 @@ end
 always_comb
 begin
 	registers_nxt    = registers;
-	registers_nxt[0] = 32'b0; // always Constant zero
 	registers_nxt[addr_in_f_wb] = (w_f_wb == 1'b1) ? write_data_f_wb : registers_nxt[addr_in_f_wb]; 
+	registers_nxt[0] = 32'b0; // always Constant zero
 end
 
 // pipeline

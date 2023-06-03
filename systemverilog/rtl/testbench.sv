@@ -32,7 +32,10 @@ rst = 0;
 	for(int i=0;i<1000000;i=i+1)
 	begin
 		if(inst_out[31:26] == 6'b010001 )
+		begin
+			#60;
 			$finish;
+		end
 		else
 			#10;
 	end

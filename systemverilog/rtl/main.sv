@@ -48,7 +48,6 @@ inst_f i_inst_fetch (
 	.rst         	 (reset        	),
 	.hazard      	 (hazard      	),   // Not connected
 	.pc_out1     	 (pc_f_ex_2_id  ),
-	.address     	 (address       ),   // Not required FIXME
 	.instruction 	 (instruction   ),
 	.ex_add      	 (add_f_ex_2_id ),
 	.pc_out      	 (pc_in_f_if_2_id) 
@@ -67,7 +66,7 @@ id i_decode(
 	.write_data_f_wb   (reg_data_f_wb_id  ),
 	.pc4_in_f_if	   (pc4_f_if_2_id     ),
 
-	.pc_out_2_ex       (pc_in_f_id_2_ex  ),
+	.pc_out_2_ex       (pc_in_f_id_2_ex   ),
 	.pc4_out_2_ex      (pc4_in_f_id_2_ex  ),
 	.opcode_2_ex       (opcode_2_ex       ),
 	.rs_reg_value_2_ex (rs_reg_value_2_ex ),

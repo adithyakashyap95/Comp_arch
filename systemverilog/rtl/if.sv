@@ -6,13 +6,10 @@ module inst_f (
 	input  logic clk,
 	input  logic rst,
 	input  logic hazard,
-	//input  logic [31:0] pc_out1,
-	//input  logic [31:0] address,
 	input  logic [31:0] ex_add,
 	
 	output logic [31:0] instruction,
-	output logic [31:0] pc_out,
-	//output logic [31:0] pc4_dc
+	output logic [31:0] pc_out
 );
 
 logic opcode;
@@ -20,7 +17,7 @@ logic [31:0] pc_in;
 logic [31:0] pc4;
 logic [31:0] inst_mem [0:1023];
 logic [31:0] inst_mem1 [0:1023];
-assign instruction = inst_mem [pc[31:2]];
+assign instruction = inst_mem[pc_out[31:2]];
 
 always_ff @(posedge clk) //porgram counter
 begin

@@ -1,13 +1,19 @@
+
+`include "../rtl/struct.sv"
 module tb_alu;
 
 logic  [5:0]op;
 logic  [31:0]rs, rt;
-logic  [31:0]imm;
+//logic  [31:0]imm;
 logic [31:0]rd, A;
 logic clk;
 logic [31:0] pc4_out_2_ex;
 logic [31:0] i_data_2_ex;
 logic [31:0] pc4_out_2_ex_out;
+logic mem_read_2_ex;
+logic mem_to_reg_2_ex;	
+logic mem_write_2_ex;
+logic [4:0]  rd_add_value_2_ex;
 
 alu i1(.*);
 
@@ -26,7 +32,7 @@ always #5 clk = ~clk;
     // Test case 2: Subtraction Immediate
     op = 6'b000011;
     rs = 32'h0000000A;
-    imm = 32'hFFFFFFF5;
+    i_data_2_ex = 32'hFFFFFFF5;
     #10;
     $display("Subtraction Immediate result: %h", rd);
     
@@ -40,7 +46,7 @@ always #5 clk = ~clk;
     // Test case 4: Load Word
     op = 6'b001100;
     rs = 32'h00000100;
-    imm = 32'h00000008;
+    i_data_2_ex = 32'h00000008;
     #10;
     $display("Load Word result: %d", A);
     

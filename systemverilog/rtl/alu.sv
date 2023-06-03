@@ -3,19 +3,30 @@
 //Immediate value -- how many bits? 5? 
 //Output : Destination register --> rd -->5bit [4:0]
 
+`include "../rtl/struct.sv"
 module alu(
   input logic clk,
   input logic reset,
   input logic [5:0] op,
   input logic [31:0] rs,
   input logic [31:0] rt,
-  input logic [31:0] imm,
+  //input logic [31:0] imm,
   input logic [31:0] pc4_out_2_ex,
   input logic [31:0] i_data_2_ex,
 
+  input logic mem_read_2_ex,
+  input logic mem_to_reg_2_ex,	
+  input logic mem_write_2_ex,
+  input logic [4:0]  rd_add_value_2_ex,
+
   output logic [31:0] rd,
   output logic [31:0] A,
-  output logic [31:0] pc4_out_2_ex_out
+  output logic [31:0] pc4_out_2_ex_out,
+
+  output logic mem_read_2_mem,
+  output logic mem_to_reg_2_mem,	
+  output logic mem_write_2_mem,
+  output logic [4:0] rd_add_value_2_mem
 );
   
   logic [31:0] opr1, opr2;
@@ -23,7 +34,17 @@ module alu(
   logic [32:0] tmp;
 assign opr1 = (~rs + 1);
 assign opr2 = (~rt + 1);
-assign IMM = (~imm + 1);
+//assign IMM = (~imm + 1);
+
+  always_ff @(posedge clk)
+	begin
+	
+		mem_read_2_mem <= mem_read_2_ex;
+		mem_to_reg_2_mem <= mem_to_reg_2_ex;	
+		mem_write_2_mem <= mem_write_2_ex;
+		rd_add_value_2_mem <= rd_add_value_2_ex;
+	end
+	
 
   
   always_ff @(posedge clk) begin
@@ -35,7 +56,7 @@ assign IMM = (~imm + 1);
  		 	pc4_out_2_ex_out<=0;
 		 end
       6'b000001: begin
-			rd <= rs + imm;  // Add Immediate
+			rd <= rs + i_data_2_ex;  // Add Immediate
           	 	A <= 32'b0;
 		 	pc4_out_2_ex_out<=0; 
 		end 
@@ -45,7 +66,7 @@ assign IMM = (~imm + 1);
 		 	pc4_out_2_ex_out<=0; 
 		end
       6'b000011: begin
-			rd<=rs+imm;//rd=subtraction(rs, IMM);  // Subtract Immedia
+			rd<=rs+i_data_2_ex;//rd=subtraction(rs, IMM);  // Subtract Immedia
         	 	A <= 32'b0; 
 		 	pc4_out_2_ex_out<=0;
 		end 
@@ -55,7 +76,7 @@ assign IMM = (~imm + 1);
 		 	pc4_out_2_ex_out<=0;
 		end
       6'b000101: begin
-			rd<=rs*imm;//rd=multiplication(rs,imm); //rd <= opr1 * IMM;  // Multiply Immediate
+			rd<=rs*i_data_2_ex;//rd=multiplication(rs,imm); //rd <= opr1 * IMM;  // Multiply Immediate
        		 	A <= 32'b0;  
 		 	pc4_out_2_ex_out<=0;
 		end
@@ -65,7 +86,7 @@ assign IMM = (~imm + 1);
 		 	pc4_out_2_ex_out<=0;
 		end
       6'b000111: begin
-			rd <= rs | imm;    // Bitwise OR Immediate
+			rd <= rs | i_data_2_ex;    // Bitwise OR Immediate
            	 	A <= 32'b0;  
 		 	pc4_out_2_ex_out<=0;
 		end
@@ -75,7 +96,7 @@ assign IMM = (~imm + 1);
 		 	pc4_out_2_ex_out<=0;
 		end
       6'b001001: begin
-			rd <= rs & imm;    // Bitwise AND Immediate
+			rd <= rs & i_data_2_ex;    // Bitwise AND Immediate
         	 	A <= 32'b0;  
 			pc4_out_2_ex_out<=0;
 		end
@@ -85,17 +106,17 @@ assign IMM = (~imm + 1);
 		 	pc4_out_2_ex_out<=0;  
 		end
       6'b001011: begin
-			rd <= rs ^ imm;    // Bitwise XOR Immediate
+			rd <= rs ^ i_data_2_ex;    // Bitwise XOR Immediate
         	 	A <= 32'b0;  
 		 	pc4_out_2_ex_out<=0;
 		end
       6'b001100: begin
-			A=rs+imm;//A=addition(rs,imm);  //A <= rs + imm;     // Load Word
+			A=rs+i_data_2_ex;//A=addition(rs,imm);  //A <= rs + imm;     // Load Word
         	 	rd <= 32'b0; 
 		 	pc4_out_2_ex_out<=0;
 		end
       6'b001101: begin
-			A=rs+imm;//A=addition(rs,imm); //A <= rs + imm;     // Store Word
+			A=rs+i_data_2_ex;//A=addition(rs,imm); //A <= rs + imm;     // Store Word
         	 	rd <= 32'b0;
 		 	pc4_out_2_ex_out<=0; 
 		end

@@ -6,7 +6,8 @@ module main (
 	input  logic 	clk,
 	input  logic 	reset,
 	input  logic 	valid,
-	input  logic 	opr_finished
+	input  logic 	opr_finished,
+	output logic [31:0] inst_out 
 ); 
 
 // IF stage
@@ -43,11 +44,14 @@ logic                       mem_to_reg_f_wb_to_id;
 logic [(D_SIZE-1):0]        reg_data_f_wb_id;
 logic [(ADDR_LINE_REG-1):0] reg_addr_f_wb_id;
 
+// Just assigning output to testbench
+assign inst_out = inst;
+
 // Fetch
 inst_f i_inst_fetch (
 	.clk         	 (clk         	), 
 	.rst         	 (reset        	),
-	.hazard      	 (hazard      	),   // Not connected
+	.hazard      	 (1'b0      	),   // Not connected
 	.instruction 	 (inst          ),
 	.ex_add      	 (pc4_out_2_if  ),
 	.pc_out      	 (pc4_f_if_2_id ) 
@@ -84,16 +88,21 @@ alu i_ex(
 	.op                 (opcode_2_ex     ),    
 	.rs                 (rs_reg_value_2_ex),   
 	.rt                 (rt_reg_value_2_ex),    
-	.imm                (i_data_2_ex     ),    
 	.pc4_out_2_ex       (pc4_in_f_id_2_ex),  
 	.i_data_2_ex        (i_data_2_ex     ), 
 	.rd                 (write_data_f_ex ),   
 	.A                  (addr_in_f_ex    ),   
-	.pc4_out_2_ex_out   (pc4_out_2_if    )
-);
+	.pc4_out_2_ex_out   (pc4_out_2_if    ),
+        .mem_read_2_ex      (mem_read_2_ex   ),    
+        .mem_to_reg_2_ex    (mem_to_reg_2_ex ),       	
+        .mem_write_2_ex     (mem_write_2_ex  ),  
+        .rd_add_value_2_ex  (rd_add_value_2_ex),  
 
-// FIXME :  EX stage should foreward the destination register as well
-// FIXME :  EX stage should foreward the ctrl registers mem_write, mem_red and mem_to_reg after pipelining 
+        .mem_read_2_mem     (mem_read        ),       
+        .mem_to_reg_2_mem   (mem_to_reg      ),       
+        .mem_write_2_mem    (mem_write       ),       
+        .rd_add_value_2_mem (addr_reg_in_f_ex)
+);
 
 // Memory
 

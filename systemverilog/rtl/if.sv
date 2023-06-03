@@ -13,6 +13,8 @@ module inst_f (
 );
 
 logic opcode;
+logic halt;
+logic [1:0] delay;
 logic [31:0] pc_in;
 logic [31:0] pc4;
 logic [31:0] inst_mem [0:1023];
@@ -23,16 +25,27 @@ always_ff @(posedge clk or negedge rst) //porgram counter
 begin
 	if(rst==0)
     	begin
+		halt   <= 0;
 		pc_out <= 0;	
     	end
    	else if (hazard)
     	begin
-      		pc_out <= pc_out; 
+		halt   <= halt;
+      		pc_out <= pc_out;   // Need to be updated 
     	end
-	else if (instruction [31:26] == 6'b010001 )
-		pc_out <= '0;
-   	else 
+	else if (opcode==1'b1)
+	begin
+		halt   <= halt;
+		pc_out <= (delay==2) ? pc_in : pc_out;
+   	end
+	else if ((instruction[31:26] == 6'b010001) | (halt == 1'b1))
+	begin
+		halt   <= 1;
+		pc_out <= pc_out;
+   	end
+	else 
      	begin 
+		halt   <= halt;
 		pc_out <= pc_in;
       	end
 end
@@ -54,6 +67,21 @@ begin
 		default   : opcode = 1'b0; 
 	endcase 
 	pc_in = (opcode==0) ? pc4 : ex_add;
+end
+
+
+always_ff@(posedge clk or negedge rst)
+begin
+	if(rst==0)
+		delay <= '0;
+	else if(delay == 2)
+		delay <= '0;
+	else if(delay>0)
+		delay <= delay + 1;
+	else if(opcode == 1)
+		delay <= delay + 1;
+	else
+		delay <= delay;
 end
 
 string memory_image;

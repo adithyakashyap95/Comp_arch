@@ -16,5 +16,5 @@ rm -rf *
 \cp -r ./memory_image.txt ./work/
 chmod 777 ./work/memory_image.txt
 chmod 777 ./memory_image.txt
-/pkgs/mentor/questa/10.6b/questasim/bin/vsim work.testbench -voptargs=+acc +MEM_IMAGE=memory_image.txt -do  "add wave sim:/testbench/i_main/i_decode/* ; run -all"
+/pkgs/mentor/questa/10.6b/questasim/bin/vsim work.testbench -voptargs=+acc +MEM_IMAGE=memory_image.txt -do  "add wave sim:/testbench/i_main/i_inst_fetch/* ; run -all"
 

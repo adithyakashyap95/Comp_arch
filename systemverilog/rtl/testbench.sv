@@ -1,7 +1,7 @@
 
 `include "../rtl/struct.sv"  // Include the necessary files
 
-module testbench;
+module tb;
 
 logic clk;
 logic rst;

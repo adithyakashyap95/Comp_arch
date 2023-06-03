@@ -6,13 +6,13 @@ module inst_f (
 	input  logic clk,
 	input  logic rst,
 	input  logic hazard,
-	input  logic [31:0] pc_out1,
-	input  logic [31:0] address,
+	//input  logic [31:0] pc_out1,
+	//input  logic [31:0] address,
 	input  logic [31:0] ex_add,
 	
 	output logic [31:0] instruction,
 	output logic [31:0] pc_out,
-	output logic [31:0] pc4_dc
+	//output logic [31:0] pc4_dc
 );
 
 logic opcode;
@@ -20,7 +20,7 @@ logic [31:0] pc_in;
 logic [31:0] pc4;
 logic [31:0] inst_mem [0:1023];
 logic [31:0] inst_mem1 [0:1023];
-assign instruction = inst_mem [address[31:2]];
+assign instruction = inst_mem [pc[31:2]];
 
 always_ff @(posedge clk) //porgram counter
 begin
@@ -45,7 +45,7 @@ begin
 	if(rst) 
 		pc4 = 0;
 	else 
-		pc4 = pc_out1 + 4;
+		pc4 = pc_out + 4;
 end
 
 always_comb
@@ -71,12 +71,11 @@ always_ff @(posedge clk)
 begin 
 	if(rst) begin 
 		inst_mem <= inst_mem1;
-		pc4_dc <= '0;
 		end
 	else begin
 		inst_mem <= inst_mem;
-		pc4_dc <= pc4;
-	     end
+		end
+
 end	
 
   

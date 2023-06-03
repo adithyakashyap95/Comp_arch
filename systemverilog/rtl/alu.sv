@@ -123,7 +123,7 @@ assign opr2 = (~rt + 1);
       6'b001110:begin
 		 if(rs==0) 
 			begin
-				pc4_out_2_ex_out=pc4_out_2_ex+i_data_2_ex;
+				pc4_out_2_ex_out=pc4_out_2_ex+(i_data_2_ex<<2);
         			rd <= 32'b0; 
 				A <= 32'b0;
 			end
@@ -137,7 +137,7 @@ assign opr2 = (~rt + 1);
       6'b001111:begin
 		 if(rs==rt) 
 			begin
-				pc4_out_2_ex_out=pc4_out_2_ex+i_data_2_ex;
+				pc4_out_2_ex_out=pc4_out_2_ex+(i_data_2_ex<<2);
         			rd <= 32'b0;
 				A <= 32'b0;
 			end 

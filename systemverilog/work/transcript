@@ -12,8 +12,8 @@
 # //  is prohibited from disclosure under the Trade Secrets Act,
 # //  18 U.S.C. Section 1905.
 # //
-# vsim work.testbench -voptargs="+acc" "+MEM_IMAGE=memory_image.txt" -do "add wave sim:/testbench/i_main/i_inst_fetch/* ; run -all" 
-# Start time: 12:34:42 on Jun 03,2023
+# vsim work.testbench -voptargs="+acc" "+MEM_IMAGE=memory_image.txt" -do "add wave sim:/testbench/i_main/i_inst_fetch/* ; add wave sim:/testbench/i_main/i_decode/* ;add wave sim:/testbench/i_main/i_ex/* ;add wave sim:/testbench/i_main/i_memory/* ;add wave sim:/testbench/i_main/i_writeback/* ;run -all" 
+# Start time: 12:59:29 on Jun 03,2023
 # ** Note: (vsim-3812) Design is being optimized...
 # Loading sv_std.std
 # Loading work.testbench_sv_unit(fast)
@@ -35,10 +35,14 @@
 # ** Warning: (vsim-PLI-3691) ../rtl/mem.sv(28): Expected a system task, not a system function '$value$plusargs'.
 #    Time: 0 ns  Iteration: 0  Instance: /testbench/i_main/i_memory File: ../rtl/mem.sv
 # add wave sim:/testbench/i_main/i_inst_fetch/* 
-#  run -all
+#  add wave sim:/testbench/i_main/i_decode/* 
+# add wave sim:/testbench/i_main/i_ex/* 
+# add wave sim:/testbench/i_main/i_memory/* 
+# add wave sim:/testbench/i_main/i_writeback/* 
+# run -all
 # ** Note: $finish    : ../rtl/testbench.sv(35)
-#    Time: 300 ns  Iteration: 0  Instance: /testbench
+#    Time: 150 ns  Iteration: 0  Instance: /testbench
 # 1
 # Break in Module testbench at ../rtl/testbench.sv line 35
-# End time: 12:45:05 on Jun 03,2023, Elapsed time: 0:10:23
+# End time: 13:09:00 on Jun 03,2023, Elapsed time: 0:09:31
 # Errors: 0, Warnings: 2

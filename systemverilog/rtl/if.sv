@@ -32,6 +32,8 @@ begin
     	begin
       		pc_out <= pc_out; 
     	end
+	else if (instruction [31:26] == 6'b010001 )
+		pc_out <= '0;
    	else 
      	begin 
 		pc_out <= pc_in;

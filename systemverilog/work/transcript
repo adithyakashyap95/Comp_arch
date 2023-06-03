@@ -13,7 +13,7 @@
 # //  18 U.S.C. Section 1905.
 # //
 # vsim work.testbench -voptargs="+acc" "+MEM_IMAGE=memory_image.txt" -do "add wave sim:/testbench/i_main/i_inst_fetch/* ; add wave sim:/testbench/i_main/i_decode/* ;add wave sim:/testbench/i_main/i_ex/* ;add wave sim:/testbench/i_main/i_memory/* ;add wave sim:/testbench/i_main/i_writeback/* ;run -all" 
-# Start time: 12:59:29 on Jun 03,2023
+# Start time: 13:18:57 on Jun 03,2023
 # ** Note: (vsim-3812) Design is being optimized...
 # Loading sv_std.std
 # Loading work.testbench_sv_unit(fast)
@@ -44,5 +44,5 @@
 #    Time: 150 ns  Iteration: 0  Instance: /testbench
 # 1
 # Break in Module testbench at ../rtl/testbench.sv line 35
-# End time: 13:09:00 on Jun 03,2023, Elapsed time: 0:09:31
+# End time: 13:22:10 on Jun 03,2023, Elapsed time: 0:03:13
 # Errors: 0, Warnings: 2

@@ -32,6 +32,7 @@ logic [5:0]  opcode;
 logic [31:0] r_rs;
 logic [31:0] r_rt;
 logic [4:0] r_rd;
+logic [4:0] i_rdt;
 logic [31:0] i_rs;
 logic [31:0] i_rt;
 logic [15:0] i_imm;
@@ -50,11 +51,11 @@ assign opcode = inst[31:26];
 assign r_rs  = registers[inst[25:21]];
 assign r_rt  = registers[inst[20:16]];
 assign r_rd  = inst[15:11];
-assign r_rdt = inst[20:16];
 
 // I -instruction
 assign i_rs  = registers[inst[25:21]];
 assign i_rt  = registers[inst[20:16]];
+assign i_rdt = inst[20:16];
 
 // Needs special attention as we get only 16 bit data which shoulf be prefixed to data
 assign i_imm = (inst[15]==1'b1) ? {16'hFFFF,inst[15:0]} : {16'b0,inst[15:0]};
@@ -76,7 +77,7 @@ begin
 		6'b000001:begin			// addi
 			rs_reg_value = i_rs;	
 			rt_reg_value = '0;	
-			rd_add_value = r_rdt;	
+			rd_add_value = i_rdt;	
 			i_data 	     = i_imm;
 			branch       = 0;
 			mem_read     = 0;
@@ -96,7 +97,7 @@ begin
 		6'b000011:begin			// subi
 			rs_reg_value = i_rs;	
 			rt_reg_value = '0;	
-			rd_add_value = r_rdt;	
+			rd_add_value = i_rdt;	
 			i_data 	     = i_imm;
 			branch       = 0;
 			mem_read     = 0;
@@ -116,7 +117,7 @@ begin
 		6'b000101:begin			// muli
 			rs_reg_value = i_rs;	
 			rt_reg_value = '0;	
-			rd_add_value = r_rdt;	
+			rd_add_value = i_rdt;	
 			i_data 	     = i_imm;
 			branch       = 0;
 			mem_read     = 0;
@@ -136,7 +137,7 @@ begin
 		6'b000111:begin			// ORI
 			rs_reg_value = i_rs;	
 			rt_reg_value = '0;	
-			rd_add_value = r_rdt;	
+			rd_add_value = i_rdt;	
 			i_data 	     = i_imm;
 			branch       = 0;
 			mem_read     = 0;
@@ -156,7 +157,7 @@ begin
 		6'b001001:begin			// ANDI
 			rs_reg_value = i_rs;	
 			rt_reg_value = '0;	
-			rd_add_value = r_rdt;	
+			rd_add_value = i_rdt;	
 			i_data 	     = i_imm;
 			branch       = 0;
 			mem_read     = 0;
@@ -176,7 +177,7 @@ begin
 		6'b001011:begin			// XORI
 			rs_reg_value = i_rs;	
 			rt_reg_value = '0;	
-			rd_add_value = r_rdt;	
+			rd_add_value = i_rdt;	
 			i_data 	     = i_imm;
 			branch       = 0;
 			mem_read     = 0;
@@ -186,7 +187,7 @@ begin
 		6'b001100:begin			// LDW
 			rs_reg_value = i_rs;	
 			rt_reg_value = '0;	
-			rd_add_value = r_rdt;	
+			rd_add_value = i_rdt;	
 			i_data 	     = i_imm;
 			branch       = 0;
 			mem_read     = 1;
@@ -196,7 +197,7 @@ begin
 		6'b001101:begin			// STW
 			rs_reg_value = i_rs;	
 			rt_reg_value = '0;	
-			rd_add_value = r_rdt;	
+			rd_add_value = i_rdt;	
 			i_data 	     = i_imm;
 			branch       = 0;
 			mem_read     = 0;

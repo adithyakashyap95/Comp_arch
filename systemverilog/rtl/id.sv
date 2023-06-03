@@ -196,7 +196,7 @@ begin
 		end
 		6'b001101:begin			// STW
 			rs_reg_value = i_rs;	
-			rt_reg_value = '0;	
+			rt_reg_value = i_rt;	
 			rd_add_value = i_rdt;	
 			i_data 	     = i_imm;
 			branch       = 0;

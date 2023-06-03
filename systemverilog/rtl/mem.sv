@@ -17,16 +17,16 @@ module mem (
 	output logic [(ADDR_LINE_REG-1):0] alu_add_f_mem_2_wb   // This is only for REGISTER WRITE
 );
 
-  mem_t [(D_MEM-1):0]  memory;
-  mem_t [(D_MEM-1):0]  mem_local;
+  logic [(D_SIZE-1):0] memory [0:(1023)];
+  logic [(D_SIZE-1):0] mem_local [0:(1023)];
   logic [(D_SIZE-1):0] reg_w_data;
-  inst_t [1023:0] inst_mem;
+  logic [31:0] inst_mem [0:1023];
 
   string memory_image;
   initial
   begin 
-        $valueplusargs("MEM_IMAGE=%s",memory_image);
-  	$readmemh("memory_image",inst_mem);  //reading the list of instructions from the instruction.txt file
+        $value$plusargs("MEM_IMAGE=%s",memory_image);
+  	$readmemh("memory_image.txt",inst_mem);  //reading the list of instructions from the instruction.txt file
   end
 
   always_ff@(posedge clk or negedge reset)

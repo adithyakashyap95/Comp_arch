@@ -18,7 +18,8 @@ module inst_f (
 logic opcode;
 logic [31:0] pc_in;
 logic [31:0] pc4;
-inst_t [1023:0] inst_mem;
+logic [31:0] inst_mem [0:1023];
+logic [31:0] inst_mem1 [0:1023];
 assign instruction = inst_mem [address[31:2]];
 
 always_ff @(posedge clk) //porgram counter
@@ -60,14 +61,14 @@ string memory_image;
 
 initial
 begin 
-        $valueplusargs("MEM_IMAGE=%s",memory_image);
-	$readmemh("memory_image",inst_mem);  //reading the list of instructions from the instruction.txt file
+        $value$plusargs("MEM_IMAGE=%s",memory_image);
+	$readmemh("memory_image.txt",inst_mem1);  //reading the list of instructions from the instruction.txt file
 end
 
 always_ff @(posedge clk)
 begin 
 	if(rst) begin 
-		inst_mem <= '0;
+		inst_mem <= inst_mem1;
 		pc4_dc <= '0;
 		end
 	else begin

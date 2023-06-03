@@ -20,12 +20,20 @@ module mem (
   mem_t [(D_MEM-1):0]  memory;
   mem_t [(D_MEM-1):0]  mem_local;
   logic [(D_SIZE-1):0] reg_w_data;
+  inst_t [1023:0] inst_mem;
+
+  string memory_image;
+  initial
+  begin 
+        $valueplusargs("MEM_IMAGE=%s",memory_image);
+  	$readmemh("memory_image",inst_mem);  //reading the list of instructions from the instruction.txt file
+  end
 
   always_ff@(posedge clk or negedge reset)
   begin
 	if(reset==0)
 	begin
-		memory             <= '0;
+		memory             <= inst_mem;   // Input from File
 		alu_out_f_mem_2_wb <= '0;
 		alu_add_f_mem_2_wb <= '0; 
 		mem_to_reg_2_wb    <= '0;

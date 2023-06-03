@@ -56,10 +56,12 @@ begin
 	pc_in = opcode ? pc4 : ex_add;
 end
 
-always_ff @(posedge clk)  // intruction memory
+string memory_image;
+
+initial
 begin 
-	if(rst) 
-		$readmemb("instruction.txt",inst_mem);  //reading the list of instructions from the instruction.txt file
+        $valueplusargs("MEM_IMAGE=%s",memory_image);
+	$readmemh("memory_image",inst_mem);  //reading the list of instructions from the instruction.txt file
 end
 
 always_ff @(posedge clk)

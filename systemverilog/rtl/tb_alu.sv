@@ -58,6 +58,20 @@ always #5 clk = ~clk;
     #10;
     $display("Subtraction  result: %h", rd);
   
+// Test case 7: Addition
+    op = 6'b000000;
+    rs = 32'h00000014;
+    rt = 32'h0000FFF0;
+    #10;
+    $display("Addition result: %h", rd);
+
+// Test case : Addition
+    op = 6'b000000;
+    rs = 32'h12345678;
+    rt = 32'h956BA988;
+    #10;
+    $display("Addition result: %h", rd);
+
     
     #10;
     $finish;

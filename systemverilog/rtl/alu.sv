@@ -28,34 +28,119 @@ assign IMM = (~imm + 1);
   always_ff @(posedge clk) begin
         
     case (op)
-      6'b000000: rd=addition(rs,rt);  //rd <= rs + rt; // Add
-      6'b000001: rd <= rs + IMM;  // Add Immediate
-      6'b000010: rd=subtraction(rs, opr2); // Subtract
-      6'b000011: rd=subtraction(rs, IMM);  // Subtract Immedia
-      6'b000100: rd=multiplication(rs,rt); //rd <= opr1 * opr2; // Multiply
-      6'b000101: rd=multiplication(rs,imm); //rd <= opr1 * IMM;  // Multiply Immediate
-      6'b000110: rd <= rs | rt;     // Bitwise OR
-      6'b000111: rd <= rs | imm;    // Bitwise OR Immediate
-      6'b001000: rd <= rs & rt;     // Bitwise AND
-      6'b001001: rd <= rs & imm;    // Bitwise AND Immediate
-      6'b001010: rd <= rs ^ rt;     // Bitwise XOR
-      6'b001011: rd <= rs ^ imm;    // Bitwise XOR Immediate
-      6'b001100: A=addition(rs,imm);  //A <= rs + imm;     // Load Word
-      6'b001101: A=addition(rs,imm); //A <= rs + imm;     // Store Word
-      6'b001110: if(rs==0) pc4_out_2_ex_out=pc4_out_2_ex+i_data_2_ex;
-		 else pc4_out_2_ex_out=pc4_out_2_ex; //BZ Rs x 
-      6'b001111: if(rs==rt) pc4_out_2_ex_out=pc4_out_2_ex+i_data_2_ex;
-		 else pc4_out_2_ex_out=pc4_out_2_ex;  //BEQ Rs Rt x
-      6'b010000: pc4_out_2_ex_out<=rs; // JR Rs (Load the PC [program counter] with the cont regi Rs.Jump to the new PC).	
+      6'b000000: begin
+		 	rd <= rs+rt; //rd=addition(rs,rt);  //rd <= rs + rt; // Add
+        	 	A <= 32'b0;  
+ 		 	pc4_out_2_ex_out<=0;
+		 end
+      6'b000001: begin
+			rd <= rs + imm;  // Add Immediate
+          	 	A <= 32'b0;
+		 	pc4_out_2_ex_out<=0; 
+		end 
+      6'b000010: begin
+			rd <=rs+rt;//rd=subtraction(rs, opr2); // Subtract
+        	 	A <= 32'b0; 
+		 	pc4_out_2_ex_out<=0; 
+		end
+      6'b000011: begin
+			rd<=rs+imm;//rd=subtraction(rs, IMM);  // Subtract Immedia
+        	 	A <= 32'b0; 
+		 	pc4_out_2_ex_out<=0;
+		end 
+      6'b000100: begin
+			rd<=rs*rt;//multiplication(rs,rt); //rd <= opr1 * opr2; // Multiply
+          	 	A <= 32'b0;  
+		 	pc4_out_2_ex_out<=0;
+		end
+      6'b000101: begin
+			rd<=rs*imm;//rd=multiplication(rs,imm); //rd <= opr1 * IMM;  // Multiply Immediate
+       		 	A <= 32'b0;  
+		 	pc4_out_2_ex_out<=0;
+		end
+      6'b000110: begin
+			rd <= rs | rt;     // Bitwise OR
+          	 	A <= 32'b0;  
+		 	pc4_out_2_ex_out<=0;
+		end
+      6'b000111: begin
+			rd <= rs | imm;    // Bitwise OR Immediate
+           	 	A <= 32'b0;  
+		 	pc4_out_2_ex_out<=0;
+		end
+      6'b001000: begin
+			rd <= rs & rt;     // Bitwise AND
+        	 	A <= 32'b0;  
+		 	pc4_out_2_ex_out<=0;
+		end
+      6'b001001: begin
+			rd <= rs & imm;    // Bitwise AND Immediate
+        	 	A <= 32'b0;  
+			pc4_out_2_ex_out<=0;
+		end
+      6'b001010: begin
+			rd <= rs ^ rt;     // Bitwise XOR
+		       	A <= 32'b0;
+		 	pc4_out_2_ex_out<=0;  
+		end
+      6'b001011: begin
+			rd <= rs ^ imm;    // Bitwise XOR Immediate
+        	 	A <= 32'b0;  
+		 	pc4_out_2_ex_out<=0;
+		end
+      6'b001100: begin
+			A=rs+imm;//A=addition(rs,imm);  //A <= rs + imm;     // Load Word
+        	 	rd <= 32'b0; 
+		 	pc4_out_2_ex_out<=0;
+		end
+      6'b001101: begin
+			A=rs+imm;//A=addition(rs,imm); //A <= rs + imm;     // Store Word
+        	 	rd <= 32'b0;
+		 	pc4_out_2_ex_out<=0; 
+		end
+      6'b001110:begin
+		 if(rs==0) 
+			begin
+				pc4_out_2_ex_out=pc4_out_2_ex+i_data_2_ex;
+        			rd <= 32'b0; 
+				A <= 32'b0;
+			end
+		 else 
+			begin
+				pc4_out_2_ex_out=pc4_out_2_ex; //BZ Rs x 
+        			rd <= 32'b0; 
+				A <= 32'b0;
+			end
+		end
+      6'b001111:begin
+		 if(rs==rt) 
+			begin
+				pc4_out_2_ex_out=pc4_out_2_ex+i_data_2_ex;
+        			rd <= 32'b0;
+				A <= 32'b0;
+			end 
+		 else 
+			begin
+				pc4_out_2_ex_out=pc4_out_2_ex;  //BEQ Rs Rt x
+        			rd <= 32'b0;
+				A <= 32'b0; 
+			end
+		end
+      6'b010000: begin
+			pc4_out_2_ex_out<=rs; // JR Rs (Load the PC [program counter] with the cont regi Rs.Jump to the new PC).
+			rd <= 32'b0;
+			A <= 32'b0;
+		end	
       default: begin
         rd <= 32'b0; // Default output
         A <= 32'b0;  // Default output
+	pc4_out_2_ex_out<=0;
       end
     endcase
   end
 endmodule
 
-function logic [31:0]subtraction(
+/*function logic [31:0]subtraction(
 input logic [31:0] A, B
 //output logic [31:0] subtraction
 );
@@ -68,7 +153,7 @@ else
 endfunction
 
 
-function logic [31:0]addition(
+/*function logic [31:0]addition(
 input logic [31:0]A, B
 //output logic [31:0] S
  );
@@ -115,7 +200,7 @@ else
 						end
 	end
 
-endfunction
+endfunction 
 
 function logic [31:0]multiplication(
 input logic [31:0] A, B
@@ -129,7 +214,7 @@ assign tmp2= B[31]? (~B+1) : B;
 multiplication=tmp1 * tmp2;
 //$display(multiplication);
 
-endfunction
+endfunction*/
 
 
 

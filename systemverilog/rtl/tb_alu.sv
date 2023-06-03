@@ -5,6 +5,9 @@ logic  [31:0]rs, rt;
 logic  [31:0]imm;
 logic [31:0]rd, A;
 logic clk;
+logic [31:0] pc4_out_2_ex;
+logic [31:0] i_data_2_ex;
+logic [31:0] pc4_out_2_ex_out;
 
 alu i1(.*);
 
@@ -41,6 +44,19 @@ always #5 clk = ~clk;
     #10;
     $display("Load Word result: %d", A);
     
+    // Test case 5: Multiplication
+    op = 6'b000100;
+    rs = 32'h00000100;
+    rt = 32'h00000008;
+    #10;
+    $display("Multiplication  result: %d", rd);
+
+    // Test case 6: Subtraction
+    op = 6'b000010;
+    rs = 32'h00000005;
+    rd = 32'h00000009;
+    #10;
+    $display("Subtraction  result: %h", rd);
   
     
     #10;

@@ -8,12 +8,12 @@ module alu(
   input logic [31:0] rs,
   input logic [31:0] rt,
   input logic [31:0] imm,
-  input logic [31:0] pc_out_2_ex,
+  input logic [31:0] pc4_out_2_ex,
   input logic [31:0] i_data_2_ex,
 
   output logic [31:0] rd,
   output logic [31:0] A,
-  output logic [31:0] pc_out_2_ex_out,
+  output logic [31:0] pc4_out_2_ex_out,
   input logic clk
 );
   
@@ -28,25 +28,25 @@ assign IMM = (~imm + 1);
   always_ff @(posedge clk) begin
         
     case (op)
-      6'b000000: addition(rs,rt,rd);  //rd <= rs + rt; // Add
+      6'b000000: rd=addition(rs,rt);  //rd <= rs + rt; // Add
       6'b000001: rd <= rs + IMM;  // Add Immediate
-      6'b000010: subtraction(rs, opr1, rd); // Subtract
-      6'b000011: subtraction(rs, IMM, rd);  // Subtract Immedia
-      6'b000100: multiplication(rs,rt,rd); //rd <= opr1 * opr2; // Multiply
-      6'b000101: multiplication(rs,imm,rd); //rd <= opr1 * IMM;  // Multiply Immediate
+      6'b000010: rd=subtraction(rs, opr2); // Subtract
+      6'b000011: rd=subtraction(rs, IMM);  // Subtract Immedia
+      6'b000100: rd=multiplication(rs,rt); //rd <= opr1 * opr2; // Multiply
+      6'b000101: rd=multiplication(rs,imm); //rd <= opr1 * IMM;  // Multiply Immediate
       6'b000110: rd <= rs | rt;     // Bitwise OR
       6'b000111: rd <= rs | imm;    // Bitwise OR Immediate
       6'b001000: rd <= rs & rt;     // Bitwise AND
       6'b001001: rd <= rs & imm;    // Bitwise AND Immediate
       6'b001010: rd <= rs ^ rt;     // Bitwise XOR
       6'b001011: rd <= rs ^ imm;    // Bitwise XOR Immediate
-      6'b001100: addition(rs,imm,A);  //A <= rs + imm;     // Load Word
-      6'b001101: addition(rs,imm,A); //A <= rs + imm;     // Store Word
-      6'b001110: if(rs==0) pc_out_2_ex_out=pc_out_2_ex+i_data_2_ex;
-		 else pc_out_2_ex_out=pc_out_2_ex; //BZ Rs x 
-      6'b001111: if(rs==rt) pc_out_2_ex_out=pc_out_2_ex+i_data_2_ex;
-		 else pc_out_2_ex_out=pc_out_2_ex;  //BEQ Rs Rt x
-      6'b010000: pc_out_2_ex_out<=rs; // JR Rs (Load the PC [program counter] with the cont regi Rs.Jump to the new PC).	
+      6'b001100: A=addition(rs,imm);  //A <= rs + imm;     // Load Word
+      6'b001101: A=addition(rs,imm); //A <= rs + imm;     // Store Word
+      6'b001110: if(rs==0) pc4_out_2_ex_out=pc4_out_2_ex+i_data_2_ex;
+		 else pc4_out_2_ex_out=pc4_out_2_ex; //BZ Rs x 
+      6'b001111: if(rs==rt) pc4_out_2_ex_out=pc4_out_2_ex+i_data_2_ex;
+		 else pc4_out_2_ex_out=pc4_out_2_ex;  //BEQ Rs Rt x
+      6'b010000: pc4_out_2_ex_out<=rs; // JR Rs (Load the PC [program counter] with the cont regi Rs.Jump to the new PC).	
       default: begin
         rd <= 32'b0; // Default output
         A <= 32'b0;  // Default output
@@ -55,21 +55,23 @@ assign IMM = (~imm + 1);
   end
 endmodule
 
-task subtraction(
-input logic [31:0] A, B,
-output logic [31:0] S);
+function logic [31:0]subtraction(
+input logic [31:0] A, B
+//output logic [31:0] subtraction
+);
 logic [32:0] tmp;
 tmp = A+B;
 if(tmp[32] !==0)
-	S=tmp[31:0];
+	subtraction=tmp[31:0];
 else 
-	S= (~tmp[31:0]+1);
-endtask
+	subtraction= (~tmp[31:0]+1);
+endfunction
 
 
-task addition(
-input logic [31:0]A, B,
-output logic [31:0] S);
+function logic [31:0]addition(
+input logic [31:0]A, B
+//output logic [31:0] S
+ );
 
 logic [32:0] tmp, tmp1,tmp2;
 logic [31:0] a, b; 
@@ -78,18 +80,18 @@ assign a = (~A+1);    //2's compliment of A
 assign b = (~B+1);    //2's compliment of B
 
 if(A[31]==0 && B[31]==0)
-	S = A+B;
+	addition = A+B;
 else if(A[31]==0 && B[31]==1) 
 				begin
 					if(A>b)  begin  //Addition of the positive number with a negative number when the positive number has a greater magnitude.
 							tmp = A+b;
-							S = tmp[31:0];
+							addition = tmp[31:0];
 						end
 					else if(A<b)  //Adding of the positive value with a negative value when the negative number has a higher magnitude
 						begin
 							tmp = A+b;
 							tmp1 =(~tmp+1);
-							S = tmp1[31:0];
+							addition = tmp1[31:0];
 						end
 				end
 else if(A[31]==1 && B[31]==1)   // Addition when both are negative
@@ -97,36 +99,37 @@ else if(A[31]==1 && B[31]==1)   // Addition when both are negative
 		tmp=a+b;
 		tmp1= tmp[31:0]+tmp[32];
 		tmp2 = (~tmp1+1);
-		S = tmp2[31:0];
+		addition = tmp2[31:0];
 	end
 else
 	begin
 					if(a<B)  begin  //Addition of the positive number with a negative number when the positive number has a greater magnitude.
 							tmp = a+B;
-							S = tmp[31:0];
+							addition = tmp[31:0];
 						end
 					else if(a>B)  //Adding of the positive value with a negative value when the negative number has a higher magnitude
 						begin
 							tmp = a+B;
 							tmp1 =(~tmp+1);
-							S = tmp1[31:0];
+							addition = tmp1[31:0];
 						end
 	end
 
-endtask
+endfunction
 
-task multiplication(
-input logic [31:0] A, B,
-output logic [31:0] M
+function logic [31:0]multiplication(
+input logic [31:0] A, B
+//output logic [31:0] M
 );
 logic [31:0] tmp1, tmp2;
 
 assign tmp1= A[31]? (~A+1) : A;
 assign tmp2= B[31]? (~B+1) : B;
 
-M=tmp1 * tmp2;
+multiplication=tmp1 * tmp2;
+//$display(multiplication);
 
-endtask
+endfunction
 
 
 

@@ -51,12 +51,12 @@ assign opr2 = (~rt + 1);
         
     case (op)
       6'b000000: begin
-		 	rd <= rs+rt; //rd=addition(rs,rt);  //rd <= rs + rt; // Add
+		 	rd<=addition(rs,rt);//rd <= rs+rt; //rd=addition(rs,rt);  //rd <= rs + rt; // Add
         	 	A <= 32'b0;  
  		 	pc4_out_2_ex_out<=0;
 		 end
       6'b000001: begin
-			rd <= rs + i_data_2_ex;  // Add Immediate
+			rd<=addition(rs,i_data_2_ex);//rd <= rs + i_data_2_ex;  // Add Immediate
           	 	A <= 32'b0;
 		 	pc4_out_2_ex_out<=0; 
 		end 
@@ -111,12 +111,12 @@ assign opr2 = (~rt + 1);
 		 	pc4_out_2_ex_out<=0;
 		end
       6'b001100: begin
-			A=rs+i_data_2_ex;//A=addition(rs,imm);  //A <= rs + imm;     // Load Word
+			A<=addition(rs,i_data_2_ex);//A=rs+i_data_2_ex;//A=addition(rs,imm);  //A <= rs + imm;     // Load Word
         	 	rd <= 32'b0; 
 		 	pc4_out_2_ex_out<=0;
 		end
       6'b001101: begin
-			A=rs+i_data_2_ex;//A=addition(rs,imm); //A <= rs + imm;     // Store Word
+			A=addition(rs,i_data_2_ex);//A=addition(rs,imm); //A <= rs + imm;     // Store Word
         	 	rd <= 32'b0;
 		 	pc4_out_2_ex_out<=0; 
 		end
@@ -182,7 +182,7 @@ else
 endfunction*/
 
 
-/*function logic [31:0]addition(
+function logic [31:0]addition(
 input logic [31:0]A, B
 //output logic [31:0] S
  );
@@ -229,7 +229,7 @@ else
 						end
 	end
 
-endfunction */
+endfunction 
 
 /*function logic [31:0]multiplication(
 input logic [31:0] A, B

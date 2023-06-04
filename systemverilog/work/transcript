@@ -13,7 +13,7 @@
 # //  18 U.S.C. Section 1905.
 # //
 # vsim work.tb -voptargs="+acc" "+MEM_IMAGE=memory_image.txt" -do "add wave sim:/tb/i_main/i_inst_fetch/* ; add wave sim:/tb/i_main/i_decode/* ;add wave sim:/tb/i_main/i_ex/* ;add wave sim:/tb/i_main/i_memory/* ;add wave sim:/tb/i_main/i_writeback/* ;run -all" 
-# Start time: 15:47:15 on Jun 03,2023
+# Start time: 11:06:42 on Jun 04,2023
 # ** Note: (vsim-3812) Design is being optimized...
 # Loading sv_std.std
 # Loading work.testbench_sv_unit(fast)
@@ -30,7 +30,7 @@
 # Loading work.mem(fast)
 # Loading work.wb_sv_unit(fast)
 # Loading work.wb(fast)
-# ** Warning: (vsim-PLI-3691) ../rtl/if.sv(90): Expected a system task, not a system function '$value$plusargs'.
+# ** Warning: (vsim-PLI-3691) ../rtl/if.sv(105): Expected a system task, not a system function '$value$plusargs'.
 #    Time: 0 ns  Iteration: 0  Instance: /tb/i_main/i_inst_fetch File: ../rtl/if.sv
 # ** Warning: (vsim-PLI-3691) ../rtl/mem.sv(28): Expected a system task, not a system function '$value$plusargs'.
 #    Time: 0 ns  Iteration: 0  Instance: /tb/i_main/i_memory File: ../rtl/mem.sv
@@ -44,5 +44,5 @@
 #    Time: 300 ns  Iteration: 0  Instance: /tb
 # 1
 # Break in Module tb at ../rtl/testbench.sv line 37
-# End time: 15:47:33 on Jun 03,2023, Elapsed time: 0:00:18
+# End time: 11:11:53 on Jun 04,2023, Elapsed time: 0:05:11
 # Errors: 0, Warnings: 2

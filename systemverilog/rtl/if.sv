@@ -12,6 +12,9 @@ module inst_f (
 	input logic [4:0] rs_f_id,
 	input logic [4:0] rd_f_id,
 	input logic [4:0] rt_f_id,
+	input logic reg_write_f_id, 
+	input logic reg_write_f_ex, 
+	input logic reg_write_f_mem, 
 	
 	output logic [31:0] instruction,
 	output logic [31:0] pc_out
@@ -120,18 +123,14 @@ end
 
 always_comb 
 begin
-// We should also chek if it is write or read
-	if (id_dest == rs || id_dest == rt || id_dest == rd)
+	if ( reg_write_f_id & (id_dest == rs || id_dest == rt || id_dest == rd))
 		hazard = 1;
-	else if (ex_dest == rs || ex_dest == rt || ex_dest == rd)
+	else if (reg_write_f_ex & (ex_dest == rs || ex_dest == rt || ex_dest == rd))
 		hazard = 1;
-	else if (mem_dest == rs || mem_dest == rt || mem_dest == rd)
+	else if (reg_write_f_mem & (mem_dest == rs || mem_dest == rt || mem_dest == rd))
 	 	hazard = 1;
 	else 
 	 	hazard = 0;
 end
-
-
-
   
 endmodule

@@ -1,4 +1,6 @@
 systemverilog/work/work/
+systemverilog/rtl/work/
+systemverilog/rtl/tran*
 systemverilog/work/vsim*
 */*/*/*swp
 */*/*swp

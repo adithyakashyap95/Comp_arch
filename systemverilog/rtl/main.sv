@@ -11,7 +11,6 @@ module main (
 ); 
 
 // IF stage
-logic hazard;
 logic [31:0] add_f_ex_2_id;
 logic [31:0] pc4_f_if_2_id;
 logic [31:0] pc4_out_2_if;
@@ -25,6 +24,9 @@ logic [31:0] rs_reg_value_2_ex;
 logic [31:0] rt_reg_value_2_ex;
 logic [4:0]  rd_add_value_2_ex;
 logic [31:0] i_data_2_ex;
+logic [4:0] id_dest;
+logic [4:0] ex_dest;
+logic [4:0] mem_dest;
 
 logic branch_2_ex;
 logic mem_read_2_ex;
@@ -44,6 +46,10 @@ logic                       mem_to_reg_f_wb_to_id;
 logic [(D_SIZE-1):0]        reg_data_f_wb_id;
 logic [(ADDR_LINE_REG-1):0] reg_addr_f_wb_id;
 
+logic [4:0]  rs_add_value_2_if;
+logic [4:0]  rd_add_value_2_if;
+logic [4:0]  rt_add_value_2_if;
+
 // Just assigning output to testbench
 assign inst_out = inst;
 
@@ -51,10 +57,15 @@ assign inst_out = inst;
 inst_f i_inst_fetch (
 	.clk         	 (clk         	), 
 	.rst         	 (reset        	),
-	.hazard      	 (1'b0      	),   // Not connected
-	.instruction 	 (inst          ),
 	.ex_add      	 (pc4_out_2_if  ),
-	.pc_out      	 (pc4_f_if_2_id ) 
+	.instruction 	 (inst          ),
+	.pc_out      	 (pc4_f_if_2_id ),
+        .id_dest         (rd_add_value_2_ex),
+        .ex_dest         (addr_reg_in_f_ex),
+        .mem_dest        (alu_add_f_mem_2_wb),
+	.rs_f_id	 (rs_add_value_2_if),
+	.rd_f_id	 (rd_add_value_2_if),
+	.rt_f_id	 (rt_add_value_2_if) 
 );
 
 // Decode
@@ -77,7 +88,10 @@ id i_decode(
 	.branch_2_ex	   (branch_2_ex	      ), 
 	.mem_read_2_ex	   (mem_read_2_ex     ), 
 	.mem_to_reg_2_ex   (mem_to_reg_2_ex   ), 
-	.mem_write_2_ex	   (mem_write_2_ex    ) 
+	.mem_write_2_ex	   (mem_write_2_ex    ), 
+	.rs_add_value_2_if (rs_add_value_2_if ),
+	.rd_add_value_2_if (rd_add_value_2_if ),
+	.rt_add_value_2_if (rt_add_value_2_if )
 ); 
 
 // Execute E

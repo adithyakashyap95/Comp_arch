@@ -61,12 +61,12 @@ assign opr2 = (~rt + 1);
 		 	pc4_out_2_ex_out<=0; 
 		end 
       6'b000010: begin
-			rd <=rs+rt;//rd=subtraction(rs, opr2); // Subtract
+			rd <=rs+(~rt+1'b1);//rd=subtraction(rs, opr2); // Subtract
         	 	A <= 32'b0; 
 		 	pc4_out_2_ex_out<=0; 
 		end
       6'b000011: begin
-			rd<=rs+i_data_2_ex;//rd=subtraction(rs, IMM);  // Subtract Immedia
+			rd<=rs+(~i_data_2_ex+1'b1);//rd=subtraction(rs, IMM);  // Subtract Immedia
         	 	A <= 32'b0; 
 		 	pc4_out_2_ex_out<=0;
 		end 
@@ -117,7 +117,7 @@ assign opr2 = (~rt + 1);
 		end
       6'b001101: begin
 			A=rs+i_data_2_ex;//A=addition(rs,imm); //A <= rs + imm;     // Store Word
-        	 	rd <= rt;
+        	 	rd <= 32'b0;
 		 	pc4_out_2_ex_out<=0; 
 		end
       6'b001110:begin
@@ -166,13 +166,20 @@ endmodule
 input logic [31:0] A, B
 //output logic [31:0] subtraction
 );
-logic [32:0] tmp;
-tmp = A+B;
-if(tmp[32] !==0)
-	subtraction=tmp[31:0];
-else 
-	subtraction= (~tmp[31:0]+1);
-endfunction
+//logic [32:0] tmp;
+logic [31:0]a,b; // to store evaluated 2's compliment of both the operands.
+
+a=(~A+1'b1);
+b=(~B+1'b1);
+if(A[31]==1'b0 && B[31]==1'b0)
+	subtraction=A+b; // Both positive so adding 2's compliment
+else if(A[31]==1'b0 && B[31]==1'b1)
+	subtraction=A+b;  // 2'compliment https://math.stackexchange.com/questions/2438414/subtract-two-negative-binary-numbers
+else if(A[31]==1'b1 && B[31]==1'b0)
+	subtraction=A+b;
+else
+	subtraction=A+b;
+endfunction*/
 
 
 /*function logic [31:0]addition(
@@ -183,27 +190,27 @@ input logic [31:0]A, B
 logic [32:0] tmp, tmp1,tmp2;
 logic [31:0] a, b; 
  
-assign a = (~A+1);    //2's compliment of A
-assign b = (~B+1);    //2's compliment of B
+assign a = (~A+1'b1);    //2's compliment of A
+assign b = (~B+1'b1);    //2's compliment of B
 
 if(A[31]==0 && B[31]==0)
 	addition = A+B;
 else if(A[31]==0 && B[31]==1) 
 				begin
 					if(A>b)  begin  //Addition of the positive number with a negative number when the positive number has a greater magnitude.
-							tmp = A+b;
+							tmp = A+B;
 							addition = tmp[31:0];
 						end
 					else if(A<b)  //Adding of the positive value with a negative value when the negative number has a higher magnitude
 						begin
-							tmp = A+b;
-							tmp1 =(~tmp+1);
-							addition = tmp1[31:0];
+							tmp = A+B;
+							//tmp1 =(~tmp+1);
+							addition = tmp[31:0];
 						end
 				end
 else if(A[31]==1 && B[31]==1)   // Addition when both are negative
 	begin
-		tmp=a+b;
+		tmp=A+B;
 		tmp1= tmp[31:0]+tmp[32];
 		tmp2 = (~tmp1+1);
 		addition = tmp2[31:0];
@@ -211,20 +218,20 @@ else if(A[31]==1 && B[31]==1)   // Addition when both are negative
 else
 	begin
 					if(a<B)  begin  //Addition of the positive number with a negative number when the positive number has a greater magnitude.
-							tmp = a+B;
+							tmp = A+B;
 							addition = tmp[31:0];
 						end
 					else if(a>B)  //Adding of the positive value with a negative value when the negative number has a higher magnitude
 						begin
-							tmp = a+B;
-							tmp1 =(~tmp+1);
+							tmp = A+B;
+							//tmp1 =(~tmp+1);
 							addition = tmp1[31:0];
 						end
 	end
 
-endfunction 
+endfunction */
 
-function logic [31:0]multiplication(
+/*function logic [31:0]multiplication(
 input logic [31:0] A, B
 //output logic [31:0] M
 );

@@ -5,8 +5,12 @@
 module inst_f (
 	input  logic clk,
 	input  logic rst,
-	input  logic hazard,
 	input  logic [31:0] ex_add,
+	input logic ifid_memread,
+	input logic idex_dest,
+	input logic [4:0] ifid_rs,
+	input logic [4:0] ifid_rt,
+
 	
 	output logic [31:0] instruction,
 	output logic [31:0] pc_out
@@ -14,6 +18,7 @@ module inst_f (
 
 logic opcode;
 logic halt;
+logic hazard;
 logic [1:0] delay;
 logic [31:0] pc_in;
 logic [31:0] pc4;
@@ -31,7 +36,7 @@ begin
    	else if (hazard)
     	begin
 		halt   <= halt;
-      		pc_out <= pc_out;   // Need to be updated 
+      		pc_out <= pc_in; //pc_out;   // Need to be updated 
     	end
 	else if (opcode==1'b1)
 	begin
@@ -100,7 +105,28 @@ begin
 		inst_mem <= inst_mem;
 		end
 
-end	
+end
+
+//assign hazard = ifid_memread & (idex_dest != 0) & ((idex_dest == ifid_rs) | (idex_dest == ifid_rt));
+//assign hazard = (idex_dest != 0 && (idex_dest == ifid_rs | idex_dest == ifid_rt)) |
+//                 (ifid_memread != 0 & (ifid_memread == ifid_rs | ifid_memread == ifid_rt));
+
+
+
+if (id_dest == ex_dest && (id_dest == rs || id_dest == rt || id_dest == rd))
+ hazard = 1;
+
+else if (ex_dest == mem_dest && (ex_dest == rs || ex_dest == rt || ex_dest == rd))
+ hazard = 1;
+
+else if (mem_dest == id_dest && (mem_dest == rs || mem_dest == rt || mem_dest == rd))
+ hazard = 1;
+else 
+ hazard = 0;
+
+
+
+
 
   
 endmodule

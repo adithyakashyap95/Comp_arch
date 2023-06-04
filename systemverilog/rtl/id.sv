@@ -23,7 +23,10 @@ module id (
  	output logic branch_2_ex,
 	output logic mem_read_2_ex,
 	output logic mem_to_reg_2_ex,	
-	output logic mem_write_2_ex
+	output logic mem_write_2_ex,
+	output logic [4:0]  rs_add_value_2_if,
+	output logic [4:0]  rt_add_value_2_if,
+	output logic [4:0]  rd_add_value_2_if
 ); 
 
 mem_t [31:0] registers; // Defininig the set of registers used as variables, temporary ...
@@ -45,6 +48,9 @@ logic mem_read;
 logic mem_to_reg;
 logic mem_write;
 
+logic [4:0] add_r_rs;
+logic [4:0] add_r_rt;
+
 assign opcode = inst[31:26];
 
 // R -instruction
@@ -56,6 +62,11 @@ assign r_rd  = inst[15:11];
 assign i_rs  = registers[inst[25:21]];
 assign i_rt  = registers[inst[20:16]];
 assign i_rdt = inst[20:16];
+
+// For data Hazard
+assign rs_add_value_2_if  = inst[25:21];
+assign rt_add_value_2_if  = inst[20:16];
+assign rd_add_value_2_if  = inst[15:11];
 
 // Needs special attention as we get only 16 bit data which shoulf be prefixed to data
 assign i_imm = (inst[15]==1'b1) ? {16'hFFFF,inst[15:0]} : {16'b0,inst[15:0]};

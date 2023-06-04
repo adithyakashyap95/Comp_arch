@@ -6,11 +6,12 @@ module inst_f (
 	input  logic clk,
 	input  logic rst,
 	input  logic [31:0] ex_add,
-	input logic ifid_memread,
-	input logic idex_dest,
-	input logic [4:0] ifid_rs,
-	input logic [4:0] ifid_rt,
-
+	input logic [4:0] id_dest,
+	input logic [4:0] ex_dest,
+	input logic [4:0] mem_dest,
+	input logic [4:0] rs_f_id,
+	input logic [4:0] rd_f_id,
+	input logic [4:0] rt_f_id,
 	
 	output logic [31:0] instruction,
 	output logic [31:0] pc_out
@@ -19,12 +20,18 @@ module inst_f (
 logic opcode;
 logic halt;
 logic hazard;
+logic [4:0] rs;
+logic [4:0] rd;
+logic [4:0] rt;
 logic [1:0] delay;
 logic [31:0] pc_in;
 logic [31:0] pc4;
 logic [31:0] inst_mem [0:1023];
 logic [31:0] inst_mem1 [0:1023];
 assign instruction = inst_mem[pc_out[31:2]];
+assign rs = rs_f_id; 
+assign rd = rd_f_id; 
+assign rt = rt_f_id; 
 
 always_ff @(posedge clk or negedge rst) //porgram counter
 begin
@@ -111,20 +118,18 @@ end
 //assign hazard = (idex_dest != 0 && (idex_dest == ifid_rs | idex_dest == ifid_rt)) |
 //                 (ifid_memread != 0 & (ifid_memread == ifid_rs | ifid_memread == ifid_rt));
 
-
-
-if (id_dest == ex_dest && (id_dest == rs || id_dest == rt || id_dest == rd))
- hazard = 1;
-
-else if (ex_dest == mem_dest && (ex_dest == rs || ex_dest == rt || ex_dest == rd))
- hazard = 1;
-
-else if (mem_dest == id_dest && (mem_dest == rs || mem_dest == rt || mem_dest == rd))
- hazard = 1;
-else 
- hazard = 0;
-
-
+always_comb 
+begin
+// We should also chek if it is write or read
+	if (id_dest == rs || id_dest == rt || id_dest == rd)
+		hazard = 1;
+	else if (ex_dest == rs || ex_dest == rt || ex_dest == rd)
+		hazard = 1;
+	else if (mem_dest == rs || mem_dest == rt || mem_dest == rd)
+	 	hazard = 1;
+	else 
+	 	hazard = 0;
+end
 
 
 

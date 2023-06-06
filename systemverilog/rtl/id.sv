@@ -255,6 +255,16 @@ begin
 			mem_to_reg   = 0; 	
 			mem_write    = 0; 	
 		end
+		6'b111111:begin			// NOP 
+			rs_reg_value = '0;	
+			rt_reg_value = '0;	
+			rd_add_value = '0;	
+			i_data 	     = '0;
+			branch       = 0;
+			mem_read     = 0;
+			mem_to_reg   = 0; 	
+			mem_write    = 0; 	
+		end
 		  default:begin
 			rs_reg_value = '0;	
 			rt_reg_value = '0;	
@@ -291,11 +301,11 @@ always_ff@(posedge clk or negedge reset)
 begin
 	if(reset==0)
 	begin
-        	opcode_2_ex       <= '0; 
-        	rs_reg_value_2_ex <= '0; 
-        	rt_reg_value_2_ex <= '0; 
-        	rd_add_value_2_ex <= '0; 
-        	i_data_2_ex       <= '0; 
+        opcode_2_ex       <= '0; 
+        rs_reg_value_2_ex <= '0; 
+        rt_reg_value_2_ex <= '0; 
+        rd_add_value_2_ex <= '0; 
+        i_data_2_ex       <= '0; 
 		pc4_out_2_ex	  <= '0;
 		branch_2_ex  	  <= '0;
 		mem_read_2_ex 	  <= '0;
@@ -304,11 +314,11 @@ begin
 	end
 	else
 	begin
-        	opcode_2_ex       <= opcode; 
-        	rs_reg_value_2_ex <= rs_reg_value; 
-        	rt_reg_value_2_ex <= rt_reg_value; 
-        	rd_add_value_2_ex <= rd_add_value; 
-        	i_data_2_ex       <= i_data; 
+        opcode_2_ex       <= opcode; 
+        rs_reg_value_2_ex <= rs_reg_value; 
+        rt_reg_value_2_ex <= rt_reg_value; 
+        rd_add_value_2_ex <= rd_add_value; 
+        i_data_2_ex       <= i_data; 
 		pc4_out_2_ex	  <= pc4_in_f_if;
 		branch_2_ex  	  <= branch;
 		mem_read_2_ex 	  <= mem_read;

@@ -153,6 +153,16 @@ assign opr2 = (~rt + 1);
 			rd <= 32'b0;
 			A <= 32'b0;
 		end	
+      6'b010001: begin
+        rd <= 32'b0;
+        A <= 32'b0; 
+	    pc4_out_2_ex_out<=0;
+      end
+      6'b111111: begin
+        rd <= 32'b0; 
+        A <= 32'b0;  
+	    pc4_out_2_ex_out<=0;
+      end
       default: begin
         rd <= 32'b0; // Default output
         A <= 32'b0;  // Default output

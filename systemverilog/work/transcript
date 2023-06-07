@@ -13,7 +13,7 @@
 # //  18 U.S.C. Section 1905.
 # //
 # vsim work.tb -voptargs="+acc" "+MEM_IMAGE=memory_image.txt" -do "add wave sim:/tb/i_main/i_inst_fetch/* ; add wave sim:/tb/i_main/i_decode/* ;add wave sim:/tb/i_main/i_ex/* ;add wave sim:/tb/i_main/i_memory/* ;add wave sim:/tb/i_main/i_writeback/* ;run -all" 
-# Start time: 00:36:19 on Jun 07,2023
+# Start time: 01:42:55 on Jun 07,2023
 # ** Note: (vsim-3812) Design is being optimized...
 # Loading sv_std.std
 # Loading work.testbench_sv_unit(fast)
@@ -44,5 +44,5 @@
 #    Time: 310 ns  Iteration: 0  Instance: /tb
 # 1
 # Break in Module tb at ../rtl/testbench.sv line 37
-# End time: 00:37:08 on Jun 07,2023, Elapsed time: 0:00:49
+# End time: 01:45:10 on Jun 07,2023, Elapsed time: 0:02:15
 # Errors: 0, Warnings: 2

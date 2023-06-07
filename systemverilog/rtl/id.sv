@@ -48,8 +48,10 @@ logic mem_read;
 logic mem_to_reg;
 logic mem_write;
 
-logic [4:0] add_r_rs;
-logic [4:0] add_r_rt;
+logic [9:0] arith_inst_cnt;
+logic [9:0] logic_inst_cnt;
+logic [9:0] mem_inst_cnt;
+logic [9:0] ctrl_inst_cnt;
 
 assign opcode = inst[31:26];
 
@@ -70,6 +72,53 @@ assign rd_add_value_2_if  = inst[15:11];
 
 // Needs special attention as we get only 16 bit data which shoulf be prefixed to data
 assign i_imm = (inst[15]==1'b1) ? {16'hFFFF,inst[15:0]} : {16'b0,inst[15:0]};
+
+// Instruction decode
+always_ff@(posedge clk or negedge reset)
+begin
+	if(reset==0)
+	begin
+    	arith_inst_cnt <= '0;
+    	logic_inst_cnt <= '0;
+    	mem_inst_cnt   <= '0;
+    	ctrl_inst_cnt  <= '0;
+	end
+	else if(opcode==6'b111111)
+	begin
+    	arith_inst_cnt <= arith_inst_cnt;
+    	logic_inst_cnt <= logic_inst_cnt;
+    	mem_inst_cnt   <= mem_inst_cnt;
+    	ctrl_inst_cnt  <= ctrl_inst_cnt;
+	end
+	else if((opcode>5) && (opcode<12))
+	begin
+    	arith_inst_cnt <= arith_inst_cnt;
+    	logic_inst_cnt <= logic_inst_cnt + 10'b1;
+    	mem_inst_cnt   <= mem_inst_cnt;
+    	ctrl_inst_cnt  <= ctrl_inst_cnt;
+	end
+	else if((opcode>11) && (opcode<14))
+	begin
+    	arith_inst_cnt <= arith_inst_cnt;
+    	logic_inst_cnt <= logic_inst_cnt;
+    	mem_inst_cnt   <= mem_inst_cnt + 10'b1;
+    	ctrl_inst_cnt  <= ctrl_inst_cnt;
+	end
+	else if(opcode>13)
+	begin
+    	arith_inst_cnt <= arith_inst_cnt;
+    	logic_inst_cnt <= logic_inst_cnt;
+    	mem_inst_cnt   <= mem_inst_cnt;
+    	ctrl_inst_cnt  <= ctrl_inst_cnt + 10'b1;
+	end
+	else 
+	begin
+    	arith_inst_cnt <= arith_inst_cnt;
+    	logic_inst_cnt <= logic_inst_cnt;
+    	mem_inst_cnt   <= mem_inst_cnt;
+    	ctrl_inst_cnt  <= ctrl_inst_cnt;
+	end
+end
 
 // instruction decode
 always_comb

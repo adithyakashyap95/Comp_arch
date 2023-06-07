@@ -111,12 +111,12 @@ assign opr2 = (~rt + 1);
 		 	pc4_out_2_ex_out<=0;
 		end
       6'b001100: begin
-			A<=addition(rs,i_data_2_ex);//A=rs+i_data_2_ex;//A=addition(rs,imm);  //A <= rs + imm;     // Load Word
+			A<=addition((rs>>2),(i_data_2_ex>>2));//A=rs+i_data_2_ex;//A=addition(rs,imm);  //A <= rs + imm;     // Load Word
         	 	rd <= 32'b0; 
 		 	pc4_out_2_ex_out<=0;
 		end
       6'b001101: begin
-			A=addition(rs,i_data_2_ex);//A=addition(rs,imm); //A <= rs + imm;     // Store Word
+			A=addition((rs>>2),(i_data_2_ex>>2));//A=addition(rs,imm); //A <= rs + imm;     // Store Word
         	 	rd <= 32'b0;
 		 	pc4_out_2_ex_out<=0; 
 		end

@@ -77,6 +77,7 @@ begin
 	unique casez (instruction[31:26])
 		6'b001110 : opcode = 1'b1; 
 		6'b001111 : opcode = 1'b1;
+		6'b010000 : opcode = 1'b1;
 		default   : opcode = 1'b0; 
 	endcase 
 	pc_in = (opcode==0) ? pc4 : ex_add;

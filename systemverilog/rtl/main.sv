@@ -8,7 +8,14 @@ module main (
 	input  logic 	reset,
 	input  logic 	valid,
 	input  logic 	opr_finished,
-	output logic [31:0] inst_out 
+	output logic [31:0] inst_out,
+    output logic [15:0] arith_inst_cnt,
+    output logic [15:0] logic_inst_cnt,
+    output logic [15:0] mem_inst_cnt,
+    output logic [15:0] ctrl_inst_cnt,
+    output mem_t [31:0] registers_out,
+    output logic [(D_SIZE-1):0] mem_out [0:1023]
+ 
 ); 
 
 // IF stage
@@ -76,13 +83,13 @@ inst_f i_inst_fetch (
 
 id i_decode(
 	.clk               (clk1              ), 
+	.clk1              (clk               ), 
 	.reset             (reset             ), 
 	.w_f_wb            (mem_to_reg_f_wb_to_id),
 	.inst              (inst              ),
 	.addr_in_f_wb      (reg_addr_f_wb_id  ), 
 	.write_data_f_wb   (reg_data_f_wb_id  ),
 	.pc4_in_f_if	   (pc4_f_if_2_id     ),
-
 	.pc4_out_2_ex      (pc4_in_f_id_2_ex  ),
 	.opcode_2_ex       (opcode_2_ex       ),
 	.rs_reg_value_2_ex (rs_reg_value_2_ex ),
@@ -95,7 +102,12 @@ id i_decode(
 	.mem_write_2_ex	   (mem_write_2_ex    ), 
 	.rs_add_value_2_if (rs_add_value_2_if ),
 	.rd_add_value_2_if (rd_add_value_2_if ),
-	.rt_add_value_2_if (rt_add_value_2_if )
+	.rt_add_value_2_if (rt_add_value_2_if ),
+    .arith_inst_cnt    (arith_inst_cnt    ),
+    .logic_inst_cnt    (logic_inst_cnt    ),
+    .mem_inst_cnt      (mem_inst_cnt      ),
+    .ctrl_inst_cnt     (ctrl_inst_cnt     ),
+    .registers_out     (registers_out     ) 
 ); 
 
 // Execute E
@@ -135,7 +147,8 @@ mem i_memory (
 	.write_data         	(write_data_f_ex       	),
 	.mem_to_reg_2_wb    	(mem_to_reg_f_mem    	), 
 	.alu_out_f_mem_2_wb 	(alu_out_f_mem_2_wb 	),
-	.alu_add_f_mem_2_wb 	(alu_add_f_mem_2_wb 	)
+	.alu_add_f_mem_2_wb 	(alu_add_f_mem_2_wb 	),
+	.mem_out                (mem_out 				)
 );
 
 // Writeback

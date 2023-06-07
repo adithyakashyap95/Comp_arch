@@ -12,8 +12,8 @@
 # //  is prohibited from disclosure under the Trade Secrets Act,
 # //  18 U.S.C. Section 1905.
 # //
-# vsim work.tb -voptargs="+acc" "+MEM_IMAGE=memory_image.txt" -do "add wave sim:/tb/i_main/i_inst_fetch/* ; add wave sim:/tb/i_main/i_decode/* ;add wave sim:/tb/i_main/i_ex/* ;add wave sim:/tb/i_main/i_memory/* ;add wave sim:/tb/i_main/i_writeback/* ;run -all" 
-# Start time: 14:10:59 on Jun 07,2023
+# vsim work.tb -voptargs="+acc" "+MEM_IMAGE=memory_image.txt" -do "add wave sim:/tb/i_main/i_inst_fetch/* ; add wave sim:/tb/i_main/i_decode/* ;add wave sim:/tb/i_main/i_ex/* ;add wave sim:/tb/i_main/i_memory/* ;add wave sim:/tb/i_main/i_writeback/* ;add wave sim:/tb/*;run -all" 
+# Start time: 16:44:53 on Jun 07,2023
 # ** Note: (vsim-3812) Design is being optimized...
 # Loading sv_std.std
 # Loading work.testbench_sv_unit(fast)
@@ -32,17 +32,18 @@
 # Loading work.wb(fast)
 # ** Warning: (vsim-PLI-3691) ../rtl/if.sv(91): Expected a system task, not a system function '$value$plusargs'.
 #    Time: 0 ns  Iteration: 0  Instance: /tb/i_main/i_inst_fetch File: ../rtl/if.sv
-# ** Warning: (vsim-PLI-3691) ../rtl/mem.sv(28): Expected a system task, not a system function '$value$plusargs'.
+# ** Warning: (vsim-PLI-3691) ../rtl/mem.sv(29): Expected a system task, not a system function '$value$plusargs'.
 #    Time: 0 ns  Iteration: 0  Instance: /tb/i_main/i_memory File: ../rtl/mem.sv
 # add wave sim:/tb/i_main/i_inst_fetch/* 
 #  add wave sim:/tb/i_main/i_decode/* 
 # add wave sim:/tb/i_main/i_ex/* 
 # add wave sim:/tb/i_main/i_memory/* 
 # add wave sim:/tb/i_main/i_writeback/* 
+# add wave sim:/tb/*
 # run -all
-# ** Note: $finish    : ../rtl/testbench.sv(41)
-#    Time: 3440 ns  Iteration: 0  Instance: /tb
+# ** Note: $finish    : ../rtl/testbench.sv(56)
+#    Time: 5170 ns  Iteration: 0  Instance: /tb
 # 1
-# Break in Module tb at ../rtl/testbench.sv line 41
-# End time: 14:14:00 on Jun 07,2023, Elapsed time: 0:03:01
+# Break in Module tb at ../rtl/testbench.sv line 56
+# End time: 16:46:36 on Jun 07,2023, Elapsed time: 0:01:43
 # Errors: 0, Warnings: 2

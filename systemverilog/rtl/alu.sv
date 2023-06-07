@@ -117,7 +117,7 @@ assign opr2 = (~rt + 1);
 		end
       6'b001101: begin
 			A=addition((rs>>2),(i_data_2_ex>>2));//A=addition(rs,imm); //A <= rs + imm;     // Store Word
-        	 	rd <= 32'b0;
+        	 	rd <= rt;
 		 	pc4_out_2_ex_out<=0; 
 		end
       6'b001110:begin

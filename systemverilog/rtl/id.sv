@@ -6,6 +6,7 @@
 
 module id (
 	input  logic 	clk,
+	input  logic 	clk1,
 	input  logic 	reset,
 	input  logic    w_f_wb,                      // Write from WB stage 
 	input  logic [31:0] inst,                    // from Inst Fetch stage
@@ -26,7 +27,12 @@ module id (
 	output logic mem_write_2_ex,
 	output logic [4:0]  rs_add_value_2_if,
 	output logic [4:0]  rt_add_value_2_if,
-	output logic [4:0]  rd_add_value_2_if
+	output logic [4:0]  rd_add_value_2_if,
+    output logic [15:0] arith_inst_cnt,
+    output logic [15:0] logic_inst_cnt,
+    output logic [15:0] mem_inst_cnt,
+    output logic [15:0] ctrl_inst_cnt,
+    output mem_t [31:0] registers_out
 ); 
 
 mem_t [31:0] registers; // Defininig the set of registers used as variables, temporary ...
@@ -48,10 +54,7 @@ logic mem_read;
 logic mem_to_reg;
 logic mem_write;
 
-logic [9:0] arith_inst_cnt;
-logic [9:0] logic_inst_cnt;
-logic [9:0] mem_inst_cnt;
-logic [9:0] ctrl_inst_cnt;
+logic cnt_flag;
 
 assign opcode = inst[31:26];
 
@@ -74,7 +77,8 @@ assign rd_add_value_2_if  = inst[15:11];
 assign i_imm = (inst[15]==1'b1) ? {16'hFFFF,inst[15:0]} : {16'b0,inst[15:0]};
 
 // Instruction decode
-always_ff@(posedge clk or negedge reset)
+//always_ff@(posedge clk or negedge reset)
+always_ff@(posedge clk1 or negedge reset)
 begin
 	if(reset==0)
 	begin
@@ -82,34 +86,55 @@ begin
     	logic_inst_cnt <= '0;
     	mem_inst_cnt   <= '0;
     	ctrl_inst_cnt  <= '0;
+		cnt_flag       <=  0;
 	end
-	else if(opcode==6'b111111)
+	else if(cnt_flag)
 	begin
     	arith_inst_cnt <= arith_inst_cnt;
     	logic_inst_cnt <= logic_inst_cnt;
     	mem_inst_cnt   <= mem_inst_cnt;
     	ctrl_inst_cnt  <= ctrl_inst_cnt;
+		cnt_flag       <= cnt_flag;
+	end
+	else if(opcode==6'b010001)
+	begin
+    	arith_inst_cnt <= arith_inst_cnt;
+    	logic_inst_cnt <= logic_inst_cnt;
+    	mem_inst_cnt   <= mem_inst_cnt;
+    	ctrl_inst_cnt  <= ctrl_inst_cnt + 16'b1;
+		cnt_flag       <= 1;
+	end
+	else if(opcode<6)
+	begin
+    	arith_inst_cnt <= arith_inst_cnt + 16'b1;
+    	logic_inst_cnt <= logic_inst_cnt;
+    	mem_inst_cnt   <= mem_inst_cnt;
+    	ctrl_inst_cnt  <= ctrl_inst_cnt;
+		cnt_flag       <= 0;
 	end
 	else if((opcode>5) && (opcode<12))
 	begin
     	arith_inst_cnt <= arith_inst_cnt;
-    	logic_inst_cnt <= logic_inst_cnt + 10'b1;
+    	logic_inst_cnt <= logic_inst_cnt + 16'b1;
     	mem_inst_cnt   <= mem_inst_cnt;
     	ctrl_inst_cnt  <= ctrl_inst_cnt;
+		cnt_flag       <= 0;
 	end
 	else if((opcode>11) && (opcode<14))
 	begin
     	arith_inst_cnt <= arith_inst_cnt;
     	logic_inst_cnt <= logic_inst_cnt;
-    	mem_inst_cnt   <= mem_inst_cnt + 10'b1;
+    	mem_inst_cnt   <= mem_inst_cnt + 16'b1;
     	ctrl_inst_cnt  <= ctrl_inst_cnt;
+		cnt_flag       <= 0;
 	end
 	else if(opcode>13)
 	begin
     	arith_inst_cnt <= arith_inst_cnt;
     	logic_inst_cnt <= logic_inst_cnt;
     	mem_inst_cnt   <= mem_inst_cnt;
-    	ctrl_inst_cnt  <= ctrl_inst_cnt + 10'b1;
+    	ctrl_inst_cnt  <= ctrl_inst_cnt + 16'b1;
+		cnt_flag       <= 0;
 	end
 	else 
 	begin
@@ -117,6 +142,7 @@ begin
     	logic_inst_cnt <= logic_inst_cnt;
     	mem_inst_cnt   <= mem_inst_cnt;
     	ctrl_inst_cnt  <= ctrl_inst_cnt;
+		cnt_flag       <= cnt_flag;
 	end
 end
 
@@ -342,6 +368,8 @@ begin
 	registers_nxt    = registers;
 	registers_nxt[addr_in_f_wb] = (w_f_wb == 1'b1) ? write_data_f_wb : registers_nxt[addr_in_f_wb]; 
 	registers_nxt[0] = 32'b0; // always Constant zero
+
+	registers_out = registers;
 end
 
 // pipeline

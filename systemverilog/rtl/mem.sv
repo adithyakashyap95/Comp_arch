@@ -14,11 +14,12 @@ module mem (
 
 	output logic mem_to_reg_2_wb,                           // when Rd/Rt is in use  
 	output logic [(D_SIZE-1):0] alu_out_f_mem_2_wb,
-	output logic [(ADDR_LINE_REG-1):0] alu_add_f_mem_2_wb   // This is only for REGISTER WRITE
+	output logic [(ADDR_LINE_REG-1):0] alu_add_f_mem_2_wb,   // This is only for REGISTER WRITE
+    output logic [(D_SIZE-1):0] mem_out [0:1023]
 );
 
-  logic [(D_SIZE-1):0] memory [0:16384];
-  logic [(D_SIZE-1):0] mem_local [0:16384];
+  logic [(D_SIZE-1):0] memory [0:1023];
+  logic [(D_SIZE-1):0] mem_local [0:1023];
   logic [(D_SIZE-1):0] reg_w_data;
   logic [31:0] inst_mem [0:1023];
 
@@ -33,11 +34,7 @@ module mem (
   begin
 	if(reset==0)
 	begin
-		memory[0:1023]     <= inst_mem;   // Input from File
-        for(int i=1024;i<16384;i=i+1)
-	    begin
-	    	memory   [i]   <= '0;
-	    end
+		memory             <= inst_mem;   // Input from File
 		alu_out_f_mem_2_wb <= '0;
 		alu_add_f_mem_2_wb <= '0; 
 		mem_to_reg_2_wb    <= '0;
@@ -58,6 +55,8 @@ module mem (
   	mem_local = memory;
 	mem_local[addr_in] = (mem_write==1) ? write_data : memory[addr_in];
 	reg_w_data = (mem_read==1) ? memory[addr_in]: write_data;           // If LDW only then read from memory 
+
+	mem_out = memory;
   end
 
 endmodule

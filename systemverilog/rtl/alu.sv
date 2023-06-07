@@ -129,7 +129,7 @@ assign opr2 = (~rt + 1);
 			end
 		 else 
 			begin
-				pc4_out_2_ex_out=pc4_out_2_ex; //BZ Rs x 
+				pc4_out_2_ex_out=pc4_out_2_ex+4; //BZ Rs x 
         			rd <= 32'b0; 
 				A <= 32'b0;
 			end
@@ -143,7 +143,7 @@ assign opr2 = (~rt + 1);
 			end 
 		 else 
 			begin
-				pc4_out_2_ex_out=pc4_out_2_ex;  //BEQ Rs Rt x
+				pc4_out_2_ex_out=pc4_out_2_ex+4;  //BEQ Rs Rt x
         			rd <= 32'b0;
 				A <= 32'b0; 
 			end

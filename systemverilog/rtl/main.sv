@@ -4,6 +4,7 @@
 
 module main (
 	input  logic 	clk,
+	input  logic 	clk1,
 	input  logic 	reset,
 	input  logic 	valid,
 	input  logic 	opr_finished,
@@ -74,7 +75,7 @@ inst_f i_inst_fetch (
 // Decode
 
 id i_decode(
-	.clk               (clk               ), 
+	.clk               (clk1              ), 
 	.reset             (reset             ), 
 	.w_f_wb            (mem_to_reg_f_wb_to_id),
 	.inst              (inst              ),
@@ -100,7 +101,7 @@ id i_decode(
 // Execute E
 
 alu i_ex(
-	.clk                (clk             ),  
+	.clk                (clk1            ),  
 	.reset              (reset           ),  
 	.op                 (opcode_2_ex     ),    
 	.rs                 (rs_reg_value_2_ex),   
@@ -124,7 +125,7 @@ alu i_ex(
 // Memory
 
 mem i_memory (
-	.clk                	(clk                	),
+	.clk                	(clk1               	),
 	.reset              	(reset              	),
 	.mem_write          	(mem_write          	),
 	.mem_read           	(mem_read           	),

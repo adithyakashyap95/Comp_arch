@@ -26,7 +26,6 @@ logic hazard;
 logic [4:0] rs;
 logic [4:0] rd;
 logic [4:0] rt;
-logic [1:0] delay;
 logic [31:0] pc_in;
 logic [31:0] pc4;
 logic [31:0] inst_mem [0:1023];
@@ -46,7 +45,7 @@ begin
 	else if (opcode==1'b1)
 	begin
 		halt   <= halt;
-		pc_out <= (delay==2) ? pc_in : pc_out;
+		pc_out <= pc_in;
    	end
    	else if (hazard)
     begin
@@ -83,20 +82,6 @@ begin
 	pc_in = (opcode==0) ? pc4 : ex_add;
 end
 
-
-always_ff@(posedge clk or negedge rst)
-begin
-	if(rst==0)
-		delay <= '0;
-	else if(delay == 2)
-		delay <= '0;
-	else if(delay>0)
-		delay <= delay + 1;
-	else if(opcode == 1)
-		delay <= delay + 1;
-	else
-		delay <= delay;
-end
 
 string memory_image;
 

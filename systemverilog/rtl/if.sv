@@ -39,30 +39,30 @@ assign rt = rt_f_id;
 always_ff @(posedge clk or negedge rst) //porgram counter
 begin
 	if(rst==0)
-    	begin
+    begin
 		halt   <= 0;
 		pc_out <= 0;	
-    	end
-   	else if (hazard)
-    	begin
-		halt   <= halt;
-      		pc_out <= pc_in; //pc_out;   // Need to be updated 
-    	end
+    end
 	else if (opcode==1'b1)
 	begin
 		halt   <= halt;
 		pc_out <= (delay==2) ? pc_in : pc_out;
    	end
+   	else if (hazard)
+    begin
+		halt   <= halt;
+      	pc_out <= pc_in; //pc_out;   // Need to be updated 
+    end
 	else if ((instruction[31:26] == 6'b010001) | (halt == 1'b1))
 	begin
 		halt   <= 1;
 		pc_out <= pc_out;
    	end
 	else 
-     	begin 
+    begin 
 		halt   <= halt;
 		pc_out <= pc_in;
-      	end
+    end
 end
 
 always_comb   // Add program counter

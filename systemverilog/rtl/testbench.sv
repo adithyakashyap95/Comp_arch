@@ -80,13 +80,38 @@ rst = 0;
 	        $display ("R10: %d",registers_out[10]);
 	        $display ("R11: %d",registers_out[11]);
 	        $display ("R12: %d",registers_out[12]);
+		$display ("R13: %d",registers_out[13]);
+		$display ("R14: %d",registers_out[14]);
+		$display ("R15: %d",registers_out[15]);
+		$display ("R16: %d",registers_out[16]);
+		$display ("R17: %d",registers_out[17]);
+		$display ("R18: %d",registers_out[18]);
+		$display ("R19: %d",registers_out[19]);
+		$display ("R20: %d",registers_out[20]);
+		$display ("R21: %d",registers_out[21]);
+		$display ("R22: %d",registers_out[22]);
+		$display ("R23: %d",registers_out[23]);
+		$display ("R24: %d",registers_out[24]);
+		$display ("R25: %d",registers_out[25]);
+		$display ("R26: %d",registers_out[26]);
+		$display ("R27: %d",registers_out[27]);
+		$display ("R28: %d",registers_out[28]);
+		$display ("R29: %d",registers_out[29]);	
+		$display ("R30: %d",registers_out[30]);
+		$display ("R31: %d",registers_out[31]);	
+		$display ("R32: %d",registers_out[32]);
+
 	        
 	        $display ("\n\n..........Final memory state...........");
 	        
-	        $display ("\nAddress: %d, Contents: %d",1400,mem_out[350]);
-	        $display ("Address: %d, Contents: %d",  1404,mem_out[351]);
-	        $display ("Address: %d, Contents: %d",  1408,mem_out[352]);
-	        
+		foreach (mem_out[i])
+		begin 
+		
+		
+	        $display ("\nAddress: %d, Contents: %d", i , mem_out[i]);
+	        //$display ("Address: %d, Contents: %d",  1404,mem_out[351]);
+	        //$display ("Address: %d, Contents: %d",  1408,mem_out[352]);
+	        end
 	        
 	        $display ("\n\n..........Timing Simulator..........");
 	        // FIXME

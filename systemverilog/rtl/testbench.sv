@@ -6,6 +6,7 @@ module tb;
 logic clk;
 logic clk1;
 logic rst;
+logic flag;
 logic [31:0] inst_out;
 logic [15:0] arith_inst_cnt;
 logic [15:0] logic_inst_cnt;
@@ -105,18 +106,21 @@ rst = 0;
 		$display ("R29: %d",registers_out[29]);	
 		$display ("R30: %d",registers_out[30]);
 		$display ("R31: %d",registers_out[31]);	
-		$display ("R32: %d",registers_out[32]);
 
 	        
 	        $display ("\n\n..........Final memory state...........");
 	        
-		foreach (mem_out[i])
+		flag=0;
+		for (int i=0 ; i< 1024 ; i=i+1)
 		begin 
+		if ( mem_out [i] == 32'h44000000) 
+		flag=1
 		
+		if(flag)
 		
 	        $display ("\nAddress: %d, Contents: %d", i , mem_out[i]);
-	        //$display ("Address: %d, Contents: %d",  1404,mem_out[351]);
-	        //$display ("Address: %d, Contents: %d",  1408,mem_out[352]);
+
+				
 	        end
 	        
 	        $display ("\n\n..........Timing Simulator without forewarding..........");

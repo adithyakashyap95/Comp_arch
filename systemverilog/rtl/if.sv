@@ -19,7 +19,10 @@ module inst_f (
 	output logic [31:0] instruction,
 	output logic [31:0] pc_out
 );
-
+bit id_stall;
+bit ex_stall;
+bit mem_stall;
+int stall_cnt;
 logic opcode;
 logic halt;
 logic hazard;
@@ -110,13 +113,50 @@ end
 always_comb 
 begin
 	if ( reg_write_f_id & (id_dest == rs || id_dest == rt || id_dest == rd))
+	begin
 		hazard = 1;
+		id_stall=1;
+		ex_stall=0;
+		mem_stall=0;
+	end
 	else if (reg_write_f_ex & (ex_dest == rs || ex_dest == rt || ex_dest == rd))
+	begin
 		hazard = 1;
+		id_stall=0;
+		ex_stall=1;
+		mem_stall=0;
+	end
+
 	else if (reg_write_f_mem & (mem_dest == rs || mem_dest == rt || mem_dest == rd))
-	 	hazard = 1;
+	 begin
+		hazard = 1;
+		id_stall=0;
+		ex_stall=0;
+		mem_stall=1;
+	end
+
 	else 
-	 	hazard = 0;
+	 begin
+		hazard = 0;
+		id_stall=0;
+		ex_stall=0;
+		mem_stall=0;
+	end
+
+end
+
+always_ff @(posedge clk or negedge rst)
+begin
+if(rst==0)
+	stall_cnt<=0;
+else if(id_stall)
+	stall_cnt<=stall_cnt+2;
+else if(ex_stall)
+	stall_cnt<=stall_cnt+1;
+else if(mem_stall)
+	stall_cnt<=stall_cnt;
+else
+	stall_cnt<=stall_cnt;
 end
   
 endmodule

@@ -44,7 +44,7 @@ logic [4:0] r_rd;
 logic [4:0] i_rdt;
 logic [31:0] i_rs;
 logic [31:0] i_rt;
-logic [15:0] i_imm;
+logic [31:0] i_imm;
 logic [31:0] rs_reg_value;
 logic [31:0] rt_reg_value;
 logic [4:0]  rd_add_value;

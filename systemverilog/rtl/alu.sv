@@ -111,12 +111,12 @@ assign opr2 = (~rt + 1);
 		 	pc4_out_2_ex_out<=0;
 		end
       6'b001100: begin
-			A<=addition((rs>>2),(i_data_2_ex>>2));//A=rs+i_data_2_ex;//A=addition(rs,imm);  //A <= rs + imm;     // Load Word
+			A<=addition((rs[31]?{2'b11,rs[31:2]}:{2'b00,rs[31:2]}),(i_data_2_ex[31]?{2'b11,i_data_2_ex[31:2]}:{2'b00,i_data_2_ex[31:2]}));//A=rs+i_data_2_ex;//A=addition(rs,imm);  //A <= rs + imm;     // Load Word
         	 	rd <= 32'b0; 
 		 	pc4_out_2_ex_out<=0;
 		end
       6'b001101: begin
-			A=addition((rs>>2),(i_data_2_ex>>2));//A=addition(rs,imm); //A <= rs + imm;     // Store Word
+			A=addition((rs[31]?{2'b11,rs[31:2]}:{2'b00,rs[31:2]}),(i_data_2_ex[31]?{2'b11,i_data_2_ex[31:2]}:{2'b00,i_data_2_ex[31:2]})); // STW
         	 	rd <= rt;
 		 	pc4_out_2_ex_out<=0; 
 		end
@@ -200,8 +200,8 @@ input logic [31:0]A, B
 logic [32:0] tmp, tmp1,tmp2;
 logic [31:0] a, b; 
  
-assign a = (~A+1'b1);    //2's compliment of A
-assign b = (~B+1'b1);    //2's compliment of B
+assign a = (~A+32'b1);    //2's compliment of A
+assign b = (~B+32'b1);    //2's compliment of B
 
 if(A[31]==0 && B[31]==0)
 	addition = A+B;
@@ -212,6 +212,12 @@ else if(A[31]==0 && B[31]==1)
 							addition = tmp[31:0];
 						end
 					else if(A<b)  //Adding of the positive value with a negative value when the negative number has a higher magnitude
+						begin
+							tmp = A+B;
+							//tmp1 =(~tmp+1);
+							addition = tmp[31:0];
+						end
+					else
 						begin
 							tmp = A+B;
 							//tmp1 =(~tmp+1);
@@ -235,7 +241,13 @@ else
 						begin
 							tmp = A+B;
 							//tmp1 =(~tmp+1);
-							addition = tmp1[31:0];
+							addition = tmp[31:0];
+						end
+					else 
+						begin
+							tmp = A+B;
+							//tmp1 =(~tmp+1);
+							addition = tmp[31:0];
 						end
 	end
 

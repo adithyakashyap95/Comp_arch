@@ -14,11 +14,15 @@ logic [15:0] ctrl_inst_cnt;
 mem_t [31:0] registers_out;
 logic [31:0] total_inst_cnt;
 logic [(D_SIZE-1):0] mem_out [0:1023];
-logic [31:0] clk_counter;
 logic [31:0] pc_out;
+logic [31:0] stall_wo_forewarding;
+logic [31:0] stall_w_forewarding;
+logic [31:0] total_clk_w_forwarding;
+logic [31:0] total_clk_wo_forwarding;
 
 assign total_inst_cnt = arith_inst_cnt + mem_inst_cnt + logic_inst_cnt + ctrl_inst_cnt;
-// While printing PC_OUT print with +4 value
+assign total_clk_w_forwarding  = total_inst_cnt + 6 + stall_w_forewarding;  // 6 to account for the cycles front and back
+assign total_clk_wo_forwarding = total_inst_cnt + 6 + stall_wo_forewarding; // 6 to account for the cycles front and back
 
 //.........instantiation .......
 main i_main (
@@ -34,7 +38,9 @@ main i_main (
     .ctrl_inst_cnt     (ctrl_inst_cnt     ),
     .registers_out     (registers_out     ),
 	.mem_out		   (mem_out			  ),
-	.pc_out 		   (pc_out 			  )
+	.pc_out 		   (pc_out 			  ),
+	.stall_wo_forewarding (stall_wo_forewarding),
+	.stall_w_forewarding  (stall_w_forewarding )
 );
 
 //..........clock generation .............
@@ -67,7 +73,7 @@ rst = 0;
 	        
 	        $display ("\n\n..............Final Register State..............");
 	        
-	        $display ("\nProgram counter: %d", pc_out);
+	        $display ("\nProgram counter: %d", (pc_out + 4));
 	        $display ("R1: %d", registers_out[1]);
 	        $display ("R2: %d", registers_out[2]);
 	        $display ("R3: %d", registers_out[3]);
@@ -113,9 +119,10 @@ rst = 0;
 	        //$display ("Address: %d, Contents: %d",  1408,mem_out[352]);
 	        end
 	        
-	        $display ("\n\n..........Timing Simulator..........");
-	        // FIXME
-	        $display ("\nTotal number of clock cycles:To be corredccted: %d", 0);
+	        $display ("\n\n..........Timing Simulator without forewarding..........");
+	        $display ("\nTotal number of clock cycles: %d", total_clk_wo_forwarding);
+	        $display ("\n\n..........Timing Simulator with forewarding..........");
+	        $display ("\nTotal number of clock cycles: %d", total_clk_w_forwarding);
 	        $display ("\nProgram Halted");
 
 			$finish;
@@ -125,16 +132,6 @@ rst = 0;
 	end
 
 end
-
-// Do we need this ?
-always_ff@(posedge clk or negedge rst)
-begin
-	if(rst==0)
-		clk_counter <= '0;
-	else
-		clk_counter <= clk_counter + 32'b1;
-end
-
 
 endmodule
 

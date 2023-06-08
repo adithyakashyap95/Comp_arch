@@ -15,6 +15,8 @@ module main (
     output logic [15:0] ctrl_inst_cnt,
     output mem_t [31:0] registers_out,
     output logic [31:0] pc_out, 
+	output logic [31:0] stall_wo_forewarding,
+	output logic [31:0] stall_w_forewarding,
     output logic [(D_SIZE-1):0] mem_out [0:1023]
  
 ); 
@@ -78,7 +80,9 @@ inst_f i_inst_fetch (
     .mem_dest        (alu_add_f_mem_2_wb),
 	.rs_f_id	     (rs_add_value_2_if),
 	.rd_f_id	     (rd_add_value_2_if),
-	.rt_f_id	     (rt_add_value_2_if) 
+	.rt_f_id	     (rt_add_value_2_if),
+	.stall_wo_forewarding (stall_wo_forewarding),
+	.stall_w_forewarding  (stall_w_forewarding)
 );
 
 // Decode

@@ -77,7 +77,6 @@ assign rd_add_value_2_if  = inst[15:11];
 assign i_imm = (inst[15]==1'b1) ? {16'hFFFF,inst[15:0]} : {16'b0,inst[15:0]};
 
 // Instruction decode
-//always_ff@(posedge clk or negedge reset)
 always_ff@(posedge clk1 or negedge reset)
 begin
 	if(reset==0)

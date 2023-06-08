@@ -13,7 +13,7 @@
 # //  18 U.S.C. Section 1905.
 # //
 # vsim work.tb -voptargs="+acc" "+MEM_IMAGE=memory_image.txt" -do "add wave sim:/tb/i_main/i_inst_fetch/* ; add wave sim:/tb/i_main/i_decode/* ;add wave sim:/tb/i_main/i_ex/* ;add wave sim:/tb/i_main/i_memory/* ;add wave sim:/tb/i_main/i_writeback/* ;add wave sim:/tb/*;run -all" 
-# Start time: 00:58:18 on Jun 08,2023
+# Start time: 01:06:06 on Jun 08,2023
 # ** Note: (vsim-3812) Design is being optimized...
 # Loading sv_std.std
 # Loading work.testbench_sv_unit(fast)
@@ -44,41 +44,41 @@
 # 
 # ..............Instruction Counts...............
 # 
-# Total number of instructions:        638
-# Arithmetic instructions:   333
-# Logical instructions:    50
-# Memory access instructions:   103
-# Control transfer instructions:   152
+# Total number of instructions:        911
+# Arithmetic instructions:   375
+# Logical instructions:    61
+# Memory access instructions:   300
+# Control transfer instructions:   175
 # 
 # 
 # ..............Final Register State..............
 # 
-# Program counter:        104
-# R1:       1200
-# R2:       1400
-# R3:        100
-# R4:         50
-# R5:         50
+# Program counter:        116
+# R1:          0
+# R2:          0
+# R3:          0
+# R4:          0
+# R5:          0
 # R6:          0
-# R7:         25
-# R8:       2550
-# R9:       1275
-# R10:         50
-# R11:         50
-# R12:         32
-# R13:          0
-# R14:          0
-# R15:          0
-# R16:          0
-# R17:          0
-# R18:          0
-# R19:          0
-# R20:          0
-# R21:          0
-# R22:          0
-# R23:          0
-# R24:          0
-# R25:          0
+# R7:          0
+# R8:          0
+# R9:          0
+# R10:          0
+# R11:       1044
+# R12:       1836
+# R13:       2640
+# R14:         25
+# R15: 4294967108
+# R16:        213
+# R17:         29
+# R18:       3440
+# R19: 4294967295
+# R20: 4294967294
+# R21: 4294967295
+# R22:         76
+# R23:          3
+# R24: 4294967295
+# R25:          3
 # R26:          0
 # R27:          0
 # R28:          0
@@ -90,61 +90,61 @@
 # 
 # ..........Final memory state...........
 # 
-# Address:           0, Contents:   67175400
+# Address:           0, Contents:   67830564
 # 
-# Address:           1, Contents:   67241136
+# Address:           1, Contents:   67896892
 # 
-# Address:           2, Contents:      14336
+# Address:           2, Contents:   67963232
 # 
-# Address:           3, Contents:      16384
+# Address:           3, Contents:   68291712
 # 
-# Address:           4, Contents:      18432
+# Address:           4, Contents:   68419583
 # 
-# Address:           5, Contents:      20480
+# Address:           5, Contents:  202637314
 # 
-# Address:           6, Contents:   67829810
+# Address:           6, Contents:  110493774
 # 
-# Address:           7, Contents:   67895328
+# Address:           7, Contents:   68616195
 # 
-# Address:           8, Contents: 1028325389
+# Address:           8, Contents:   39895040
 # 
-# Address:           9, Contents:  807600128
+# Address:           9, Contents:  829358076
 # 
-# Address:          10, Contents:  809762816
+# Address:          10, Contents:  831455236
 # 
-# Address:          11, Contents:  140781568
+# Address:          11, Contents:  833683456
 # 
-# Address:          12, Contents:  614858753
+# Address:          12, Contents:  164593664
 # 
-# Address:          13, Contents:  952107010
+# Address:          13, Contents:  437561344
 # 
-# Address:          14, Contents:   82247681
+# Address:          14, Contents: 1051918339
 # 
-# Address:          15, Contents:   16990208
+# Address:          15, Contents:  372310018
 # 
-# Address:          16, Contents:   19154944
+# Address:          16, Contents: 1119879168
 # 
-# Address:          17, Contents:   69271556
+# Address:          17, Contents:  305629184
 # 
-# Address:          18, Contents:   71434244
+# Address:          18, Contents:   37259264
 # 
-# Address:          19, Contents:   88735745
+# Address:          19, Contents:   90898436
 # 
-# Address:          20, Contents: 1098907648
+# Address:          20, Contents:   93061124
 # 
-# Address:          21, Contents:  872875384
+# Address:          21, Contents:  900792320
 # 
-# Address:          22, Contents:  872940924
+# Address:          22, Contents:   95223812
 # 
-# Address:          23, Contents:  873006464
+# Address:          23, Contents:  106037252
 # 
-# Address:          24, Contents: 1140850688
+# Address:          24, Contents:  844693504
 # 
-# Address:          25, Contents:          0
+# Address:          25, Contents:  992018416
 # 
-# Address:          26, Contents:          0
+# Address:          26, Contents:  792264767
 # 
-# Address:          27, Contents:          0
+# Address:          27, Contents: 1140850688
 # 
 # Address:          28, Contents:          0
 # 
@@ -490,311 +490,311 @@
 # 
 # Address:         199, Contents:          0
 # 
-# Address:         200, Contents:          0
+# Address:         200, Contents:         90
 # 
-# Address:         201, Contents:          0
+# Address:         201, Contents:        100
 # 
-# Address:         202, Contents:          0
+# Address:         202, Contents:         18
 # 
-# Address:         203, Contents:          0
+# Address:         203, Contents:        214
 # 
-# Address:         204, Contents:          0
+# Address:         204, Contents:        126
 # 
-# Address:         205, Contents:          0
+# Address:         205, Contents:        148
 # 
-# Address:         206, Contents:          0
+# Address:         206, Contents:         54
 # 
-# Address:         207, Contents:          0
+# Address:         207, Contents:         40
 # 
-# Address:         208, Contents:          0
+# Address:         208, Contents:        176
 # 
-# Address:         209, Contents:          0
+# Address:         209, Contents:         25
 # 
-# Address:         210, Contents:          0
+# Address:         210, Contents:         44
 # 
-# Address:         211, Contents:          0
+# Address:         211, Contents:         24
 # 
-# Address:         212, Contents:          0
+# Address:         212, Contents:         58
 # 
-# Address:         213, Contents:          0
+# Address:         213, Contents:        242
 # 
-# Address:         214, Contents:          0
+# Address:         214, Contents:         56
 # 
-# Address:         215, Contents:          0
+# Address:         215, Contents:        136
 # 
-# Address:         216, Contents:          0
+# Address:         216, Contents:         98
 # 
-# Address:         217, Contents:          0
+# Address:         217, Contents:        116
 # 
-# Address:         218, Contents:          0
+# Address:         218, Contents:         78
 # 
-# Address:         219, Contents:          0
+# Address:         219, Contents:         17
 # 
-# Address:         220, Contents:          0
+# Address:         220, Contents:         18
 # 
-# Address:         221, Contents:          0
+# Address:         221, Contents:        214
 # 
-# Address:         222, Contents:          0
+# Address:         222, Contents:        126
 # 
-# Address:         223, Contents:          0
+# Address:         223, Contents:        148
 # 
-# Address:         224, Contents:          0
+# Address:         224, Contents:         58
 # 
-# Address:         225, Contents:          0
+# Address:         225, Contents:        242
 # 
-# Address:         226, Contents:          0
+# Address:         226, Contents:         56
 # 
-# Address:         227, Contents:          0
+# Address:         227, Contents:        136
 # 
-# Address:         228, Contents:          0
+# Address:         228, Contents:         64
 # 
-# Address:         229, Contents:          0
+# Address:         229, Contents:        185
 # 
-# Address:         230, Contents:          0
+# Address:         230, Contents:         34
 # 
-# Address:         231, Contents:          0
+# Address:         231, Contents:         68
 # 
-# Address:         232, Contents:          0
+# Address:         232, Contents:        102
 # 
-# Address:         233, Contents:          0
+# Address:         233, Contents:        136
 # 
-# Address:         234, Contents:          0
+# Address:         234, Contents:        170
 # 
-# Address:         235, Contents:          0
+# Address:         235, Contents:        204
 # 
-# Address:         236, Contents:          0
+# Address:         236, Contents:        238
 # 
-# Address:         237, Contents:          0
+# Address:         237, Contents:         18
 # 
-# Address:         238, Contents:          0
+# Address:         238, Contents:         52
 # 
-# Address:         239, Contents:          0
+# Address:         239, Contents:         85
 # 
-# Address:         240, Contents:          0
+# Address:         240, Contents:        160
 # 
-# Address:         241, Contents:          0
+# Address:         241, Contents:        178
 # 
-# Address:         242, Contents:          0
+# Address:         242, Contents:        196
 # 
-# Address:         243, Contents:          0
+# Address:         243, Contents:        214
 # 
-# Address:         244, Contents:          0
+# Address:         244, Contents:        232
 # 
-# Address:         245, Contents:          0
+# Address:         245, Contents:        250
 # 
-# Address:         246, Contents:          0
+# Address:         246, Contents:         12
 # 
-# Address:         247, Contents:          0
+# Address:         247, Contents:         30
 # 
-# Address:         248, Contents:          0
+# Address:         248, Contents:         32
 # 
-# Address:         249, Contents:          0
+# Address:         249, Contents:        185
 # 
-# Address:         250, Contents:          2
+# Address:         250, Contents:         90
 # 
-# Address:         251, Contents:          4
+# Address:         251, Contents:        100
 # 
-# Address:         252, Contents:          6
+# Address:         252, Contents:         18
 # 
-# Address:         253, Contents:          8
+# Address:         253, Contents:        214
 # 
-# Address:         254, Contents:         10
+# Address:         254, Contents:        126
 # 
-# Address:         255, Contents:         12
+# Address:         255, Contents:        148
 # 
-# Address:         256, Contents:         14
+# Address:         256, Contents:         54
 # 
-# Address:         257, Contents:         16
+# Address:         257, Contents:         40
 # 
-# Address:         258, Contents:         18
+# Address:         258, Contents:        176
 # 
-# Address:         259, Contents:         20
+# Address:         259, Contents:         25
 # 
-# Address:         260, Contents:         22
+# Address:         260, Contents:         44
 # 
 # Address:         261, Contents:         24
 # 
-# Address:         262, Contents:         26
+# Address:         262, Contents:         58
 # 
-# Address:         263, Contents:         28
+# Address:         263, Contents:        242
 # 
-# Address:         264, Contents:         30
+# Address:         264, Contents:         56
 # 
-# Address:         265, Contents:         32
+# Address:         265, Contents:        136
 # 
-# Address:         266, Contents:         34
+# Address:         266, Contents:         98
 # 
-# Address:         267, Contents:         36
+# Address:         267, Contents:        116
 # 
-# Address:         268, Contents:         38
+# Address:         268, Contents:         78
 # 
-# Address:         269, Contents:         40
+# Address:         269, Contents:         17
 # 
-# Address:         270, Contents:         42
+# Address:         270, Contents:         18
 # 
-# Address:         271, Contents:         44
+# Address:         271, Contents:        214
 # 
-# Address:         272, Contents:         46
+# Address:         272, Contents:        126
 # 
-# Address:         273, Contents:         48
+# Address:         273, Contents:        148
 # 
-# Address:         274, Contents:         50
+# Address:         274, Contents:         58
 # 
-# Address:         275, Contents:         52
+# Address:         275, Contents:        242
 # 
-# Address:         276, Contents:         54
+# Address:         276, Contents:         56
 # 
-# Address:         277, Contents:         56
+# Address:         277, Contents:        136
 # 
-# Address:         278, Contents:         58
+# Address:         278, Contents:         64
 # 
-# Address:         279, Contents:         60
+# Address:         279, Contents:        185
 # 
-# Address:         280, Contents:         62
+# Address:         280, Contents:         34
 # 
-# Address:         281, Contents:         64
+# Address:         281, Contents:         68
 # 
-# Address:         282, Contents:         66
+# Address:         282, Contents:        102
 # 
-# Address:         283, Contents:         68
+# Address:         283, Contents:        136
 # 
-# Address:         284, Contents:         70
+# Address:         284, Contents:        170
 # 
-# Address:         285, Contents:         72
+# Address:         285, Contents:        204
 # 
-# Address:         286, Contents:         74
+# Address:         286, Contents:        238
 # 
-# Address:         287, Contents:         76
+# Address:         287, Contents:         18
 # 
-# Address:         288, Contents:         78
+# Address:         288, Contents:         52
 # 
-# Address:         289, Contents:         80
+# Address:         289, Contents:         85
 # 
-# Address:         290, Contents:         82
+# Address:         290, Contents:        160
 # 
-# Address:         291, Contents:         84
+# Address:         291, Contents:        178
 # 
-# Address:         292, Contents:         86
+# Address:         292, Contents:        196
 # 
-# Address:         293, Contents:         88
+# Address:         293, Contents:        214
 # 
-# Address:         294, Contents:         90
+# Address:         294, Contents:        232
 # 
-# Address:         295, Contents:         92
+# Address:         295, Contents:        250
 # 
-# Address:         296, Contents:         94
+# Address:         296, Contents:         12
 # 
-# Address:         297, Contents:         96
+# Address:         297, Contents:         30
 # 
-# Address:         298, Contents:         98
+# Address:         298, Contents:         32
 # 
-# Address:         299, Contents:        100
+# Address:         299, Contents:        185
 # 
-# Address:         300, Contents:          1
+# Address:         300, Contents:          0
 # 
-# Address:         301, Contents:          2
+# Address:         301, Contents:          0
 # 
-# Address:         302, Contents:          3
+# Address:         302, Contents:          0
 # 
-# Address:         303, Contents:          4
+# Address:         303, Contents:          0
 # 
-# Address:         304, Contents:          5
+# Address:         304, Contents:          0
 # 
-# Address:         305, Contents:          6
+# Address:         305, Contents:          0
 # 
-# Address:         306, Contents:          7
+# Address:         306, Contents:          0
 # 
-# Address:         307, Contents:          8
+# Address:         307, Contents:          0
 # 
-# Address:         308, Contents:          9
+# Address:         308, Contents:          0
 # 
-# Address:         309, Contents:         10
+# Address:         309, Contents:          0
 # 
-# Address:         310, Contents:         11
+# Address:         310, Contents:          0
 # 
-# Address:         311, Contents:         12
+# Address:         311, Contents:          0
 # 
-# Address:         312, Contents:         13
+# Address:         312, Contents:          0
 # 
-# Address:         313, Contents:         14
+# Address:         313, Contents:          0
 # 
-# Address:         314, Contents:         15
+# Address:         314, Contents:          0
 # 
-# Address:         315, Contents:         16
+# Address:         315, Contents:          0
 # 
-# Address:         316, Contents:         17
+# Address:         316, Contents:          0
 # 
-# Address:         317, Contents:         18
+# Address:         317, Contents:          0
 # 
-# Address:         318, Contents:         19
+# Address:         318, Contents:          0
 # 
-# Address:         319, Contents:         20
+# Address:         319, Contents:          0
 # 
-# Address:         320, Contents:         21
+# Address:         320, Contents:          0
 # 
-# Address:         321, Contents:         22
+# Address:         321, Contents:          0
 # 
-# Address:         322, Contents:         23
+# Address:         322, Contents:          0
 # 
-# Address:         323, Contents:         24
+# Address:         323, Contents:          0
 # 
-# Address:         324, Contents:         25
+# Address:         324, Contents:          0
 # 
-# Address:         325, Contents:         26
+# Address:         325, Contents:          0
 # 
-# Address:         326, Contents:         27
+# Address:         326, Contents:          0
 # 
-# Address:         327, Contents:         28
+# Address:         327, Contents:          0
 # 
-# Address:         328, Contents:         29
+# Address:         328, Contents:          0
 # 
-# Address:         329, Contents:         30
+# Address:         329, Contents:          0
 # 
-# Address:         330, Contents:         31
+# Address:         330, Contents:          0
 # 
-# Address:         331, Contents:         32
+# Address:         331, Contents:          0
 # 
-# Address:         332, Contents:         33
+# Address:         332, Contents:          0
 # 
-# Address:         333, Contents:         34
+# Address:         333, Contents:          0
 # 
-# Address:         334, Contents:         35
+# Address:         334, Contents:          0
 # 
-# Address:         335, Contents:         36
+# Address:         335, Contents:          0
 # 
-# Address:         336, Contents:         37
+# Address:         336, Contents:          0
 # 
-# Address:         337, Contents:         38
+# Address:         337, Contents:          0
 # 
-# Address:         338, Contents:         39
+# Address:         338, Contents:          0
 # 
-# Address:         339, Contents:         40
+# Address:         339, Contents:          0
 # 
-# Address:         340, Contents:         41
+# Address:         340, Contents:          0
 # 
-# Address:         341, Contents:         42
+# Address:         341, Contents:          0
 # 
-# Address:         342, Contents:         43
+# Address:         342, Contents:          0
 # 
-# Address:         343, Contents:         44
+# Address:         343, Contents:          0
 # 
-# Address:         344, Contents:         45
+# Address:         344, Contents:          0
 # 
-# Address:         345, Contents:         46
+# Address:         345, Contents:          0
 # 
-# Address:         346, Contents:         47
+# Address:         346, Contents:          0
 # 
-# Address:         347, Contents:         48
+# Address:         347, Contents:          0
 # 
-# Address:         348, Contents:         49
+# Address:         348, Contents:          0
 # 
-# Address:         349, Contents:         50
+# Address:         349, Contents:          0
 # 
-# Address:         350, Contents:         25
+# Address:         350, Contents:          0
 # 
-# Address:         351, Contents:       2550
+# Address:         351, Contents:          0
 # 
-# Address:         352, Contents:       1275
+# Address:         352, Contents:          0
 # 
 # Address:         353, Contents:          0
 # 
@@ -890,205 +890,205 @@
 # 
 # Address:         399, Contents:          0
 # 
-# Address:         400, Contents:          0
+# Address:         400, Contents: 4294967294
 # 
-# Address:         401, Contents:          0
+# Address:         401, Contents: 4294967082
 # 
-# Address:         402, Contents:          0
+# Address:         402, Contents: 4294967090
 # 
-# Address:         403, Contents:          0
+# Address:         403, Contents: 4294967190
 # 
-# Address:         404, Contents:          0
+# Address:         404, Contents: 4294967172
 # 
-# Address:         405, Contents:          0
+# Address:         405, Contents: 4294967064
 # 
-# Address:         406, Contents:          0
+# Address:         406, Contents: 4294967088
 # 
-# Address:         407, Contents:          0
+# Address:         407, Contents: 4294967212
 # 
-# Address:         408, Contents:          0
+# Address:         408, Contents: 4294967218
 # 
-# Address:         409, Contents:          0
+# Address:         409, Contents: 4294967108
 # 
-# Address:         410, Contents:          0
+# Address:         410, Contents: 4294967294
 # 
-# Address:         411, Contents:          0
+# Address:         411, Contents: 4294967082
 # 
-# Address:         412, Contents:          0
+# Address:         412, Contents: 4294967090
 # 
-# Address:         413, Contents:          0
+# Address:         413, Contents: 4294967190
 # 
-# Address:         414, Contents:          0
+# Address:         414, Contents: 4294967172
 # 
-# Address:         415, Contents:          0
+# Address:         415, Contents: 4294967064
 # 
-# Address:         416, Contents:          0
+# Address:         416, Contents: 4294967088
 # 
-# Address:         417, Contents:          0
+# Address:         417, Contents: 4294967212
 # 
-# Address:         418, Contents:          0
+# Address:         418, Contents: 4294967218
 # 
-# Address:         419, Contents:          0
+# Address:         419, Contents: 4294967108
 # 
-# Address:         420, Contents:          0
+# Address:         420, Contents: 4294967294
 # 
-# Address:         421, Contents:          0
+# Address:         421, Contents: 4294967082
 # 
-# Address:         422, Contents:          0
+# Address:         422, Contents: 4294967090
 # 
-# Address:         423, Contents:          0
+# Address:         423, Contents: 4294967190
 # 
-# Address:         424, Contents:          0
+# Address:         424, Contents: 4294967172
 # 
-# Address:         425, Contents:          0
+# Address:         425, Contents: 4294967064
 # 
-# Address:         426, Contents:          0
+# Address:         426, Contents: 4294967088
 # 
-# Address:         427, Contents:          0
+# Address:         427, Contents: 4294967212
 # 
-# Address:         428, Contents:          0
+# Address:         428, Contents: 4294967218
 # 
-# Address:         429, Contents:          0
+# Address:         429, Contents: 4294967108
 # 
-# Address:         430, Contents:          0
+# Address:         430, Contents: 4294967294
 # 
-# Address:         431, Contents:          0
+# Address:         431, Contents: 4294967082
 # 
-# Address:         432, Contents:          0
+# Address:         432, Contents: 4294967090
 # 
-# Address:         433, Contents:          0
+# Address:         433, Contents: 4294967190
 # 
-# Address:         434, Contents:          0
+# Address:         434, Contents: 4294967172
 # 
-# Address:         435, Contents:          0
+# Address:         435, Contents: 4294967064
 # 
-# Address:         436, Contents:          0
+# Address:         436, Contents: 4294967088
 # 
-# Address:         437, Contents:          0
+# Address:         437, Contents: 4294967212
 # 
-# Address:         438, Contents:          0
+# Address:         438, Contents: 4294967218
 # 
-# Address:         439, Contents:          0
+# Address:         439, Contents: 4294967108
 # 
-# Address:         440, Contents:          0
+# Address:         440, Contents: 4294967294
 # 
-# Address:         441, Contents:          0
+# Address:         441, Contents: 4294967082
 # 
-# Address:         442, Contents:          0
+# Address:         442, Contents: 4294967090
 # 
-# Address:         443, Contents:          0
+# Address:         443, Contents: 4294967190
 # 
-# Address:         444, Contents:          0
+# Address:         444, Contents: 4294967172
 # 
-# Address:         445, Contents:          0
+# Address:         445, Contents: 4294967064
 # 
-# Address:         446, Contents:          0
+# Address:         446, Contents: 4294967088
 # 
-# Address:         447, Contents:          0
+# Address:         447, Contents: 4294967212
 # 
-# Address:         448, Contents:          0
+# Address:         448, Contents: 4294967218
 # 
-# Address:         449, Contents:          0
+# Address:         449, Contents: 4294967108
 # 
-# Address:         450, Contents:          0
+# Address:         450, Contents: 4294967294
 # 
-# Address:         451, Contents:          0
+# Address:         451, Contents: 4294967082
 # 
-# Address:         452, Contents:          0
+# Address:         452, Contents: 4294967090
 # 
-# Address:         453, Contents:          0
+# Address:         453, Contents: 4294967190
 # 
-# Address:         454, Contents:          0
+# Address:         454, Contents: 4294967172
 # 
-# Address:         455, Contents:          0
+# Address:         455, Contents: 4294967064
 # 
-# Address:         456, Contents:          0
+# Address:         456, Contents: 4294967088
 # 
-# Address:         457, Contents:          0
+# Address:         457, Contents: 4294967212
 # 
-# Address:         458, Contents:          0
+# Address:         458, Contents: 4294967218
 # 
-# Address:         459, Contents:          0
+# Address:         459, Contents: 4294967108
 # 
-# Address:         460, Contents:          0
+# Address:         460, Contents: 4294967294
 # 
-# Address:         461, Contents:          0
+# Address:         461, Contents: 4294967082
 # 
-# Address:         462, Contents:          0
+# Address:         462, Contents: 4294967090
 # 
-# Address:         463, Contents:          0
+# Address:         463, Contents: 4294967190
 # 
-# Address:         464, Contents:          0
+# Address:         464, Contents: 4294967172
 # 
-# Address:         465, Contents:          0
+# Address:         465, Contents: 4294967064
 # 
-# Address:         466, Contents:          0
+# Address:         466, Contents: 4294967088
 # 
-# Address:         467, Contents:          0
+# Address:         467, Contents: 4294967212
 # 
-# Address:         468, Contents:          0
+# Address:         468, Contents: 4294967218
 # 
-# Address:         469, Contents:          0
+# Address:         469, Contents: 4294967108
 # 
-# Address:         470, Contents:          0
+# Address:         470, Contents: 4294967294
 # 
-# Address:         471, Contents:          0
+# Address:         471, Contents: 4294967082
 # 
-# Address:         472, Contents:          0
+# Address:         472, Contents: 4294967090
 # 
-# Address:         473, Contents:          0
+# Address:         473, Contents: 4294967190
 # 
-# Address:         474, Contents:          0
+# Address:         474, Contents: 4294967172
 # 
-# Address:         475, Contents:          0
+# Address:         475, Contents: 4294967064
 # 
-# Address:         476, Contents:          0
+# Address:         476, Contents: 4294967088
 # 
-# Address:         477, Contents:          0
+# Address:         477, Contents: 4294967212
 # 
-# Address:         478, Contents:          0
+# Address:         478, Contents: 4294967218
 # 
-# Address:         479, Contents:          0
+# Address:         479, Contents: 4294967108
 # 
-# Address:         480, Contents:          0
+# Address:         480, Contents: 4294967294
 # 
-# Address:         481, Contents:          0
+# Address:         481, Contents: 4294967082
 # 
-# Address:         482, Contents:          0
+# Address:         482, Contents: 4294967090
 # 
-# Address:         483, Contents:          0
+# Address:         483, Contents: 4294967190
 # 
-# Address:         484, Contents:          0
+# Address:         484, Contents: 4294967172
 # 
-# Address:         485, Contents:          0
+# Address:         485, Contents: 4294967064
 # 
-# Address:         486, Contents:          0
+# Address:         486, Contents: 4294967088
 # 
-# Address:         487, Contents:          0
+# Address:         487, Contents: 4294967212
 # 
-# Address:         488, Contents:          0
+# Address:         488, Contents: 4294967218
 # 
-# Address:         489, Contents:          0
+# Address:         489, Contents: 4294967108
 # 
-# Address:         490, Contents:          0
+# Address:         490, Contents: 4294967294
 # 
-# Address:         491, Contents:          0
+# Address:         491, Contents: 4294967082
 # 
-# Address:         492, Contents:          0
+# Address:         492, Contents: 4294967090
 # 
-# Address:         493, Contents:          0
+# Address:         493, Contents: 4294967190
 # 
-# Address:         494, Contents:          0
+# Address:         494, Contents: 4294967172
 # 
-# Address:         495, Contents:          0
+# Address:         495, Contents: 4294967064
 # 
-# Address:         496, Contents:          0
+# Address:         496, Contents: 4294967088
 # 
-# Address:         497, Contents:          0
+# Address:         497, Contents: 4294967212
 # 
-# Address:         498, Contents:          0
+# Address:         498, Contents: 4294967218
 # 
-# Address:         499, Contents:          0
+# Address:         499, Contents: 4294967108
 # 
 # Address:         500, Contents:          0
 # 
@@ -1290,205 +1290,205 @@
 # 
 # Address:         599, Contents:          0
 # 
-# Address:         600, Contents:          0
+# Address:         600, Contents:          2
 # 
-# Address:         601, Contents:          0
+# Address:         601, Contents:          4
 # 
-# Address:         602, Contents:          0
+# Address:         602, Contents:          6
 # 
-# Address:         603, Contents:          0
+# Address:         603, Contents:          8
 # 
-# Address:         604, Contents:          0
+# Address:         604, Contents:         10
 # 
-# Address:         605, Contents:          0
+# Address:         605, Contents:         12
 # 
-# Address:         606, Contents:          0
+# Address:         606, Contents:         14
 # 
-# Address:         607, Contents:          0
+# Address:         607, Contents:         16
 # 
-# Address:         608, Contents:          0
+# Address:         608, Contents:         18
 # 
-# Address:         609, Contents:          0
+# Address:         609, Contents:         29
 # 
-# Address:         610, Contents:          0
+# Address:         610, Contents:         22
 # 
-# Address:         611, Contents:          0
+# Address:         611, Contents:         24
 # 
-# Address:         612, Contents:          0
+# Address:         612, Contents:         26
 # 
-# Address:         613, Contents:          0
+# Address:         613, Contents:         28
 # 
-# Address:         614, Contents:          0
+# Address:         614, Contents:         30
 # 
-# Address:         615, Contents:          0
+# Address:         615, Contents:         32
 # 
-# Address:         616, Contents:          0
+# Address:         616, Contents:         34
 # 
-# Address:         617, Contents:          0
+# Address:         617, Contents:         36
 # 
-# Address:         618, Contents:          0
+# Address:         618, Contents:         38
 # 
-# Address:         619, Contents:          0
+# Address:         619, Contents:         59
 # 
-# Address:         620, Contents:          0
+# Address:         620, Contents:         42
 # 
-# Address:         621, Contents:          0
+# Address:         621, Contents:         44
 # 
-# Address:         622, Contents:          0
+# Address:         622, Contents:         46
 # 
-# Address:         623, Contents:          0
+# Address:         623, Contents:         48
 # 
-# Address:         624, Contents:          0
+# Address:         624, Contents:         50
 # 
-# Address:         625, Contents:          0
+# Address:         625, Contents:         52
 # 
-# Address:         626, Contents:          0
+# Address:         626, Contents:         54
 # 
-# Address:         627, Contents:          0
+# Address:         627, Contents:         56
 # 
-# Address:         628, Contents:          0
+# Address:         628, Contents:         58
 # 
-# Address:         629, Contents:          0
+# Address:         629, Contents:         89
 # 
-# Address:         630, Contents:          0
+# Address:         630, Contents:         62
 # 
-# Address:         631, Contents:          0
+# Address:         631, Contents:         64
 # 
-# Address:         632, Contents:          0
+# Address:         632, Contents:         66
 # 
-# Address:         633, Contents:          0
+# Address:         633, Contents:         68
 # 
-# Address:         634, Contents:          0
+# Address:         634, Contents:         70
 # 
-# Address:         635, Contents:          0
+# Address:         635, Contents:         72
 # 
-# Address:         636, Contents:          0
+# Address:         636, Contents:         74
 # 
-# Address:         637, Contents:          0
+# Address:         637, Contents:         76
 # 
-# Address:         638, Contents:          0
+# Address:         638, Contents:         78
 # 
-# Address:         639, Contents:          0
+# Address:         639, Contents:        119
 # 
-# Address:         640, Contents:          0
+# Address:         640, Contents:         82
 # 
-# Address:         641, Contents:          0
+# Address:         641, Contents:         84
 # 
-# Address:         642, Contents:          0
+# Address:         642, Contents:         86
 # 
-# Address:         643, Contents:          0
+# Address:         643, Contents:         88
 # 
-# Address:         644, Contents:          0
+# Address:         644, Contents:         90
 # 
-# Address:         645, Contents:          0
+# Address:         645, Contents:         92
 # 
-# Address:         646, Contents:          0
+# Address:         646, Contents:         94
 # 
-# Address:         647, Contents:          0
+# Address:         647, Contents:         96
 # 
-# Address:         648, Contents:          0
+# Address:         648, Contents:         98
 # 
-# Address:         649, Contents:          0
+# Address:         649, Contents:        149
 # 
-# Address:         650, Contents:          0
+# Address:         650, Contents:          2
 # 
-# Address:         651, Contents:          0
+# Address:         651, Contents:          4
 # 
-# Address:         652, Contents:          0
+# Address:         652, Contents:          6
 # 
-# Address:         653, Contents:          0
+# Address:         653, Contents:          8
 # 
-# Address:         654, Contents:          0
+# Address:         654, Contents:         10
 # 
-# Address:         655, Contents:          0
+# Address:         655, Contents:         12
 # 
-# Address:         656, Contents:          0
+# Address:         656, Contents:         14
 # 
-# Address:         657, Contents:          0
+# Address:         657, Contents:         16
 # 
-# Address:         658, Contents:          0
+# Address:         658, Contents:         18
 # 
-# Address:         659, Contents:          0
+# Address:         659, Contents:         29
 # 
-# Address:         660, Contents:          0
+# Address:         660, Contents:         11
 # 
-# Address:         661, Contents:          0
+# Address:         661, Contents:         12
 # 
-# Address:         662, Contents:          0
+# Address:         662, Contents:         13
 # 
-# Address:         663, Contents:          0
+# Address:         663, Contents:         14
 # 
-# Address:         664, Contents:          0
+# Address:         664, Contents:         15
 # 
-# Address:         665, Contents:          0
+# Address:         665, Contents:         16
 # 
-# Address:         666, Contents:          0
+# Address:         666, Contents:         17
 # 
-# Address:         667, Contents:          0
+# Address:         667, Contents:         18
 # 
-# Address:         668, Contents:          0
+# Address:         668, Contents:         19
 # 
-# Address:         669, Contents:          0
+# Address:         669, Contents:         20
 # 
-# Address:         670, Contents:          0
+# Address:         670, Contents:         21
 # 
-# Address:         671, Contents:          0
+# Address:         671, Contents:         22
 # 
-# Address:         672, Contents:          0
+# Address:         672, Contents:         23
 # 
-# Address:         673, Contents:          0
+# Address:         673, Contents:         24
 # 
-# Address:         674, Contents:          0
+# Address:         674, Contents:         25
 # 
-# Address:         675, Contents:          0
+# Address:         675, Contents:         26
 # 
-# Address:         676, Contents:          0
+# Address:         676, Contents:         27
 # 
-# Address:         677, Contents:          0
+# Address:         677, Contents:         28
 # 
-# Address:         678, Contents:          0
+# Address:         678, Contents:         29
 # 
-# Address:         679, Contents:          0
+# Address:         679, Contents:         30
 # 
-# Address:         680, Contents:          0
+# Address:         680, Contents:         31
 # 
-# Address:         681, Contents:          0
+# Address:         681, Contents:         32
 # 
-# Address:         682, Contents:          0
+# Address:         682, Contents:         33
 # 
-# Address:         683, Contents:          0
+# Address:         683, Contents:         34
 # 
-# Address:         684, Contents:          0
+# Address:         684, Contents:         35
 # 
-# Address:         685, Contents:          0
+# Address:         685, Contents:         36
 # 
-# Address:         686, Contents:          0
+# Address:         686, Contents:         37
 # 
-# Address:         687, Contents:          0
+# Address:         687, Contents:         38
 # 
-# Address:         688, Contents:          0
+# Address:         688, Contents:         39
 # 
-# Address:         689, Contents:          0
+# Address:         689, Contents:         40
 # 
-# Address:         690, Contents:          0
+# Address:         690, Contents:         41
 # 
-# Address:         691, Contents:          0
+# Address:         691, Contents:         42
 # 
-# Address:         692, Contents:          0
+# Address:         692, Contents:         43
 # 
-# Address:         693, Contents:          0
+# Address:         693, Contents:         44
 # 
-# Address:         694, Contents:          0
+# Address:         694, Contents:         45
 # 
-# Address:         695, Contents:          0
+# Address:         695, Contents:         46
 # 
-# Address:         696, Contents:          0
+# Address:         696, Contents:         47
 # 
-# Address:         697, Contents:          0
+# Address:         697, Contents:         48
 # 
-# Address:         698, Contents:          0
+# Address:         698, Contents:         49
 # 
-# Address:         699, Contents:          0
+# Address:         699, Contents:         50
 # 
 # Address:         700, Contents:          0
 # 
@@ -1810,7 +1810,7 @@
 # 
 # Address:         859, Contents:          0
 # 
-# Address:         860, Contents:          0
+# Address:         860, Contents:         60
 # 
 # Address:         861, Contents:          0
 # 
@@ -2141,17 +2141,17 @@
 # 
 # ..........Timing Simulator without forewarding..........
 # 
-# Total number of clock cycles:       1095
+# Total number of clock cycles:       1586
 # 
 # 
 # ..........Timing Simulator with forewarding..........
 # 
-# Total number of clock cycles:        844
+# Total number of clock cycles:       1218
 # 
 # Program Halted
 # ** Note: $finish    : ../rtl/testbench.sv(128)
-#    Time: 5170 ns  Iteration: 0  Instance: /tb
+#    Time: 7350 ns  Iteration: 0  Instance: /tb
 # 1
 # Break in Module tb at ../rtl/testbench.sv line 128
-# End time: 01:00:19 on Jun 08,2023, Elapsed time: 0:02:01
+# End time: 01:14:51 on Jun 08,2023, Elapsed time: 0:08:45
 # Errors: 0, Warnings: 2

@@ -13,7 +13,7 @@
 # //  18 U.S.C. Section 1905.
 # //
 # vsim work.tb -voptargs="+acc" "+MEM_IMAGE=memory_image.txt" -do "add wave sim:/tb/i_main/i_inst_fetch/* ; add wave sim:/tb/i_main/i_decode/* ;add wave sim:/tb/i_main/i_ex/* ;add wave sim:/tb/i_main/i_memory/* ;add wave sim:/tb/i_main/i_writeback/* ;add wave sim:/tb/*;run -all" 
-# Start time: 16:44:53 on Jun 07,2023
+# Start time: 17:44:21 on Jun 07,2023
 # ** Note: (vsim-3812) Design is being optimized...
 # Loading sv_std.std
 # Loading work.testbench_sv_unit(fast)
@@ -41,9 +41,48 @@
 # add wave sim:/tb/i_main/i_writeback/* 
 # add wave sim:/tb/*
 # run -all
-# ** Note: $finish    : ../rtl/testbench.sv(56)
+# 
+# ..............Instruction Counts...............
+# 
+# Total number of instructions:        638
+# Arithmetic instructions:   333
+# Logical instructions:    50
+# Memory access instructions:   103
+# Control transfer instructions:   152
+# 
+# 
+# ..............Final Register State..............
+# 
+# Program counter:        100
+# R1:       1200
+# R2:       1400
+# R3:        100
+# R4:         50
+# R5:         50
+# R6:          0
+# R7:         25
+# R8:       2550
+# R9:       1275
+# R10:         50
+# R11:         50
+# R12:         32
+# 
+# 
+# ..........Final memory state...........
+# 
+# Address:        1400, Contents:         25
+# Address:        1404, Contents:       2550
+# Address:        1408, Contents:       1275
+# 
+# 
+# ..........Timing Simulator..........
+# 
+# Total number of clock cycles:To be corredccted:           0
+# 
+# Program Halted
+# ** Note: $finish    : ../rtl/testbench.sv(96)
 #    Time: 5170 ns  Iteration: 0  Instance: /tb
 # 1
-# Break in Module tb at ../rtl/testbench.sv line 56
-# End time: 16:46:36 on Jun 07,2023, Elapsed time: 0:01:43
+# Break in Module tb at ../rtl/testbench.sv line 96
+# End time: 17:44:45 on Jun 07,2023, Elapsed time: 0:00:24
 # Errors: 0, Warnings: 2

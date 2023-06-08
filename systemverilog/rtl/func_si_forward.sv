@@ -1,4 +1,3 @@
-module func_si_forward ();
 
 $display ("\n..............Instruction Counts...............")
 

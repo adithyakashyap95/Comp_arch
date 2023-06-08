@@ -14,6 +14,7 @@ module main (
     output logic [15:0] mem_inst_cnt,
     output logic [15:0] ctrl_inst_cnt,
     output mem_t [31:0] registers_out,
+    output logic [31:0] pc_out, 
     output logic [(D_SIZE-1):0] mem_out [0:1023]
  
 ); 
@@ -60,6 +61,7 @@ logic [4:0]  rt_add_value_2_if;
 
 // Just assigning output to testbench
 assign inst_out = inst;
+assign pc_out = pc4_f_if_2_id + 4;
 
 // Fetch
 inst_f i_inst_fetch (
@@ -68,15 +70,15 @@ inst_f i_inst_fetch (
 	.ex_add      	 (pc4_out_2_if  ),
 	.instruction 	 (inst          ),
 	.pc_out      	 (pc4_f_if_2_id ),
-        .reg_write_f_ex  (mem_to_reg    ),
-        .reg_write_f_id  (mem_to_reg_2_ex),
-        .reg_write_f_mem (mem_to_reg_f_mem), 
-        .id_dest         (rd_add_value_2_ex),
-        .ex_dest         (addr_reg_in_f_ex),
-        .mem_dest        (alu_add_f_mem_2_wb),
-	.rs_f_id	 (rs_add_value_2_if),
-	.rd_f_id	 (rd_add_value_2_if),
-	.rt_f_id	 (rt_add_value_2_if) 
+    .reg_write_f_ex  (mem_to_reg    ),
+    .reg_write_f_id  (mem_to_reg_2_ex),
+    .reg_write_f_mem (mem_to_reg_f_mem), 
+    .id_dest         (rd_add_value_2_ex),
+    .ex_dest         (addr_reg_in_f_ex),
+    .mem_dest        (alu_add_f_mem_2_wb),
+	.rs_f_id	     (rs_add_value_2_if),
+	.rd_f_id	     (rd_add_value_2_if),
+	.rt_f_id	     (rt_add_value_2_if) 
 );
 
 // Decode

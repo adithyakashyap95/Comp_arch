@@ -52,6 +52,7 @@ logic [31:0] stall_w_forewarding;
 logic [31:0] total_clk_w_forwarding;
 logic [31:0] total_clk_wo_forwarding;
 logic signed [31:0] mem_temp;
+real a,b,c;
 
 assign total_inst_cnt = arith_inst_cnt + mem_inst_cnt + logic_inst_cnt + ctrl_inst_cnt;
 assign total_clk_w_forwarding  = total_inst_cnt + 6 + stall_w_forewarding;  // 6 to account for the cycles front and back
@@ -174,25 +175,32 @@ rst = 0;
 	        
 	        $display ("\n\n..........Final memory state...........");
 	        
-		flag=0;
-		for (int i=0 ; i< 1024 ; i=i+1)
-		begin 
-			if ( mem_out[i-1] == 32'h44000000) 
-				flag=1;
-			if(flag)
-			begin
-	        	if(mem_out[i]!='0) 
+			flag=0;
+			for (int i=0 ; i< 1024 ; i=i+1)
+			begin 
+				if ( mem_out[i-1] == 32'h44000000) 
+					flag=1;
+				if(flag)
 				begin
-					mem_temp = mem_out[i];
-					$display ("\nAddress: %d, Contents: %d", (i<<2) , mem_temp);
+		        	if(mem_out[i]!='0) 
+					begin
+						mem_temp = mem_out[i];
+						$display ("\nAddress: %d, Contents: %d", (i<<2) , mem_temp);
+					end
 				end
-			end
 	        end
 	        
 	        $display ("\n\n..........Timing Simulator without forewarding..........");
 	        $display ("\nTotal number of clock cycles: %d", total_clk_wo_forwarding);
 	        $display ("\n\n..........Timing Simulator with forewarding..........");
 	        $display ("\nTotal number of clock cycles: %d", total_clk_w_forwarding);
+
+			a = real'(total_clk_wo_forwarding);
+			b = real'(total_clk_w_forwarding);
+			c = a/b;
+
+	        $display ("\n\n..........Speedup overall..........");
+			$display ("Speedup overall : %f",c);
 	        $display ("\nProgram Halted");
 
 			$finish;

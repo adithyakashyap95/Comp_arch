@@ -1,4 +1,3 @@
-module func_si_noforward ();
 
 $display ("\n..............Instruction Counts...............")
 

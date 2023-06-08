@@ -1,4 +1,3 @@
-module func_si ();
 
 $display ("..............Instruction Counts...............")
 

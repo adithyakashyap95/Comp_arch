@@ -13,7 +13,7 @@
 # //  18 U.S.C. Section 1905.
 # //
 # vsim work.tb -voptargs="+acc" "+MEM_IMAGE=memory_image.txt" -do "add wave sim:/tb/i_main/i_inst_fetch/* ; add wave sim:/tb/i_main/i_decode/* ;add wave sim:/tb/i_main/i_ex/* ;add wave sim:/tb/i_main/i_memory/* ;add wave sim:/tb/i_main/i_writeback/* ;add wave sim:/tb/*;run -all" 
-# Start time: 12:33:26 on Jun 08,2023
+# Start time: 11:49:37 on Jun 09,2023
 # ** Note: (vsim-3812) Design is being optimized...
 # Loading sv_std.std
 # Loading work.testbench_sv_unit(fast)
@@ -44,41 +44,41 @@
 # 
 # ..............Instruction Counts...............
 # 
-# Total number of instructions:            638
-# Arithmetic instructions:              333
-# Logical instructions:                  50
-# Memory access instructions:           103
-# Control transfer instructions:        152
+# Total number of instructions:            911
+# Arithmetic instructions:              375
+# Logical instructions:                  61
+# Memory access instructions:           300
+# Control transfer instructions:        175
 # 
 # 
 # ..............Final Register State..............
 # 
-# Program counter:        100
-# R1:        1200
-# R2:        1400
-# R3:         100
-# R4:          50
-# R5:          50
+# Program counter:        112
+# R1:           0
+# R2:           0
+# R3:           0
+# R4:           0
+# R5:           0
 # R6:           0
-# R7:          25
-# R8:        2550
-# R9:        1275
-# R10:         50
-# R11:         50
-# R12:         32
-# R13:          0
-# R14:          0
-# R15:          0
-# R16:          0
-# R17:          0
-# R18:          0
-# R19:          0
-# R20:          0
-# R21:          0
-# R22:          0
-# R23:          0
-# R24:          0
-# R25:          0
+# R7:           0
+# R8:           0
+# R9:           0
+# R10:          0
+# R11:       1044
+# R12:       1836
+# R13:       2640
+# R14:         25
+# R15:       -188
+# R16:        213
+# R17:         29
+# R18:       3440
+# R19:         -1
+# R20:         -2
+# R21:         -1
+# R22:         76
+# R23:          3
+# R24:         -1
+# R25:          3
 # R26:          0
 # R27:          0
 # R28:          0
@@ -89,229 +89,625 @@
 # 
 # ..........Final memory state...........
 # 
-# Address:        1000, Contents:           2
+# Address:         800, Contents:          90
 # 
-# Address:        1004, Contents:           4
+# Address:         804, Contents:         100
 # 
-# Address:        1008, Contents:           6
+# Address:         808, Contents:          18
 # 
-# Address:        1012, Contents:           8
+# Address:         812, Contents:         214
 # 
-# Address:        1016, Contents:          10
+# Address:         816, Contents:         126
 # 
-# Address:        1020, Contents:          12
+# Address:         820, Contents:         148
 # 
-# Address:        1024, Contents:          14
+# Address:         824, Contents:          54
 # 
-# Address:        1028, Contents:          16
+# Address:         828, Contents:          40
 # 
-# Address:        1032, Contents:          18
+# Address:         832, Contents:         176
 # 
-# Address:        1036, Contents:          20
+# Address:         836, Contents:          25
 # 
-# Address:        1040, Contents:          22
+# Address:         840, Contents:          44
+# 
+# Address:         844, Contents:          24
+# 
+# Address:         848, Contents:          58
+# 
+# Address:         852, Contents:         242
+# 
+# Address:         856, Contents:          56
+# 
+# Address:         860, Contents:         136
+# 
+# Address:         864, Contents:          98
+# 
+# Address:         868, Contents:         116
+# 
+# Address:         872, Contents:          78
+# 
+# Address:         876, Contents:          17
+# 
+# Address:         880, Contents:          18
+# 
+# Address:         884, Contents:         214
+# 
+# Address:         888, Contents:         126
+# 
+# Address:         892, Contents:         148
+# 
+# Address:         896, Contents:          58
+# 
+# Address:         900, Contents:         242
+# 
+# Address:         904, Contents:          56
+# 
+# Address:         908, Contents:         136
+# 
+# Address:         912, Contents:          64
+# 
+# Address:         916, Contents:         185
+# 
+# Address:         920, Contents:          34
+# 
+# Address:         924, Contents:          68
+# 
+# Address:         928, Contents:         102
+# 
+# Address:         932, Contents:         136
+# 
+# Address:         936, Contents:         170
+# 
+# Address:         940, Contents:         204
+# 
+# Address:         944, Contents:         238
+# 
+# Address:         948, Contents:          18
+# 
+# Address:         952, Contents:          52
+# 
+# Address:         956, Contents:          85
+# 
+# Address:         960, Contents:         160
+# 
+# Address:         964, Contents:         178
+# 
+# Address:         968, Contents:         196
+# 
+# Address:         972, Contents:         214
+# 
+# Address:         976, Contents:         232
+# 
+# Address:         980, Contents:         250
+# 
+# Address:         984, Contents:          12
+# 
+# Address:         988, Contents:          30
+# 
+# Address:         992, Contents:          32
+# 
+# Address:         996, Contents:         185
+# 
+# Address:        1000, Contents:          90
+# 
+# Address:        1004, Contents:         100
+# 
+# Address:        1008, Contents:          18
+# 
+# Address:        1012, Contents:         214
+# 
+# Address:        1016, Contents:         126
+# 
+# Address:        1020, Contents:         148
+# 
+# Address:        1024, Contents:          54
+# 
+# Address:        1028, Contents:          40
+# 
+# Address:        1032, Contents:         176
+# 
+# Address:        1036, Contents:          25
+# 
+# Address:        1040, Contents:          44
 # 
 # Address:        1044, Contents:          24
 # 
-# Address:        1048, Contents:          26
+# Address:        1048, Contents:          58
 # 
-# Address:        1052, Contents:          28
+# Address:        1052, Contents:         242
 # 
-# Address:        1056, Contents:          30
+# Address:        1056, Contents:          56
 # 
-# Address:        1060, Contents:          32
+# Address:        1060, Contents:         136
 # 
-# Address:        1064, Contents:          34
+# Address:        1064, Contents:          98
 # 
-# Address:        1068, Contents:          36
+# Address:        1068, Contents:         116
 # 
-# Address:        1072, Contents:          38
+# Address:        1072, Contents:          78
 # 
-# Address:        1076, Contents:          40
+# Address:        1076, Contents:          17
 # 
-# Address:        1080, Contents:          42
+# Address:        1080, Contents:          18
 # 
-# Address:        1084, Contents:          44
+# Address:        1084, Contents:         214
 # 
-# Address:        1088, Contents:          46
+# Address:        1088, Contents:         126
 # 
-# Address:        1092, Contents:          48
+# Address:        1092, Contents:         148
 # 
-# Address:        1096, Contents:          50
+# Address:        1096, Contents:          58
 # 
-# Address:        1100, Contents:          52
+# Address:        1100, Contents:         242
 # 
-# Address:        1104, Contents:          54
+# Address:        1104, Contents:          56
 # 
-# Address:        1108, Contents:          56
+# Address:        1108, Contents:         136
 # 
-# Address:        1112, Contents:          58
+# Address:        1112, Contents:          64
 # 
-# Address:        1116, Contents:          60
+# Address:        1116, Contents:         185
 # 
-# Address:        1120, Contents:          62
+# Address:        1120, Contents:          34
 # 
-# Address:        1124, Contents:          64
+# Address:        1124, Contents:          68
 # 
-# Address:        1128, Contents:          66
+# Address:        1128, Contents:         102
 # 
-# Address:        1132, Contents:          68
+# Address:        1132, Contents:         136
 # 
-# Address:        1136, Contents:          70
+# Address:        1136, Contents:         170
 # 
-# Address:        1140, Contents:          72
+# Address:        1140, Contents:         204
 # 
-# Address:        1144, Contents:          74
+# Address:        1144, Contents:         238
 # 
-# Address:        1148, Contents:          76
+# Address:        1148, Contents:          18
 # 
-# Address:        1152, Contents:          78
+# Address:        1152, Contents:          52
 # 
-# Address:        1156, Contents:          80
+# Address:        1156, Contents:          85
 # 
-# Address:        1160, Contents:          82
+# Address:        1160, Contents:         160
 # 
-# Address:        1164, Contents:          84
+# Address:        1164, Contents:         178
 # 
-# Address:        1168, Contents:          86
+# Address:        1168, Contents:         196
 # 
-# Address:        1172, Contents:          88
+# Address:        1172, Contents:         214
 # 
-# Address:        1176, Contents:          90
+# Address:        1176, Contents:         232
 # 
-# Address:        1180, Contents:          92
+# Address:        1180, Contents:         250
 # 
-# Address:        1184, Contents:          94
+# Address:        1184, Contents:          12
 # 
-# Address:        1188, Contents:          96
+# Address:        1188, Contents:          30
 # 
-# Address:        1192, Contents:          98
+# Address:        1192, Contents:          32
 # 
-# Address:        1196, Contents:         100
+# Address:        1196, Contents:         185
 # 
-# Address:        1200, Contents:           1
+# Address:        1600, Contents:          -2
 # 
-# Address:        1204, Contents:           2
+# Address:        1604, Contents:        -214
 # 
-# Address:        1208, Contents:           3
+# Address:        1608, Contents:        -206
 # 
-# Address:        1212, Contents:           4
+# Address:        1612, Contents:        -106
 # 
-# Address:        1216, Contents:           5
+# Address:        1616, Contents:        -124
 # 
-# Address:        1220, Contents:           6
+# Address:        1620, Contents:        -232
 # 
-# Address:        1224, Contents:           7
+# Address:        1624, Contents:        -208
 # 
-# Address:        1228, Contents:           8
+# Address:        1628, Contents:         -84
 # 
-# Address:        1232, Contents:           9
+# Address:        1632, Contents:         -78
 # 
-# Address:        1236, Contents:          10
+# Address:        1636, Contents:        -188
 # 
-# Address:        1240, Contents:          11
+# Address:        1640, Contents:          -2
 # 
-# Address:        1244, Contents:          12
+# Address:        1644, Contents:        -214
 # 
-# Address:        1248, Contents:          13
+# Address:        1648, Contents:        -206
 # 
-# Address:        1252, Contents:          14
+# Address:        1652, Contents:        -106
 # 
-# Address:        1256, Contents:          15
+# Address:        1656, Contents:        -124
 # 
-# Address:        1260, Contents:          16
+# Address:        1660, Contents:        -232
 # 
-# Address:        1264, Contents:          17
+# Address:        1664, Contents:        -208
 # 
-# Address:        1268, Contents:          18
+# Address:        1668, Contents:         -84
 # 
-# Address:        1272, Contents:          19
+# Address:        1672, Contents:         -78
 # 
-# Address:        1276, Contents:          20
+# Address:        1676, Contents:        -188
 # 
-# Address:        1280, Contents:          21
+# Address:        1680, Contents:          -2
 # 
-# Address:        1284, Contents:          22
+# Address:        1684, Contents:        -214
 # 
-# Address:        1288, Contents:          23
+# Address:        1688, Contents:        -206
 # 
-# Address:        1292, Contents:          24
+# Address:        1692, Contents:        -106
 # 
-# Address:        1296, Contents:          25
+# Address:        1696, Contents:        -124
 # 
-# Address:        1300, Contents:          26
+# Address:        1700, Contents:        -232
 # 
-# Address:        1304, Contents:          27
+# Address:        1704, Contents:        -208
 # 
-# Address:        1308, Contents:          28
+# Address:        1708, Contents:         -84
 # 
-# Address:        1312, Contents:          29
+# Address:        1712, Contents:         -78
 # 
-# Address:        1316, Contents:          30
+# Address:        1716, Contents:        -188
 # 
-# Address:        1320, Contents:          31
+# Address:        1720, Contents:          -2
 # 
-# Address:        1324, Contents:          32
+# Address:        1724, Contents:        -214
 # 
-# Address:        1328, Contents:          33
+# Address:        1728, Contents:        -206
 # 
-# Address:        1332, Contents:          34
+# Address:        1732, Contents:        -106
 # 
-# Address:        1336, Contents:          35
+# Address:        1736, Contents:        -124
 # 
-# Address:        1340, Contents:          36
+# Address:        1740, Contents:        -232
 # 
-# Address:        1344, Contents:          37
+# Address:        1744, Contents:        -208
 # 
-# Address:        1348, Contents:          38
+# Address:        1748, Contents:         -84
 # 
-# Address:        1352, Contents:          39
+# Address:        1752, Contents:         -78
 # 
-# Address:        1356, Contents:          40
+# Address:        1756, Contents:        -188
 # 
-# Address:        1360, Contents:          41
+# Address:        1760, Contents:          -2
 # 
-# Address:        1364, Contents:          42
+# Address:        1764, Contents:        -214
 # 
-# Address:        1368, Contents:          43
+# Address:        1768, Contents:        -206
 # 
-# Address:        1372, Contents:          44
+# Address:        1772, Contents:        -106
 # 
-# Address:        1376, Contents:          45
+# Address:        1776, Contents:        -124
 # 
-# Address:        1380, Contents:          46
+# Address:        1780, Contents:        -232
 # 
-# Address:        1384, Contents:          47
+# Address:        1784, Contents:        -208
 # 
-# Address:        1388, Contents:          48
+# Address:        1788, Contents:         -84
 # 
-# Address:        1392, Contents:          49
+# Address:        1792, Contents:         -78
 # 
-# Address:        1396, Contents:          50
+# Address:        1796, Contents:        -188
 # 
-# Address:        1400, Contents:          25
+# Address:        1800, Contents:          -2
 # 
-# Address:        1404, Contents:        2550
+# Address:        1804, Contents:        -214
 # 
-# Address:        1408, Contents:        1275
+# Address:        1808, Contents:        -206
 # 
-# Address:        4092, Contents:          -1
+# Address:        1812, Contents:        -106
+# 
+# Address:        1816, Contents:        -124
+# 
+# Address:        1820, Contents:        -232
+# 
+# Address:        1824, Contents:        -208
+# 
+# Address:        1828, Contents:         -84
+# 
+# Address:        1832, Contents:         -78
+# 
+# Address:        1836, Contents:        -188
+# 
+# Address:        1840, Contents:          -2
+# 
+# Address:        1844, Contents:        -214
+# 
+# Address:        1848, Contents:        -206
+# 
+# Address:        1852, Contents:        -106
+# 
+# Address:        1856, Contents:        -124
+# 
+# Address:        1860, Contents:        -232
+# 
+# Address:        1864, Contents:        -208
+# 
+# Address:        1868, Contents:         -84
+# 
+# Address:        1872, Contents:         -78
+# 
+# Address:        1876, Contents:        -188
+# 
+# Address:        1880, Contents:          -2
+# 
+# Address:        1884, Contents:        -214
+# 
+# Address:        1888, Contents:        -206
+# 
+# Address:        1892, Contents:        -106
+# 
+# Address:        1896, Contents:        -124
+# 
+# Address:        1900, Contents:        -232
+# 
+# Address:        1904, Contents:        -208
+# 
+# Address:        1908, Contents:         -84
+# 
+# Address:        1912, Contents:         -78
+# 
+# Address:        1916, Contents:        -188
+# 
+# Address:        1920, Contents:          -2
+# 
+# Address:        1924, Contents:        -214
+# 
+# Address:        1928, Contents:        -206
+# 
+# Address:        1932, Contents:        -106
+# 
+# Address:        1936, Contents:        -124
+# 
+# Address:        1940, Contents:        -232
+# 
+# Address:        1944, Contents:        -208
+# 
+# Address:        1948, Contents:         -84
+# 
+# Address:        1952, Contents:         -78
+# 
+# Address:        1956, Contents:        -188
+# 
+# Address:        1960, Contents:          -2
+# 
+# Address:        1964, Contents:        -214
+# 
+# Address:        1968, Contents:        -206
+# 
+# Address:        1972, Contents:        -106
+# 
+# Address:        1976, Contents:        -124
+# 
+# Address:        1980, Contents:        -232
+# 
+# Address:        1984, Contents:        -208
+# 
+# Address:        1988, Contents:         -84
+# 
+# Address:        1992, Contents:         -78
+# 
+# Address:        1996, Contents:        -188
+# 
+# Address:        2400, Contents:           2
+# 
+# Address:        2404, Contents:           4
+# 
+# Address:        2408, Contents:           6
+# 
+# Address:        2412, Contents:           8
+# 
+# Address:        2416, Contents:          10
+# 
+# Address:        2420, Contents:          12
+# 
+# Address:        2424, Contents:          14
+# 
+# Address:        2428, Contents:          16
+# 
+# Address:        2432, Contents:          18
+# 
+# Address:        2436, Contents:          29
+# 
+# Address:        2440, Contents:          22
+# 
+# Address:        2444, Contents:          24
+# 
+# Address:        2448, Contents:          26
+# 
+# Address:        2452, Contents:          28
+# 
+# Address:        2456, Contents:          30
+# 
+# Address:        2460, Contents:          32
+# 
+# Address:        2464, Contents:          34
+# 
+# Address:        2468, Contents:          36
+# 
+# Address:        2472, Contents:          38
+# 
+# Address:        2476, Contents:          59
+# 
+# Address:        2480, Contents:          42
+# 
+# Address:        2484, Contents:          44
+# 
+# Address:        2488, Contents:          46
+# 
+# Address:        2492, Contents:          48
+# 
+# Address:        2496, Contents:          50
+# 
+# Address:        2500, Contents:          52
+# 
+# Address:        2504, Contents:          54
+# 
+# Address:        2508, Contents:          56
+# 
+# Address:        2512, Contents:          58
+# 
+# Address:        2516, Contents:          89
+# 
+# Address:        2520, Contents:          62
+# 
+# Address:        2524, Contents:          64
+# 
+# Address:        2528, Contents:          66
+# 
+# Address:        2532, Contents:          68
+# 
+# Address:        2536, Contents:          70
+# 
+# Address:        2540, Contents:          72
+# 
+# Address:        2544, Contents:          74
+# 
+# Address:        2548, Contents:          76
+# 
+# Address:        2552, Contents:          78
+# 
+# Address:        2556, Contents:         119
+# 
+# Address:        2560, Contents:          82
+# 
+# Address:        2564, Contents:          84
+# 
+# Address:        2568, Contents:          86
+# 
+# Address:        2572, Contents:          88
+# 
+# Address:        2576, Contents:          90
+# 
+# Address:        2580, Contents:          92
+# 
+# Address:        2584, Contents:          94
+# 
+# Address:        2588, Contents:          96
+# 
+# Address:        2592, Contents:          98
+# 
+# Address:        2596, Contents:         149
+# 
+# Address:        2600, Contents:           2
+# 
+# Address:        2604, Contents:           4
+# 
+# Address:        2608, Contents:           6
+# 
+# Address:        2612, Contents:           8
+# 
+# Address:        2616, Contents:          10
+# 
+# Address:        2620, Contents:          12
+# 
+# Address:        2624, Contents:          14
+# 
+# Address:        2628, Contents:          16
+# 
+# Address:        2632, Contents:          18
+# 
+# Address:        2636, Contents:          29
+# 
+# Address:        2640, Contents:          11
+# 
+# Address:        2644, Contents:          12
+# 
+# Address:        2648, Contents:          13
+# 
+# Address:        2652, Contents:          14
+# 
+# Address:        2656, Contents:          15
+# 
+# Address:        2660, Contents:          16
+# 
+# Address:        2664, Contents:          17
+# 
+# Address:        2668, Contents:          18
+# 
+# Address:        2672, Contents:          19
+# 
+# Address:        2676, Contents:          20
+# 
+# Address:        2680, Contents:          21
+# 
+# Address:        2684, Contents:          22
+# 
+# Address:        2688, Contents:          23
+# 
+# Address:        2692, Contents:          24
+# 
+# Address:        2696, Contents:          25
+# 
+# Address:        2700, Contents:          26
+# 
+# Address:        2704, Contents:          27
+# 
+# Address:        2708, Contents:          28
+# 
+# Address:        2712, Contents:          29
+# 
+# Address:        2716, Contents:          30
+# 
+# Address:        2720, Contents:          31
+# 
+# Address:        2724, Contents:          32
+# 
+# Address:        2728, Contents:          33
+# 
+# Address:        2732, Contents:          34
+# 
+# Address:        2736, Contents:          35
+# 
+# Address:        2740, Contents:          36
+# 
+# Address:        2744, Contents:          37
+# 
+# Address:        2748, Contents:          38
+# 
+# Address:        2752, Contents:          39
+# 
+# Address:        2756, Contents:          40
+# 
+# Address:        2760, Contents:          41
+# 
+# Address:        2764, Contents:          42
+# 
+# Address:        2768, Contents:          43
+# 
+# Address:        2772, Contents:          44
+# 
+# Address:        2776, Contents:          45
+# 
+# Address:        2780, Contents:          46
+# 
+# Address:        2784, Contents:          47
+# 
+# Address:        2788, Contents:          48
+# 
+# Address:        2792, Contents:          49
+# 
+# Address:        2796, Contents:          50
+# 
+# Address:        3440, Contents:          60
 # 
 # 
 # ..........Timing Simulator without forewarding..........
 # 
-# Total number of clock cycles:       1095
+# Total number of clock cycles:       1586
 # 
 # 
 # ..........Timing Simulator with forewarding..........
 # 
-# Total number of clock cycles:        844
-# Speedup overall : 1.297393
+# Total number of clock cycles:       1218
+# 
+# 
+# ..........Speedup overall..........
+# Speedup overall : 1.302135
 # 
 # Program Halted
-# ** Note: $finish    : ../rtl/testbench.sv(205)
-#    Time: 5170 ns  Iteration: 0  Instance: /tb
+# ** Note: $finish    : ../rtl/testbench.sv(206)
+#    Time: 7350 ns  Iteration: 0  Instance: /tb
 # 1
-# Break in Module tb at ../rtl/testbench.sv line 205
-# End time: 12:33:49 on Jun 08,2023, Elapsed time: 0:00:23
-# Errors: 0, Warnings: 2
+# Break in Module tb at ../rtl/testbench.sv line 206
+# Break key hit

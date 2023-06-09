@@ -129,15 +129,6 @@ begin
 		ex_stall=1;
 		mem_stall=0;
 	end
-
-//	else if (reg_write_f_mem & (mem_dest == rs || mem_dest == rt || mem_dest == rd))
-//	 begin
-//		hazard = 1;
-//		id_stall=0;
-//		ex_stall=0;
-//		mem_stall=1;
-//	end
-
 	else 
 	 begin
 		hazard = 0;
